@@ -5,10 +5,10 @@ import FasterDeliveryIcon from '@/assets/FasterDeliveryIcon';
 import TrackDeliveryIcon from '@/assets/TrackDeliveryIcon';
 import RateStarIcon from '@/assets/RateStarIcon';
 import { getDictionary } from '../../../lib/dictionary';
-import { Locale } from '../../../i18n.config';
 import Button from '@/components/Button/Button';
+import { IAppBenefits } from './AppBenefits.types';
 
-const AppBenefits = async ({ locale }: { locale: Locale }) => {
+const AppBenefits = async ({ locale, isLackOfAccount, isWithoutAccount }: IAppBenefits) => {
   const translation = await getDictionary(locale);
 
   return (
@@ -39,16 +39,31 @@ const AppBenefits = async ({ locale }: { locale: Locale }) => {
           </div>
           <span className='m-0.5 text-main-gray text-xl'>{translation.rate}</span>
         </div>
-        <div className='flex w-full justify-center items-center flex-col gap-8'>
-          <h3 className='m-0.5 text-title-gray font-bold text-2xl text-center'>
-            {translation.dontHaveAccount}
-          </h3>
-          <div className='max-w-sm w-full'>
-            <Button type='button' variant='bordered'>
-              {translation.register}
-            </Button>
+        {isLackOfAccount && (
+          <div className='flex w-full justify-center items-center flex-col gap-8'>
+            <h3 className='m-0.5 text-title-gray font-bold text-2xl text-center'>
+              {translation.dontHaveAccount}
+            </h3>
+            <div className='max-w-sm w-full'>
+              <Button type='button' variant='bordered'>
+                {translation.register}
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
+        {isWithoutAccount && (
+          <div className='flex w-full justify-center items-start flex-col gap-8'>
+            <h3 className='m-0.5 text-title-gray font-bold text-2xl'>
+              {translation.dontHaveAccount}
+            </h3>
+            <p className='text-title-gray text-xl font-medium'>{translation.buyWithoutAccount}</p>
+            <div className='max-w-sm w-full'>
+              <Button type='button' variant='bordered'>
+                {translation.continueWithoutRegistration}
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
