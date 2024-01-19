@@ -1,3 +1,8 @@
+import { ReactNode } from 'react';
+
 export interface IButtonProps {
-  text: string;
+  type: 'button' | 'submit' | 'reset' | undefined;
+  onClick?: () => void;
+  variant?: 'filled' | 'bordered' | 'google';
+  children: ReactNode;
 }
