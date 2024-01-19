@@ -1,3 +1,20 @@
 {
-    "test": "test-PLL"
+    "login": "login",
+    "password": "hasło",
+    "signIn": "Zaloguj się",
+    "signInWinWithGoogle": "Zaloguj się z Google",
+    "register": "Zarejestruj się",
+    "discountAndPromotions": "Rabaty i promocje",
+    "orderFaster": "Zamawiaj szybciej",
+    "trackYourOrder": "Śledź swoje zamówienie",
+    "rate": "Oceniaj",
+    "or": "lub",
+    "dontHaveAccount": "Nie masz konta?",
+    "benefitsOfRegistration": "Dlaczego warto mieć konto w Tess-ract",
+    "forgotPassword": "Zapomniałeś hasła?",
+    "rememberMe": "Zapamiętaj mnie",
+
+    "errorMessage": {
+        "thisFieldIsRequired": "To pole jest wymagane"
+    }
 }

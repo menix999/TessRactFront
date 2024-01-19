@@ -1,3 +1,20 @@
 {
-    "test": "test-EN"
+    "login": "login",
+    "password": "password",
+    "signIn": "Sign in",
+    "signInWinWithGoogle": "Sign with google",
+    "register": "Register",
+    "discountAndPromotions": "Discounts and promotions",
+    "orderFaster": "Order faster",
+    "trackYourOrder": "Track your order",
+    "rate": "Rate",
+    "or": "or",
+    "dontHaveAccount": "Don't have an account?",
+    "benefitsOfRegistration": "Why it's worth to have an account in Tess-ract?",
+    "forgotPassword": "Forgot password?",
+    "rememberMe": "Remember me",
+
+    "errorMessage": {
+        "thisFieldIsRequired": "This field is required"
+    }
 }

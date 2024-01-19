@@ -14,8 +14,13 @@ const config: Config = {
       },
       colors: {
         'main-purple': '#4153EF',
+        'main-purple-hover': '#3644C4',
         'main-gray': '#B0B0B0',
         'secondary-gray': '#686868',
+        'main-error-red': '#DF0423',
+        'title-gray': '#4D4D4D',
+        'google-gradient': '#C1C1C1',
+        'google-content': '#0E435C',
       },
     },
   },
