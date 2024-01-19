@@ -2,43 +2,55 @@
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import { ILoginForm, ILoginPanel } from './LoginPanel.types';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import OpenEyeIcon from '@/assets/OpenEyeIcon';
 import ClosedEyeIcon from '@/assets/ClosedEyeIcon';
+import { IRegistration, IRegistrationForm } from './RegistrationPanel.types';
 import Checkbox from '../Checkbox/Checkbox';
 
-const LoginPanel = ({ translation }: ILoginPanel) => {
+const RegistrationPanel = ({ translation }: IRegistration) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILoginForm>();
+  } = useForm<IRegistrationForm>();
 
-  const onSubmit: SubmitHandler<ILoginForm> = async ({ login, password }) => {
+  const onSubmit: SubmitHandler<IRegistrationForm> = async ({
+    name,
+    surname,
+    email,
+    password,
+    isAcceptedRules,
+  }) => {
     try {
-      console.log('login', login);
+      console.log('name', name);
+      console.log('surname', surname);
+      console.log('email', email);
       console.log('password', password);
+      console.log('isAcceptedRules', isAcceptedRules);
     } catch (error) {
       console.log('LoginPanel error', error);
     }
   };
 
+  console.log('errors', errors);
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-full gap-14' noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-full gap-10' noValidate>
       <Controller
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <Input
-              placeholder={translation.login}
+              placeholder={translation.name}
               value={value}
               onChange={onChange}
-              required={!!errors.login}
+              required={!!errors.name}
             />
             <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
-              {errors.login?.message}
+              {errors.name?.message}
             </span>
           </div>
         )}
@@ -50,7 +62,55 @@ const LoginPanel = ({ translation }: ILoginPanel) => {
         }}
         control={control}
         defaultValue=''
-        name='login'
+        name='name'
+      />
+      <Controller
+        render={({ field: { onChange, value } }) => (
+          <div className='flex flex-col relative'>
+            <Input
+              placeholder={translation.surname}
+              value={value}
+              onChange={onChange}
+              required={!!errors.surname}
+            />
+            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+              {errors.surname?.message}
+            </span>
+          </div>
+        )}
+        rules={{
+          required: {
+            value: true,
+            message: translation.errorMessage.thisFieldIsRequired,
+          },
+        }}
+        control={control}
+        defaultValue=''
+        name='surname'
+      />
+      <Controller
+        render={({ field: { onChange, value } }) => (
+          <div className='flex flex-col relative'>
+            <Input
+              placeholder={translation.email}
+              value={value}
+              onChange={onChange}
+              required={!!errors.email}
+            />
+            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+              {errors.email?.message}
+            </span>
+          </div>
+        )}
+        rules={{
+          required: {
+            value: true,
+            message: translation.errorMessage.thisFieldIsRequired,
+          },
+        }}
+        control={control}
+        defaultValue=''
+        name='email'
       />
       <Controller
         render={({ field: { onChange, value } }) => (
@@ -61,9 +121,6 @@ const LoginPanel = ({ translation }: ILoginPanel) => {
             >
               {isEyeOpen ? <OpenEyeIcon /> : <ClosedEyeIcon />}
             </div>
-            <span className='absolute w-full -top-6 text-right text-main-purple text-sm hover:text-main-purple-hover cursor-pointer'>
-              {translation.forgotPassword}
-            </span>
             <Input
               placeholder={translation.password}
               type={isEyeOpen ? 'text' : 'password'}
@@ -88,11 +145,11 @@ const LoginPanel = ({ translation }: ILoginPanel) => {
       />
       <Controller
         render={({ field: { onChange, value } }) => (
-          <label htmlFor='acceptRules' className='flex cursor-pointer relative mt-[-2rem]'>
+          <label htmlFor='acceptRules' className='flex cursor-pointer relative'>
             <Checkbox onChange={onChange} checked={value} id='acceptRules' />
-            {translation.rememberMe}
+            {translation.acceptTermsAndConditions}
             <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-4'>
-              {errors.isRememberMe?.message}
+              {errors.isAcceptedRules?.message}
             </span>
           </label>
         )}
@@ -104,11 +161,11 @@ const LoginPanel = ({ translation }: ILoginPanel) => {
         }}
         control={control}
         defaultValue={false}
-        name='isRememberMe'
+        name='isAcceptedRules'
       />
-      <Button type='submit'>{translation.signIn}</Button>
+      <Button type='submit'>{translation.createAccount}</Button>
     </form>
   );
 };
 
-export default LoginPanel;
+export default RegistrationPanel;

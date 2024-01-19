@@ -1,18 +1,26 @@
 {
+    "name": "Name",
+    "surname": "Surname",
+    "email": "Email",
     "login": "login",
     "password": "password",
     "signIn": "Sign in",
     "signInWinWithGoogle": "Sign with google",
     "register": "Register",
+    "registration": "Registration",
     "discountAndPromotions": "Discounts and promotions",
     "orderFaster": "Order faster",
     "trackYourOrder": "Track your order",
     "rate": "Rate",
     "or": "or",
     "dontHaveAccount": "Don't have an account?",
+    "buyWithoutAccount": "Buy as a guest without registration",
     "benefitsOfRegistration": "Why it's worth to have an account in Tess-ract?",
+    "continueWithoutRegistration": "Continue without registration",
     "forgotPassword": "Forgot password?",
     "rememberMe": "Remember me",
+    "createAccount": "Create account",
+    "acceptTermsAndConditions": "I accept the terms and conditions",
 
     "errorMessage": {
         "thisFieldIsRequired": "This field is required"
