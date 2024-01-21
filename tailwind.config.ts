@@ -16,6 +16,7 @@ const config: Config = {
         'main-purple': '#4153EF',
         'main-purple-hover': '#3644C4',
         'main-gray': '#B0B0B0',
+        'dashboard-background-gray': '#FAFAFA',
         'secondary-gray': '#686868',
         'main-error-red': '#DF0423',
         'title-gray': '#4D4D4D',

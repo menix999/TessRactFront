@@ -1,12 +1,12 @@
 import React from 'react';
 
-function TessRactLogo() {
+const TessRactLogo = ({ width, height }: { width: string; height: string }) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       xmlnsXlink='http://www.w3.org/1999/xlink'
-      width='99'
-      height='93'
+      width={width}
+      height={height}
       fill='none'
       viewBox='0 0 99 93'
     >
@@ -24,6 +24,6 @@ function TessRactLogo() {
       </defs>
     </svg>
   );
-}
+};
 
 export default TessRactLogo;

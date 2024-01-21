@@ -21,6 +21,8 @@
     "rememberMe": "Zapamiętaj mnie",
     "createAccount": "Załóż konto",
     "acceptTermsAndConditions": "Akceptuję regulamin sklepu",
+    "search": "Szukaj",
+    "cart": "Koszyk",
 
     "errorMessage": {
         "thisFieldIsRequired": "To pole jest wymagane"

@@ -21,6 +21,8 @@
     "rememberMe": "Remember me",
     "createAccount": "Create account",
     "acceptTermsAndConditions": "I accept the terms and conditions",
+    "search": "Search",
+    "cart": "Cart",
 
     "errorMessage": {
         "thisFieldIsRequired": "This field is required"
