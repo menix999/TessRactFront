@@ -1,7 +1,8 @@
+import './globals.css';
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { Roboto } from 'next/font/google';
-import './globals.css';
+
 import { Locale, i18n } from '../../../i18n.config';
 
 const roboto = Roboto({

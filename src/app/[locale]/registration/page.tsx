@@ -14,7 +14,7 @@ const RegistrationPage = async ({ params: { locale } }: { params: { locale: Loca
       <div className='flex items-center justify-center flex-grow p-6 lg:w-1/2'>
         <div className='flex flex-col items-start  w-full max-w-sm '>
           <div className='flex items-center w-full mb-10'>
-            <TessRactLogo />
+            <TessRactLogo width='100' height='94' />
             <span className='text-4xl ml-6 font-extrabold text-main-purple'>Tess-</span>
             <span className='text-4xl font-extrabold'>ract</span>
           </div>
