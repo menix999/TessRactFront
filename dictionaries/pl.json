@@ -3,7 +3,7 @@
     "surname": "Nazwisko",
     "email": "E-mail",
     "login": "login",
-    "password": "hasło",
+    "password": "Hasło",
     "signIn": "Zaloguj się",
     "signInWinWithGoogle": "Zaloguj się z Google",
     "register": "Zarejestruj się",
@@ -23,8 +23,14 @@
     "acceptTermsAndConditions": "Akceptuję regulamin sklepu",
     "search": "Szukaj",
     "cart": "Koszyk",
+    "confirmPassword": "Potwierdź hasło",
+    "yourAccountHasBeenActivated": "Twoje konto zostało aktywowane możesz się teraz zalogować",
+
 
     "errorMessage": {
-        "thisFieldIsRequired": "To pole jest wymagane"
+        "youEnteredTheWrongFormatOfEmailAddress": "Wprowadziłeś zły format adresu e-mail",
+        "thisFieldIsRequired": "To pole jest wymagane",
+        "passwordsDoNotMatch": "Hasła nie są takie same",
+        "thereIsAProblemWithActivatingYourAccount": "Wystąpił problem z aktywacją Twojego konta"
     }
 }

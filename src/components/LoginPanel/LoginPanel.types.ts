@@ -1,7 +1,7 @@
 import { type getDictionary } from '../../../lib/dictionary';
 
 export interface ILoginForm {
-  login: string;
+  email: string;
   password: string;
   isRememberMe: boolean;
 }

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Locale } from '../../../../i18n.config';
 import { getDictionary } from '../../../../lib/dictionary';
 
