@@ -2,8 +2,8 @@
     "name": "Name",
     "surname": "Surname",
     "email": "Email",
-    "login": "login",
-    "password": "password",
+    "login": "Login",
+    "password": "Password",
     "signIn": "Sign in",
     "signInWinWithGoogle": "Sign with google",
     "register": "Register",
@@ -23,8 +23,13 @@
     "acceptTermsAndConditions": "I accept the terms and conditions",
     "search": "Search",
     "cart": "Cart",
+    "confirmPassword": "Confirm password",
+    "yourAccountHasBeenActivated": "Your account has been activated you can now log in",
 
     "errorMessage": {
-        "thisFieldIsRequired": "This field is required"
+        "youEnteredTheWrongFormatOfEmailAddress": "You entered the wrong format of email address",
+        "thisFieldIsRequired": "This field is required",
+        "passwordsDoNotMatch": "Passwords do not match",
+        "thereIsAProblemWithActivatingYourAccount": "There is a problem with activating your account"
     }
 }

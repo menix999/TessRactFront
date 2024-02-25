@@ -1,21 +1,30 @@
 'use client';
+import axios from 'axios';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import { ChangeEvent, useState } from 'react';
 import OpenEyeIcon from '@/assets/OpenEyeIcon';
 import ClosedEyeIcon from '@/assets/ClosedEyeIcon';
 import { IRegistration, IRegistrationForm } from './RegistrationPanel.types';
 import Checkbox from '../Checkbox/Checkbox';
+import { emailRegex } from '@/constants/regex';
+import { routes } from '@/constants/constants';
 
 const RegistrationPanel = ({ translation }: IRegistration) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
+  const [isConfirmPasswordEye, setIsConfirmPasswordEyeOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+
+  const router = useRouter();
 
   const {
     control,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<IRegistrationForm>();
 
   const onSubmit: SubmitHandler<IRegistrationForm> = async ({
@@ -24,13 +33,22 @@ const RegistrationPanel = ({ translation }: IRegistration) => {
     email,
     password,
     isAcceptedRules,
+    confirmPassword,
   }) => {
     try {
-      console.log('name', name);
-      console.log('surname', surname);
-      console.log('email', email);
-      console.log('password', password);
-      console.log('isAcceptedRules', isAcceptedRules);
+      const response = await axios.post('http://localhost:5250/api/Account/register', {
+        firstName: name,
+        surname,
+        email,
+        password,
+        confirmPassword,
+      });
+
+      if (response) {
+        // Write nawigation to login page in next js
+        router.push(routes.login);
+      }
+      console.log('response', response);
     } catch (error) {
       console.log('LoginPanel error', error);
     }
@@ -107,6 +125,10 @@ const RegistrationPanel = ({ translation }: IRegistration) => {
             value: true,
             message: translation.errorMessage.thisFieldIsRequired,
           },
+          pattern: {
+            value: emailRegex,
+            message: translation.errorMessage.youEnteredTheWrongFormatOfEmailAddress,
+          },
         }}
         control={control}
         defaultValue=''
@@ -142,6 +164,42 @@ const RegistrationPanel = ({ translation }: IRegistration) => {
         control={control}
         defaultValue=''
         name='password'
+      />
+      <Controller
+        render={({ field: { onChange, value } }) => (
+          <div className='relative flex flex-col'>
+            <div
+              onClick={() => setIsConfirmPasswordEyeOpen((prevValue) => !prevValue)}
+              className='flex items-center absolute right-8 bottom-0 top-0 cursor-pointer'
+            >
+              {isConfirmPasswordEye ? <OpenEyeIcon /> : <ClosedEyeIcon />}
+            </div>
+            <Input
+              placeholder={translation.confirmPassword}
+              type={isConfirmPasswordEye ? 'text' : 'password'}
+              value={value}
+              onChange={onChange}
+              required={!!errors.confirmPassword}
+            />
+            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+              {errors.confirmPassword?.message}
+            </span>
+          </div>
+        )}
+        rules={{
+          required: {
+            value: true,
+            message: translation.errorMessage.thisFieldIsRequired,
+          },
+          validate: (value) => {
+            if (watch('password') != value) {
+              return translation.errorMessage.passwordsDoNotMatch;
+            }
+          },
+        }}
+        control={control}
+        defaultValue=''
+        name='confirmPassword'
       />
       <Controller
         render={({ field: { onChange, value } }) => (

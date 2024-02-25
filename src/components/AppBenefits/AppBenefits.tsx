@@ -7,6 +7,8 @@ import RateStarIcon from '@/assets/RateStarIcon';
 import { getDictionary } from '../../../lib/dictionary';
 import Button from '@/components/Button/Button';
 import { IAppBenefits } from './AppBenefits.types';
+import Link from 'next/link';
+import { routes } from '@/constants/constants';
 
 const AppBenefits = async ({ locale, isLackOfAccount, isWithoutAccount }: IAppBenefits) => {
   const translation = await getDictionary(locale);
@@ -45,9 +47,11 @@ const AppBenefits = async ({ locale, isLackOfAccount, isWithoutAccount }: IAppBe
               {translation.dontHaveAccount}
             </h3>
             <div className='max-w-sm w-full'>
-              <Button type='button' variant='bordered'>
-                {translation.register}
-              </Button>
+              <Link href={routes.register}>
+                <Button type='button' variant='bordered'>
+                  {translation.register}
+                </Button>
+              </Link>
             </div>
           </div>
         )}
