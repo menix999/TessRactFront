@@ -9,6 +9,8 @@ import OpenEyeIcon from '@/assets/OpenEyeIcon';
 import ClosedEyeIcon from '@/assets/ClosedEyeIcon';
 import Checkbox from '../Checkbox/Checkbox';
 import { emailRegex } from '@/constants/regex';
+import Link from 'next/link';
+import { routes } from '@/constants/constants';
 
 const LoginPanel = ({ translation }: ILoginPanel) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
@@ -70,9 +72,11 @@ const LoginPanel = ({ translation }: ILoginPanel) => {
             >
               {isEyeOpen ? <OpenEyeIcon /> : <ClosedEyeIcon />}
             </div>
-            <span className='absolute w-full -top-6 text-right text-main-purple text-sm hover:text-main-purple-hover cursor-pointer'>
-              {translation.forgotPassword}
-            </span>
+            <Link href={routes.recoverPassword}>
+              <span className='absolute w-full -top-6 text-right text-main-purple text-sm hover:text-main-purple-hover cursor-pointer'>
+                {translation.forgotPassword}
+              </span>
+            </Link>
             <Input
               placeholder={translation.password}
               type={isEyeOpen ? 'text' : 'password'}

@@ -9,6 +9,7 @@ import ChangeLanguage from '../ChangeLanguage/ChangeLanguage';
 import CustomLink from '../CustomLink/CustomLink';
 import Link from 'next/link';
 import { routes } from '@/constants/constants';
+import AccountTooltip from '../AccountTooltip/AccountTooltip';
 
 const NavBar = ({ translation, locale }: INavBar) => {
   return (
@@ -31,13 +32,7 @@ const NavBar = ({ translation, locale }: INavBar) => {
             <ChangeLanguage locale={locale} />
             <span>{locale.toUpperCase()}</span>
           </div>
-          <Link
-            href={routes.login}
-            className='flex items-center gap-5 cursor-pointer w-36 whitespace-nowrap'
-          >
-            <PersonIcon />
-            {translation.signIn}
-          </Link>
+          <AccountTooltip translation={translation} />
           <div className='flex items-center gap-5 cursor-pointer min-w-32'>
             <CartIcon /> {translation.cart}
           </div>

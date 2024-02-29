@@ -1,11 +1,12 @@
 import TessRactLogo from '@/assets/TessRactLogo';
 import React from 'react';
+import Link from 'next/link';
+
 import { Locale } from '../../../i18n.config';
 import { getDictionary } from '../../../lib/dictionary';
 import Button from '../Button/Button';
 import GoogleButtonIcon from '@/assets/GoogleButtonIcon';
 import LoginPanel from '../LoginPanel/LoginPanel';
-import Link from 'next/link';
 import { routes } from '@/constants/constants';
 
 interface ILoginForm {

@@ -25,6 +25,31 @@
     "cart": "Cart",
     "confirmPassword": "Confirm password",
     "yourAccountHasBeenActivated": "Your account has been activated you can now log in",
+    "recoverPassword": "Recover password",
+    "return": "Return",
+    "enterNewPasswordForYourAccount": "Enter new password for your account",
+    "enterAdresEmailToVerificate": "Enter your email address to verify",
+    "checkYourEmail": "Check your email",
+
+    "tooltipAccount": {
+        "myAccount": "My account",
+        "orders": "Orders",
+        "returnAndComplaints": "Returns and complaints",
+        "settingsAccount": "Account settings",
+        "productToRate": "Products to rate",
+        "manageOrders": "Manage orders",
+        "logout": "Logout"
+    },
+
+    "emailVerification": {
+        "checkYourEmail": "Check your email",
+        "haveNotReceivedYourEmail": "Haven't received your email?",
+        "checkSpamFolder": "Please check your spam folder.",
+        "checkYourEmailIsCorrect": "Make sure the email address is correct.",
+        "waitAndCheckInFewMinutes": "Wait and check again in a few minutes.",
+        "areYouSendIncorrectEmail": "Are you entered the incorrect email address?",
+        "completeTheFormAgain": "Complete the form again"
+    },
 
     "errorMessage": {
         "youEnteredTheWrongFormatOfEmailAddress": "You entered the wrong format of email address",

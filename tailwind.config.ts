@@ -15,6 +15,7 @@ const config: Config = {
       colors: {
         'main-purple': '#4153EF',
         'main-purple-hover': '#3644C4',
+        'main-gray-hover': '#F5F5F5',
         'main-gray': '#B0B0B0',
         'dashboard-background-gray': '#FAFAFA',
         'secondary-gray': '#686868',
@@ -22,6 +23,7 @@ const config: Config = {
         'title-gray': '#4D4D4D',
         'google-gradient': '#C1C1C1',
         'google-content': '#0E435C',
+        'main-green': '#32CD32',
       },
     },
   },
