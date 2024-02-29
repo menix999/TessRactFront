@@ -25,6 +25,30 @@
     "cart": "Koszyk",
     "confirmPassword": "Potwierdź hasło",
     "yourAccountHasBeenActivated": "Twoje konto zostało aktywowane możesz się teraz zalogować",
+    "recoverPassword": "Przywróć hasło",
+    "return": "Powrót",
+    "enterNewPasswordForYourAccount": "Wprowadź nowe hasło dla swojego konta",
+    "enterAdresEmailToVerificate": "Podaj adres e-mail w celu weryfikacji",
+
+    "tooltipAccount": {
+        "myAccount": "Moje konto",
+        "orders": "Zamówienia",
+        "returnAndComplaints": "Zwroty i reklamacje",
+        "settingsAccount": "Ustawienia konta",
+        "productToRate": "Produkty do oceny",
+        "manageOrders": "Zarządzaj zamówieniami",
+        "logout": "Wyloguj się"
+    },
+
+    "emailVerification": {
+        "checkYourEmail": "Sprawdź swoją pocztę",
+        "haveNotReceivedYourEmail": "Nie otrzymałeś e-maila?",
+        "checkSpamFolder": "Sprawdź folder ze spamem.",
+        "checkYourEmailIsCorrect": "Sprawdź czy Twój adres e-mail jest poprawny.",
+        "waitAndCheckInFewMinutes": "Poczekaj chwilę i sprawdź ponownie.",
+        "areYouSendIncorrectEmail": "Czy podałeś zły adres e-mail?",
+        "completeTheFormAgain": "Wypełnij formularz ponownie"
+    },
 
 
     "errorMessage": {
