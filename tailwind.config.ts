@@ -24,6 +24,10 @@ const config: Config = {
         'google-gradient': '#C1C1C1',
         'google-content': '#0E435C',
         'main-green': '#32CD32',
+
+        'dashboard-watch-background': '#EFEFEF',
+        'dashboard-watch-title': '#333333',
+        'dashboard-watch-text': '#737373',
       },
     },
   },

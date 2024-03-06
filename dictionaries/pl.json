@@ -29,6 +29,22 @@
     "return": "Powrót",
     "enterNewPasswordForYourAccount": "Wprowadź nowe hasło dla swojego konta",
     "enterAdresEmailToVerificate": "Podaj adres e-mail w celu weryfikacji",
+    "apartmentNumber": "Numer domu / mieszkania",
+    "street": "Ulica",
+    "postalCode": "Kod pocztowy",
+    "city": "Miasto",
+    "phoneNumber": "Numer telefonu",
+    "dateOfBirth": "Data urodzenia",
+    "accountSettings": "Ustawienia konta",
+    "save": "Zapisz",
+
+    "footer": {
+        "regulations": "Regulamin",
+        "contact": "Kontakt",
+        "promotions": "Promocje",
+        "aboutUs": "O nas",
+        "informations": "Informacje"
+    },
 
     "tooltipAccount": {
         "myAccount": "Moje konto",
