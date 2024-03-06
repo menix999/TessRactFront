@@ -8,4 +8,7 @@ export const routes = {
   login: '/login',
   register: '/register',
   recoverPassword: '/recover-password',
+  regulations: '/regulations',
+  aboutUs: '/about-us',
+  accountSettings: '/account-settings',
 };

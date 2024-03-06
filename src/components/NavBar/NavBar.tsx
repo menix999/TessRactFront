@@ -14,7 +14,7 @@ import AccountTooltip from '../AccountTooltip/AccountTooltip';
 const NavBar = ({ translation, locale }: INavBar) => {
   return (
     <div className='h-16'>
-      <header className='flex h-16 shadow-xl w-full items-center px-8 fixed z-10 top-0 bg-white'>
+      <header className='flex h-16 shadow-xl w-full items-center px-8 fixed z-50 top-0 bg-white'>
         <div className='w-3/4 flex justify-center'>
           <CustomLink href='/' locale={locale}>
             <div className='flex items-center w-full'>

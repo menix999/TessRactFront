@@ -70,10 +70,13 @@ const AccountTooltip = ({ translation }: IAccountTooltipProps) => {
               <ReturnAndComplaintsIcon />
               <span className='text-sm'>{translation.tooltipAccount.returnAndComplaints}</span>
             </div>
-            <div className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'>
+            <Link
+              href={routes.accountSettings}
+              className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'
+            >
               <SettingsIcon />
               <span className='text-sm'>{translation.tooltipAccount.settingsAccount}</span>
-            </div>
+            </Link>
             <div className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'>
               <ProductToRateIcon />
               <span className='text-sm'>{translation.tooltipAccount.productToRate}</span>

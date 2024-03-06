@@ -30,6 +30,22 @@
     "enterNewPasswordForYourAccount": "Enter new password for your account",
     "enterAdresEmailToVerificate": "Enter your email address to verify",
     "checkYourEmail": "Check your email",
+    "apartmentNumber": "Apartment / house number",
+    "street": "Street",
+    "postalCode": "Postal code",
+    "city": "City",
+    "phoneNumber": "Phone number",
+    "dateOfBirth": "Date of birth",
+    "accountSettings": "Account settings",
+    "save": "Save",
+
+    "footer": {
+        "regulations": "Regulations",
+        "contact": "Contact",
+        "promotions": "Promotions",
+        "aboutUs": "About us",
+        "informations": "Informations"
+    },
 
     "tooltipAccount": {
         "myAccount": "My account",
