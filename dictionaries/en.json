@@ -38,6 +38,21 @@
     "dateOfBirth": "Date of birth",
     "accountSettings": "Account settings",
     "save": "Save",
+    "nameOfProduct": "Name of product",
+    "companyName": "Company name",
+    "category": "Category",
+    "price": "Price",
+    "quantityOfProduct": "Quantity default: 1",
+    "color": "Color",
+    "productMaterial": "Product material",
+    "description": "Description",
+    "uploadYourPhoto": "Upload your photo :",
+    "choosePhotoAndDragItHere": "Choose a photo or drag it here",
+    "supportsJpgJpegPngGif": "Supports JPEG, JPG, PNG",
+    "addProduct": "Add product",
+    "add": "Add",
+    "yesterday": "Yesterday",
+    "today": "Today",
 
     "footer": {
         "regulations": "Regulations",
@@ -54,6 +69,7 @@
         "settingsAccount": "Account settings",
         "productToRate": "Products to rate",
         "manageOrders": "Manage orders",
+        "addProduct": "Add product",
         "logout": "Logout"
     },
 

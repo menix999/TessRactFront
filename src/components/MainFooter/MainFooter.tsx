@@ -17,10 +17,8 @@ const MainFooter = ({ translation }: IMainFooterProps) => {
   const [tessRactOpen, setTessRactOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
 
-  console.log('isMobile', isMobile);
-
   return (
-    <footer className='flex sm:h-64 sm:px-8 px-4 pt-8 justify-center'>
+    <footer className='flex sm:h-64 pt-8 justify-center'>
       {isMobile ? (
         <div className='flex flex-col w-full items-start mb-8'>
           <button

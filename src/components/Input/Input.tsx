@@ -4,7 +4,7 @@ interface IInput {
   placeholder?: string;
   type?: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  value: string;
+  value?: string | number;
   errorMessage?: string;
   required?: boolean;
 }

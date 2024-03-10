@@ -37,6 +37,22 @@
     "dateOfBirth": "Data urodzenia",
     "accountSettings": "Ustawienia konta",
     "save": "Zapisz",
+    "nameOfProduct": "Nazwa produktu",
+    "companyName": "Nazwa firmy",
+    "category": "Kategoria",
+    "price": "Cena",
+    "quantityOfProduct": "Ilość domyślnie: 1",
+    "color": "Kolor",
+    "productMaterial": "Materiał produktu",
+    "description": "Opis",
+    "uploadYourPhoto": "Prześlij swoje zdjęcie : ",
+    "choosePhotoAndDragItHere": "Wybierz zdjęcie i przeciągnij je tutaj",
+    "supportsJpgJpegPngGif": "Obsługuje formaty JPG, JPEG, PNG",
+    "addProduct": "Dodawanie produktu",
+    "add": "Dodaj",
+    "yesterday": "Wczoraj",
+    "today": "Dzisiaj",
+
 
     "footer": {
         "regulations": "Regulamin",
@@ -53,6 +69,7 @@
         "settingsAccount": "Ustawienia konta",
         "productToRate": "Produkty do oceny",
         "manageOrders": "Zarządzaj zamówieniami",
+        "addProduct": "Dodaj produkt",
         "logout": "Wyloguj się"
     },
 

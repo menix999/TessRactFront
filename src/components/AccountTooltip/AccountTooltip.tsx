@@ -1,4 +1,5 @@
 'use client';
+import Cookies from 'js-cookie';
 
 import { useEffect, useRef, useState } from 'react';
 import Tooltip from '../Tooltip/Tooltip';
@@ -11,9 +12,13 @@ import ReturnAndComplaintsIcon from '@/assets/ReturnAndComplaintsIcon';
 import SettingsIcon from '@/assets/SettingsIcon';
 import ProductToRateIcon from '@/assets/ProductToRateIcon';
 import ManageOrdersIcon from '@/assets/ManageOrdersIcon';
+import { useAuth } from '@/context/AuthContext/AuthContext';
+import AddProductIcon from '@/assets/AddProductIcon';
 
 const AccountTooltip = ({ translation }: IAccountTooltipProps) => {
   const [isToolTipVisible, setIsToolTipVisible] = useState(true);
+
+  const { logout, userToken, userRole } = useAuth();
 
   const loginRef = useRef<HTMLAnchorElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -40,20 +45,26 @@ const AccountTooltip = ({ translation }: IAccountTooltipProps) => {
     };
   }, []);
 
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <div className='relative'>
       <Link
         href={routes.login}
-        className='flex items-center gap-5 cursor-pointer w-36 whitespace-nowrap'
+        className={`flex items-center gap-5 cursor-pointer ${
+          userToken ? 'w-10 mr-2' : 'w-36'
+        } whitespace-nowrap`}
         onMouseOver={() => setIsToolTipVisible(true)}
         ref={loginRef}
       >
         <div className='z-10'>
           <PersonIcon />
         </div>
-        {translation.signIn}
+        {!userToken ? <span>{translation.signIn}</span> : null}
       </Link>
-      {isToolTipVisible && (
+      {isToolTipVisible && userToken && (
         <Tooltip tooltipRef={tooltipRef}>
           <div className='flex flex-col bg-white rounded-xl w-60'>
             <div className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'>
@@ -81,11 +92,25 @@ const AccountTooltip = ({ translation }: IAccountTooltipProps) => {
               <ProductToRateIcon />
               <span className='text-sm'>{translation.tooltipAccount.productToRate}</span>
             </div>
-            <div className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'>
-              <ManageOrdersIcon />
-              <span className='text-sm'>{translation.tooltipAccount.manageOrders}</span>
-            </div>
-            <div className='flex h-12 p-3 justify-center items-center text-sm cursor-pointer border-t border-main-gray hover:bg-main-gray-hover'>
+            {userRole === 'Administrator' && (
+              <>
+                <div className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'>
+                  <ManageOrdersIcon />
+                  <span className='text-sm'>{translation.tooltipAccount.manageOrders}</span>
+                </div>
+                <Link
+                  href={routes.addProduct}
+                  className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'
+                >
+                  <AddProductIcon />
+                  <span className='text-sm'>{translation.tooltipAccount.addProduct}</span>
+                </Link>
+              </>
+            )}
+            <div
+              onClick={handleLogout}
+              className='flex h-12 p-3 justify-center items-center text-sm cursor-pointer border-t border-main-gray hover:bg-main-gray-hover'
+            >
               <span>{translation.tooltipAccount.logout}</span>
             </div>
           </div>

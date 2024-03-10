@@ -1,16 +1,21 @@
 'use client';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import { ILoginForm, ILoginPanel } from './LoginPanel.types';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import OpenEyeIcon from '@/assets/OpenEyeIcon';
 import ClosedEyeIcon from '@/assets/ClosedEyeIcon';
 import Checkbox from '../Checkbox/Checkbox';
 import { emailRegex } from '@/constants/regex';
 import Link from 'next/link';
 import { routes } from '@/constants/constants';
+import { useAuth } from '@/context/AuthContext/AuthContext';
 
 const LoginPanel = ({ translation }: ILoginPanel) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
@@ -21,13 +26,33 @@ const LoginPanel = ({ translation }: ILoginPanel) => {
     formState: { errors },
   } = useForm<ILoginForm>();
 
+  const router = useRouter();
+
+  const { login } = useAuth();
+
   const onSubmit: SubmitHandler<ILoginForm> = async ({ email, password }) => {
     try {
       const { data } = await axios.post('http://localhost:5250/api/Account/login', {
         email,
         password,
       });
-      console.log('response', data);
+      const userToken = data;
+
+      if (userToken) {
+        const decodedToken = jwtDecode(data);
+
+        const userId = (decodedToken as any)[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+        ];
+
+        const role = (decodedToken as any)[
+          'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+        ];
+
+        login(userToken, role, userId);
+
+        router.push(routes.main);
+      }
     } catch (error) {
       console.log('LoginPanel error', error);
     }

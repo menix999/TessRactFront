@@ -1,4 +1,5 @@
 import React from 'react';
+import { cookies } from 'next/headers';
 
 import SearchBar from '../SearchBar/SearchBar';
 import { INavBar } from './INavBar.types';
@@ -12,6 +13,9 @@ import { routes } from '@/constants/constants';
 import AccountTooltip from '../AccountTooltip/AccountTooltip';
 
 const NavBar = ({ translation, locale }: INavBar) => {
+  // const userRole = cookies().get('userRole')?.value;
+  // const userToken = cookies().get('userRole')?.value;
+
   return (
     <div className='h-16'>
       <header className='flex h-16 shadow-xl w-full items-center px-8 fixed z-50 top-0 bg-white'>
