@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { Roboto } from 'next/font/google';
 
 import { Locale, i18n } from '../../../i18n.config';
+import { AuthProvider } from '@/context/AuthContext/AuthContext';
 
 const roboto = Roboto({
   weight: '400',
@@ -28,7 +29,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang={params.locale}>
-      <body className={roboto.className}>{children}</body>
+      <AuthProvider>
+        <body className={roboto.className}>{children}</body>
+      </AuthProvider>
     </html>
   );
 }

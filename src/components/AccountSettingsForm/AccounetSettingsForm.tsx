@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -45,8 +46,8 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
     // }
   };
 
-  console.log('errors', errors);
-
+  const userIdFromCookie = Cookies.get();
+  console.log('userId', userIdFromCookie);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-full gap-10' noValidate>
       <Controller

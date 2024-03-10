@@ -17,7 +17,7 @@ const DashboardLayout = async ({ params: { locale }, children }: IDashboardLayou
     <div>
       <NavBar translation={translation} locale={locale} />
       <div className='flex w-full justify-center bg-dashboard-background-gray'>
-        <div className='w-full lg:max-w-7xl'>
+        <div className='w-full lg:max-w-7xl sm:px-8 px-4'>
           {children}
           <MainFooter translation={translation} />
         </div>
