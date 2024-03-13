@@ -37,9 +37,9 @@ const NavBar = ({ translation, locale }: INavBar) => {
             <span>{locale.toUpperCase()}</span>
           </div>
           <AccountTooltip translation={translation} />
-          <div className='flex items-center gap-5 cursor-pointer min-w-32'>
+          <Link href={routes.cart} className='flex items-center gap-5 cursor-pointer min-w-32'>
             <CartIcon /> {translation.cart}
-          </div>
+          </Link>
         </div>
       </header>
     </div>

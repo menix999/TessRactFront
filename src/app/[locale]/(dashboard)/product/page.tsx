@@ -3,11 +3,9 @@ import { Locale } from '../../../../../i18n.config';
 import { getDictionary } from '../../../../../lib/dictionary';
 import DeliveryIcon from '@/assets/DeliveryIcon';
 import Stars from '@/components/Stars/Stars';
-import smartWatchLogo from '../../../../assets/smartWatch.png';
 import UserAvatar from '@/components/UserAvatar/UserAvatar';
 
 const getProduct = async (id: number) => {
-  console.log('process.env.DB_BASEURL', process.env.DB_BASEURL);
   const response = await fetch(`${process.env.DB_BASEURL}/api/Product/${id}`, {
     cache: 'no-cache',
   });
@@ -18,20 +16,30 @@ const getProduct = async (id: number) => {
 const ProductPage = async ({ params: { locale } }: { params: { locale: Locale } }) => {
   const translation = await getDictionary(locale);
 
-  const { description, category, name, price, color, material, mark, ratesAmount, averageRate } =
-    await getProduct(1);
+  const {
+    description,
+    category,
+    name,
+    price,
+    color,
+    material,
+    mark,
+    ratesAmount,
+    averageRate,
+    base64Image,
+  } = await getProduct(3);
 
   return (
     <div className='flex flex-col items-center'>
       <div className='flex mt-52 w-full md:w-auto h-fit flex-col md:flex-row'>
         <div className='flex justify-center items-center'>
           <img
-            src={smartWatchLogo.src}
+            src={`data:image/;base64,${base64Image}`}
             alt='New smartWatch'
             className='max-w-60 max-h-60 md:max-w-80 md:max-h-80'
           />
         </div>
-        <div className='border-2 border-main-gray w-full md:w-auto my-12 md:my-0 md:mx-20' />
+        <div className='border rounded-xl border-main-gray w-full md:w-auto my-12 md:my-0 md:mx-20' />
         <div className='flex flex-col gap-4 mb-12'>
           <div className='flex gap-2'>
             <DeliveryIcon />

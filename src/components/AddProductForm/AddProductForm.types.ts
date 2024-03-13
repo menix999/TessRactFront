@@ -4,14 +4,20 @@ export interface IAddProductFormProps {
   translation: Awaited<ReturnType<typeof getDictionary>>;
 }
 
-type CategoryTypes = 'Headphones' | 'Smartwatch' | 'Watch';
+type CategoryNameTypes = 'Headphones' | 'Smartwatch' | 'Watch';
+
+interface ICategory {
+  id: number;
+  name: CategoryNameTypes;
+  nameValue: CategoryNameTypes;
+}
 
 export interface IAddProductForm {
   description: string;
   quantity?: number;
-  category: CategoryTypes;
+  category: ICategory;
   name: string;
-  price?: number;
+  price?: string;
   color: string;
   material: string;
   mark: string;

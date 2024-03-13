@@ -92,7 +92,7 @@ const DropdownInput = ({
         <div
           className={`flex flex-col absolute max-h-56 z-20 top-20 bg-white w-full border border-main-gray rounded-xl overflow-y-auto cursor-pointer ${
             isDropdownListPositionOnUp && '-top-40'
-          } top-11`}
+          } top-[44px]`}
         >
           {!!options ? (
             options.map(({ id, name, nameValue }) => (

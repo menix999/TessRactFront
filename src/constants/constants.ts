@@ -12,6 +12,7 @@ export const routes = {
   aboutUs: '/about-us',
   accountSettings: '/account-settings',
   addProduct: '/add-product',
+  cart: '/cart',
 };
 
 export const avatarColors = [
