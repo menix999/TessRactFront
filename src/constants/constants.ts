@@ -11,6 +11,8 @@ export const routes = {
   regulations: '/regulations',
   aboutUs: '/about-us',
   accountSettings: '/account-settings',
+  product: '/product',
+  productList: '/product-list',
   addProduct: '/add-product',
   cart: '/cart',
 };

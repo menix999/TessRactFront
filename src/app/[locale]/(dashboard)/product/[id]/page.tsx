@@ -1,9 +1,10 @@
 import Button from '@/components/Button/Button';
-import { Locale } from '../../../../../i18n.config';
-import { getDictionary } from '../../../../../lib/dictionary';
+import { Locale } from '../../../../../../i18n.config';
+import { getDictionary } from '../../../../../../lib/dictionary';
 import DeliveryIcon from '@/assets/DeliveryIcon';
 import Stars from '@/components/Stars/Stars';
 import UserAvatar from '@/components/UserAvatar/UserAvatar';
+import BuyProduct from '@/components/BuyProduct/BuyProduct';
 
 const getProduct = async (id: number) => {
   const response = await fetch(`${process.env.DB_BASEURL}/api/Product/${id}`, {
@@ -13,22 +14,30 @@ const getProduct = async (id: number) => {
   return response.json();
 };
 
-const ProductPage = async ({ params: { locale } }: { params: { locale: Locale } }) => {
+const ProductPage = async ({
+  params: { locale, id },
+}: {
+  params: { locale: Locale; id: string };
+}) => {
   const translation = await getDictionary(locale);
 
+  const productData = await getProduct(Number(id));
+
   const {
-    description,
-    category,
+    id: productId,
     name,
+    description,
     price,
     color,
     material,
     mark,
+    category,
     ratesAmount,
     averageRate,
     base64Image,
-  } = await getProduct(3);
+  } = productData;
 
+  console.log('productId', productId);
   return (
     <div className='flex flex-col items-center'>
       <div className='flex mt-52 w-full md:w-auto h-fit flex-col md:flex-row'>
@@ -43,61 +52,58 @@ const ProductPage = async ({ params: { locale } }: { params: { locale: Locale } 
         <div className='flex flex-col gap-4 mb-12'>
           <div className='flex gap-2'>
             <DeliveryIcon />
-            <span className='text-main-green'>Bezpłatna dostawa</span>
+            <span className='text-main-green'>{translation.freeDelivery}</span>
           </div>
           <h2 className='font-bold text-2xl'>{name}</h2>
           <span>
             <Stars count={averageRate} numberOfRates={ratesAmount} />
           </span>
           <div>
-            <span className='text-secondary-gray mr-1'>Firma:</span>
+            <span className='text-secondary-gray mr-1'>{translation.company}:</span>
             <span>{mark}</span>
           </div>
           <div>
-            <span className='text-secondary-gray mr-1'>Materiał:</span>
+            <span className='text-secondary-gray mr-1'>{translation.material}:</span>
             <span>{material}</span>
           </div>
           <div>
-            <span className='text-secondary-gray mr-1'>Kolor:</span>
+            <span className='text-secondary-gray mr-1'>{translation.color}:</span>
             <span>{color}</span>
           </div>
-          <span className='underline cursor-pointer'>Zobacz pełen opis</span>
+          <span className='underline cursor-pointer'>{translation.seeFullDescription}</span>
           <span className='flex text-3xl'>{price} zł</span>
-          <Button type='button'>Dodaj do koszyka</Button>
-          <Button type='button' variant='bordered'>
-            Kup i zapłać
-          </Button>
+          <BuyProduct productData={productData} />
         </div>
       </div>
       <div className='flex flex-col items-start border-b-2 border-main-gray w-full pb-10 gap-4 mb-12'>
-        <h2 className='text-2xl font-bold'>Opis</h2>
-        <span className='text-base'>{description}</span>
+        <h2 className='text-2xl font-bold'>{translation.description}</h2>
+        <span className='text-base max-w-[700px] break-words'>{description}</span>
       </div>
       <div className='flex flex-col items-start border-b-2 border-main-gray w-full pb-10 gap-4 mb-12'>
-        <h2 className='text-2xl font-bold'>Szczegóły produktu</h2>
+        <h2 className='text-2xl font-bold'>{translation.productDetails}</h2>
         <div>
-          <span className='text-secondary-gray mr-1'>Nazwa produktu:</span>
+          <span className='text-secondary-gray mr-1'>{translation.productName}:</span>
           <span>{name}</span>
         </div>
         <div>
-          <span className='text-secondary-gray mr-1'>Firma:</span>
+          <span className='text-secondary-gray mr-1'>{translation.company}:</span>
           <span>{mark}</span>
         </div>
         <div>
-          <span className='text-secondary-gray mr-1'>Kategoria:</span>
+          <span className='text-secondary-gray mr-1'>{translation.category}:</span>
           <span>{category}</span>
         </div>
         <div>
-          <span className='text-secondary-gray mr-1'>Kolor:</span>
+          <span className='text-secondary-gray mr-1'>{translation.color}:</span>
           <span>{color}</span>
         </div>
         <div>
-          <span className='text-secondary-gray mr-1'>Materiał:</span>
+          <span className='text-secondary-gray mr-1'>{translation.material}:</span>
           <span>{material}</span>
         </div>
       </div>
       <div className='flex flex-col items-start border-b-2 border-main-gray w-full pb-10 gap-4 mb-12'>
-        <h2 className='text-2xl font-bold mb-3'>Opinie</h2>
+        <h2 className='text-2xl font-bold mb-3'>{translation.opinions}</h2>
         <div className='flex flex-col gap-4'>
           <div className='flex gap-3 items-center'>
             <UserAvatar firstName={'Damian'} lastName={'Smolinski'} />
