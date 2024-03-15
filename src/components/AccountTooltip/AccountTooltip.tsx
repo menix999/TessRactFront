@@ -52,17 +52,19 @@ const AccountTooltip = ({ translation }: IAccountTooltipProps) => {
   return (
     <div className='relative'>
       <Link
-        href={routes.login}
-        className={`flex items-center gap-5 cursor-pointer ${
-          userToken ? 'w-10 mr-2' : 'w-36'
-        } whitespace-nowrap`}
+        href={!userToken ? routes.login : ''}
+        className='flex flex-col sm:flex-row items-center sm:gap-3 cursor-pointer sm:w-36 whitespace-nowrap z-50'
         onMouseOver={() => setIsToolTipVisible(true)}
         ref={loginRef}
       >
-        <div className='z-10'>
+        <div className='w-8 h-8 z-50'>
           <PersonIcon />
         </div>
-        {!userToken ? <span>{translation.signIn}</span> : null}
+        {!userToken ? (
+          <span className='flex text-xs sm:text-base'>{translation.signIn}</span>
+        ) : (
+          <span className='flex text-xs sm:text-base'>{translation.myAccount}</span>
+        )}
       </Link>
       {isToolTipVisible && userToken && (
         <Tooltip tooltipRef={tooltipRef}>

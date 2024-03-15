@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss';
 
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -24,11 +26,16 @@ const config: Config = {
         'google-gradient': '#C1C1C1',
         'google-content': '#0E435C',
         'main-green': '#32CD32',
+        'category-background': '#FBFBFB',
 
         'dashboard-watch-background': '#EFEFEF',
         'dashboard-watch-title': '#333333',
         'dashboard-watch-text': '#737373',
       },
+    },
+    screens: {
+      xs: '400px',
+      ...defaultTheme.screens,
     },
   },
   plugins: [],

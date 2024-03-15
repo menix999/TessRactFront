@@ -4,6 +4,7 @@ import NavBar from '@/components/NavBar/NavBar';
 import { Locale } from '../../../../i18n.config';
 import { getDictionary } from '../../../../lib/dictionary';
 import MainFooter from '@/components/MainFooter/MainFooter';
+import CategoriesNavBar from '@/components/CategoriesNavBar/CategoriesNavBar';
 
 interface IDashboardLayout {
   children: ReactNode;
@@ -16,7 +17,8 @@ const DashboardLayout = async ({ params: { locale }, children }: IDashboardLayou
   return (
     <div>
       <NavBar translation={translation} locale={locale} />
-      <div className='flex w-full justify-center bg-dashboard-background-gray'>
+      <CategoriesNavBar translation={translation} />
+      <div className='flex w-full justify-center'>
         <div className='w-full lg:max-w-7xl sm:px-8 px-4'>
           {children}
           <MainFooter translation={translation} />

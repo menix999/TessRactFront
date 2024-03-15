@@ -1,7 +1,6 @@
 'use client';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';

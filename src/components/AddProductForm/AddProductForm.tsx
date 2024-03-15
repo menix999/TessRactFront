@@ -10,9 +10,11 @@ import DropdownInput from '../DropdownInput/DropdownInput';
 import UploadPhotoIcon from '@/assets/UploadPhotoIcon';
 import TextareaInput from '../TextareaInput/TextareaInput';
 import apiClient from '@/utils/api';
+import TrashIcon from '@/assets/TrashIcon';
 
 const AddProductForm = ({ translation }: IAddProductFormProps) => {
   const [selectedImage, setSelectedImage] = useState(null);
+  console.log('selectedImage', selectedImage);
 
   const { categoryOptions } = ConstantProduct();
 
@@ -36,26 +38,27 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
     try {
       const quantityValue = !quantity ? 1 : quantity;
 
-      const formData = new FormData();
+      let formData = new FormData();
       if (selectedImage) {
-        formData.append('image', selectedImage);
-
-        // In order to see the data in the console
-        // formData.forEach((value, key) => {
-        //   console.log(key, value);
-        // });
+        formData.append('imageFile', selectedImage);
       }
 
-      const response = await apiClient.post('/api/Product', {
-        name,
-        mark,
-        category,
-        price,
-        color,
-        material,
-        description,
-        quantity: quantityValue,
-      });
+      console.log('category', category);
+      formData.append('name', name);
+      formData.append('mark', mark);
+      formData.append('category', category.nameValue);
+      formData.append('price', String(price));
+      formData.append('color', color);
+      formData.append('material', material);
+      formData.append('description', description);
+      formData.append('quantity', String(quantityValue));
+
+      // In order to see the data in the console
+      // formData.forEach((value, key) => {
+      //   console.log(key, value);
+      // });
+
+      const response = await apiClient.post('/api/Product', formData);
 
       if (response) {
         reset();
@@ -67,7 +70,6 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
 
   const handleDrop = (event: any) => {
     event.preventDefault();
-    console.log('event', event);
     const file = event.dataTransfer.files[0];
     if (
       file &&
@@ -94,6 +96,10 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
     } else {
       setSelectedImage(null);
     }
+  };
+
+  const handleDeletePhoto = () => {
+    setSelectedImage(null);
   };
 
   return (
@@ -168,8 +174,12 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
             message: translation.errorMessage.thisFieldIsRequired,
           },
         }}
+        defaultValue={{
+          id: 1,
+          name: 'Headphones',
+          nameValue: 'Headphones',
+        }}
         control={control}
-        defaultValue='Headphones'
         name='category'
       />
       <Controller
@@ -290,21 +300,35 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
       />
       <div className='flex items-center justify-center'>
         <div
-          className='flex items-center flex-col w-full justify-center border-dashed border-2 rounded-xl border-main-gray h-60 relative'
+          className='flex items-center relative flex-col w-full justify-center border-dashed border-2 rounded-xl border-main-gray h-60 relative'
           onDrop={handleDrop}
           onDragOver={handleDragOver}
         >
-          <input
-            type='file'
-            accept='.jpg, .jpeg, .png'
-            onChange={handleImageChange}
-            className='opacity-0 absolute inset-0 w-full h-full cursor-pointer'
-          />
-          <UploadPhotoIcon />
-          <span className='font-bold text-xs sm:text-lg'>
-            {translation.choosePhotoAndDragItHere}
-          </span>
-          <span className='text-[10px] text-xs'>{translation.supportsJpgJpegPngGif}</span>
+          {selectedImage ? (
+            <>
+              <img src={URL.createObjectURL(selectedImage)} className='max-w-40 max-h-40 ' />
+              <div
+                className='absolute z-30 top-4 right-4 cursor-pointer'
+                onClick={handleDeletePhoto}
+              >
+                <TrashIcon />
+              </div>
+            </>
+          ) : (
+            <>
+              <input
+                type='file'
+                accept='.jpg, .jpeg, .png'
+                onChange={handleImageChange}
+                className='opacity-0 absolute inset-0 w-full h-full cursor-pointer'
+              />
+              <UploadPhotoIcon />
+              <span className='font-bold text-xs sm:text-lg'>
+                {translation.choosePhotoAndDragItHere}
+              </span>
+              <span className='text-[10px] text-xs'>{translation.supportsJpgJpegPngGif}</span>
+            </>
+          )}
         </div>
       </div>
       <Button type='submit'>{translation.add}</Button>

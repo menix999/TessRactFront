@@ -64,6 +64,10 @@ const MainFooter = ({ translation }: IMainFooterProps) => {
               </div>
               <div className='flex gap-6'>
                 <EnvelopIcon />
+                <span>dawid.borowik400@gmail.com</span>
+              </div>
+              <div className='flex gap-6'>
+                <EnvelopIcon />
                 <span>damiansmolinski32@gmail.com</span>
               </div>
               <div className='flex gap-6'>
@@ -95,6 +99,10 @@ const MainFooter = ({ translation }: IMainFooterProps) => {
               <div className='flex gap-6'>
                 <PhoneIcon />
                 <span>663 339 122</span>
+              </div>
+              <div className='flex gap-6'>
+                <EnvelopIcon />
+                <span>dawid.borowik400@gmail.com</span>
               </div>
               <div className='flex gap-6'>
                 <EnvelopIcon />

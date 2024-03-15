@@ -5,6 +5,7 @@ import { Roboto } from 'next/font/google';
 
 import { Locale, i18n } from '../../../i18n.config';
 import { AuthProvider } from '@/context/AuthContext/AuthContext';
+import { CartProvider } from '@/context/CartContext/CartContext';
 
 const roboto = Roboto({
   weight: '400',
@@ -30,7 +31,9 @@ export default function RootLayout({
   return (
     <html lang={params.locale}>
       <AuthProvider>
-        <body className={roboto.className}>{children}</body>
+        <CartProvider>
+          <body className={roboto.className}>{children}</body>
+        </CartProvider>
       </AuthProvider>
     </html>
   );

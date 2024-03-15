@@ -12,7 +12,7 @@ interface ISearchBar {
 
 const SearchBar = ({ placeholder, type, value, onChange }: ISearchBar) => {
   return (
-    <div className='flex'>
+    <div className='flex w-full'>
       <input
         placeholder={placeholder}
         onChange={onChange}

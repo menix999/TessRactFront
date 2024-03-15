@@ -12,70 +12,100 @@ import GuaranteeIcon from '@/assets/GuaranteeIcon';
 import SafetyTransactionIcon from '@/assets/SafetyTransactionIcon';
 import ProductCard from '@/components/ProductCard/ProductCard';
 
+const getNewProducts = async () => {
+  const params = new URLSearchParams({
+    pageSize: '50',
+    sortDirection: '0',
+    pageNumber: '1',
+    // sortBy: 'Headphones',
+  });
+
+  const respone = await fetch(`${process.env.DB_BASEURL}/api/Product?${params}`, {
+    cache: 'no-cache',
+  });
+
+  return respone.json();
+};
+
 const Home = async ({ params: { locale } }: { params: { locale: Locale } }) => {
   const translation = await getDictionary(locale);
 
+  const { items } = await getNewProducts();
+
+  const newItems = items.slice(0, 3);
+
   return (
-    <div className='flex flex-col min-h-screen sm:px-8 px-4 mb-64'>
-      <div className='absolute w-full bg-dashboard-watch-background h-[760px] lg:h-[500px] top-40 left-0 ' />
-      <div className='flex flex-col md:flex-row mb-40'>
-        <div className='flex flex-col mt-40 items-start justify-star w-full z-10 relative gap-8'>
+    <div className='flex flex-col sm:px-8 px-4 mb-64 '>
+      <div className='flex flex-col lg:flex-row mb-40 lg:max-w-7xl mt-32 py-14'>
+        <div className='flex flex-col items-start justify-star w-full gap-8'>
           <h1 className='text-4xl lg:text-6xl text-dashboard-watch-title font-extrabold'>
-            NAJLEPSZE AKCESORIA W ZASIĘGU RĘKI
+            {translation.bestAccessoriesToReach}
           </h1>
-          <span className='text-dashboard-watch-text'>
-            Jesteśmy nową firmą, która zajmuje się sprzedażą wyszukanych akcesoriów, gadżetów i nie
-            tylko. Przeglądaj najnowsze oferty już teraz.
-          </span>
+          <span className='text-dashboard-watch-text'>{translation.presentCompanyMainPage}</span>
+          <div className='flex-col sm:flex-row gap-4 lg:w-96 w-full z-10 hidden lg:flex'>
+            <Button type='button' variant='bordered'>
+              {translation.seeMore}
+            </Button>
+            <Button type='button'>{translation.buyNow}</Button>
+          </div>
         </div>
-        <div className='flex justify-center w-full my-10 sm:mt-40 '>
+        <div className='flex justify-center w-full '>
           <img
             src={logo.src}
             alt='watch'
-            className='transform rotate-12 max-w-40 max-h-40 sm:max-w-80 sm:max-h-80'
+            className='transform rotate-12 max-w-40 max-h-40 sm:max-w-80 sm:max-h-80 my-8 sm:my-12 lg:my-0'
           />
         </div>
-        <div className='flex flex-col sm:flex-row gap-4 lg:w-96 w-full z-10 '>
+        <div className='flex flex-col sm:flex-row gap-4 lg:w-96 w-full z-10 lg:hidden'>
           <Button type='button' variant='bordered'>
-            Zobacz więcej
+            {translation.seeMore}
           </Button>
-          <Button type='button'>Kup teraz</Button>
+          <Button type='button'>{translation.buyNow}</Button>
         </div>
       </div>
 
-      <div className='flex flex-col lg:flex-row items-center justify-center gap-20 mb-40 z-10'>
-        <CompanyTraitsCard text='Płatności Online' icon={<OnlinePaymentIcon />} />
-        <CompanyTraitsCard text='Gwarancja satysfakcji' icon={<GuaranteeIcon />} />
-        <CompanyTraitsCard text='Bezpieczne transakcje' icon={<SafetyTransactionIcon />} />
+      <div className='flex flex-col lg:flex-row items-center justify-center gap-20 mb-32 z-10'>
+        <CompanyTraitsCard text={translation.onlinePayments} icon={<OnlinePaymentIcon />} />
+        <CompanyTraitsCard text={translation.satisfactionGuaranteed} icon={<GuaranteeIcon />} />
+        <CompanyTraitsCard text={translation.secureTransactions} icon={<SafetyTransactionIcon />} />
       </div>
 
       <div className='flex flex-col gap-6 mb-40 w-full'>
-        <span className='font-bold text-xl text-main-purple'>POPULARNE</span>
-        <span className='font-bold text-2xl'>NOWE PRODUKTY</span>
+        <span className='font-bold text-xl text-main-purple'>{translation.popular}</span>
+        <span className='font-bold text-2xl'>{translation.newProducts}</span>
         <div className='flex flex-col md:flex-row items-center gap-8 w-full justify-center'>
-          <div className='md:w-full'>
-            <ProductCard photo={logo.src} text='Roli roli' rate={4} price='40,00zł' />
-          </div>
-          <div className='md:w-full'>
-            <ProductCard photo={logo.src} text='Roli roli' rate={2} price='40,00zł' />
-          </div>
-          <div className='md:w-full'>
-            <ProductCard photo={logo.src} text='Roli roli' rate={1} price='40,00zł' />
-          </div>
+          {newItems.map(({ name, price, averageRate, base64Image, id }: any, index: number) => {
+            return (
+              <div className='md:w-full' key={id}>
+                <ProductCard
+                  photo={`data:image/;base64,${base64Image}`}
+                  text={name}
+                  rate={averageRate}
+                  productId={id}
+                  price={`${price} zł`}
+                  translation={translation}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
 
       <div className='flex flex-col z-10 w-full justify-center items-center'>
         <div className='flex flex-col gap-10 md:mb-40 mb-20 w-full items-center'>
-          <h2 className='text-6xl text-dashboard-watch-title font-extrabold '>Nowości</h2>
-          <p>Odkryj nowy wymiar funkcjonalności i stylu z naszym smartwatchem!</p>
+          <h2 className='text-6xl text-dashboard-watch-title font-extrabold '>
+            {translation.advertisementSmartwatch.news}
+          </h2>
+          <p>{translation.advertisementSmartwatch.description}</p>
         </div>
         <div className='flex flex-col md:flex-row md:gap-10 gap-20'>
-          <div className='flex flex-col justify-center items-center w-80 gap-4'>
+          <div className='flex flex-col justify-center items-center w-full xs:w-80 gap-4'>
             <CareAboutHealthIcon />
-            <h3 className='font-bold text-xl'>Zadbaj o swoje zdrowie</h3>
+            <h3 className='font-bold text-xl'>
+              {translation.advertisementSmartwatch.healthControl}
+            </h3>
             <span className='text-dashboard-watch-text md:text-xl text-base text-center sm:text-left'>
-              Smartwatch umożliwia kontrolę tętna, snu, kalorii i nie tylko
+              {translation.advertisementSmartwatch.healthControlDescription}
             </span>
           </div>
           <div className='flex w-full justify-center'>
@@ -88,12 +118,16 @@ const Home = async ({ params: { locale } }: { params: { locale: Locale } }) => {
           <div className='flex flex-col md:gap-32 gap-20 md:ml-28 items-center '>
             <div className='flex flex-col gap-4 w-full items-center'>
               <RecommendedSmartWatchIcon />
-              <h3 className='font-bold text-xl text-center'>Polecany przez sportowców</h3>
+              <h3 className='font-bold text-xl text-center'>
+                {translation.advertisementSmartwatch.recommendedBySportsman}
+              </h3>
             </div>
 
             <div className='flex flex-col gap-4 items-center'>
               <PhoneSmartWatchIcon />
-              <h3 className='font-bold text-xl'>Rozmawiaj i pisz z innymi</h3>
+              <h3 className='font-bold text-xl'>
+                {translation.advertisementSmartwatch.talkAndChat}
+              </h3>
             </div>
           </div>
         </div>

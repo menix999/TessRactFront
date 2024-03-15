@@ -1,10 +1,5 @@
 import { type getDictionary } from '../../../lib/dictionary';
 
-export interface IProductCardProps {
-  photo: any;
-  text: string;
-  rate: number;
-  price: string;
+export interface ICartTooltipProps {
   translation: Awaited<ReturnType<typeof getDictionary>>;
-  productId: string;
 }

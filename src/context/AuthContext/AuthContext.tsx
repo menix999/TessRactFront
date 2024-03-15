@@ -1,24 +1,9 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState, useMemo, ReactNode } from 'react';
+import React, { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import Cookies from 'js-cookie';
 
-interface IUser {
-  token: string;
-  userId: string;
-}
-
-interface IAuthContextProps {
-  children: ReactNode;
-}
-
-type userType = 'Administrator' | 'User';
-
-export interface IAuthCreateContext {
-  userToken?: string | null;
-  userRole?: userType | null;
-  userId?: string | null;
-}
+import { IAuthContextProps, IAuthCreateContext, userType } from './AuthContext.types';
 
 export const AuthContext = createContext<IAuthCreateContext>({
   userToken: null,
@@ -38,7 +23,6 @@ export const AuthProvider = ({ children }: IAuthContextProps) => {
     const userRole = Cookies.get('userRole') as userType | null | undefined;
     const userId = Cookies.get('userId');
 
-    console.log('userToken', userToken);
     setUser({
       userToken,
       userRole,
