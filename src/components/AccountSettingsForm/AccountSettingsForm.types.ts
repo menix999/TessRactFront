@@ -1,7 +1,7 @@
 import { type getDictionary } from '../../../lib/dictionary';
 
 export interface IAccountSettingsForm {
-  dateOfBirth: string;
+  // dateOfBirth: string;
   phoneNumber: string;
   city: string;
   postalCode: string;

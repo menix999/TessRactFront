@@ -16,7 +16,7 @@ import { useAuth } from '@/context/AuthContext/AuthContext';
 import AddProductIcon from '@/assets/AddProductIcon';
 
 const AccountTooltip = ({ translation }: IAccountTooltipProps) => {
-  const [isToolTipVisible, setIsToolTipVisible] = useState(true);
+  const [isToolTipVisible, setIsToolTipVisible] = useState(false);
 
   const { logout, userToken, userRole } = useAuth();
 

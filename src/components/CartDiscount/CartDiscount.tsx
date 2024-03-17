@@ -34,7 +34,7 @@ const CartDiscount = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex gap-4'>
+    <div className='flex gap-4'>
       <Controller
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col w-full relative'>
@@ -58,7 +58,7 @@ const CartDiscount = () => {
           Zastosuj
         </Button>
       </div>
-    </form>
+    </div>
   );
 };
 

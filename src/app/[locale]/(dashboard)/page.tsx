@@ -20,7 +20,7 @@ const getNewProducts = async () => {
     // sortBy: 'Headphones',
   });
 
-  const respone = await fetch(`${process.env.DB_BASEURL}/api/Product?${params}`, {
+  const respone = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Product?${params}`, {
     cache: 'no-cache',
   });
 
