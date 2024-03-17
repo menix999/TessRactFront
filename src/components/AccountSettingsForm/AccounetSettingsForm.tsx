@@ -1,79 +1,95 @@
 'use client';
-import axios from 'axios';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import { routes } from '@/constants/constants';
 import { IAccountSettingsFormProps, IAccountSettingsForm } from './AccountSettingsForm.types';
+import { phoneNumberRegex, postalCodeRegex } from '@/constants/regex';
+import { useAuth } from '@/context/AuthContext/AuthContext';
+import { useEffect } from 'react';
 
 const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
   const router = useRouter();
+
+  const { userId, userToken } = useAuth();
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-    watch,
+    setValue,
   } = useForm<IAccountSettingsForm>();
 
+  console.log('userId', userId);
+  console.log('userToken', userToken);
+  const getAccountSettingsData = async () => {
+    try {
+      if (!userId || !userToken) return;
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Account/${userId}`, {
+        method: 'GET',
+        cache: 'no-cache',
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
+
+      if (!response) return;
+
+      const data = await response.json();
+
+      if (!data) return;
+      setValue('phoneNumber', data.phoneNumber);
+      setValue('city', data.city);
+      setValue('postalCode', data.postalCode);
+      setValue('street', data.street);
+      setValue('apartmentNumber', data.apartmentNumber);
+
+      console.log('respone', data);
+    } catch (error) {
+      console.log('getAccountSettingsData - error', error);
+    }
+  };
+
+  useEffect(() => {
+    getAccountSettingsData();
+  }, [userId]);
+
   const onSubmit: SubmitHandler<IAccountSettingsForm> = async ({
-    dateOfBirth,
     phoneNumber,
     city,
     postalCode,
     street,
     apartmentNumber,
   }) => {
-    // try {
-    //   const response = await axios.post('http://localhost:5250/api/Account/register', {
-    //     firstName: name,
-    //     surname,
-    //     email,
-    //     password,
-    //     confirmPassword,
-    //   });
-    //   if (response) {
-    //     // Write nawigation to login page in next js
-    //     router.push(routes.login);
-    //   }
-    //   console.log('response', response);
-    // } catch (error) {
-    //   console.log('LoginPanel error', error);
-    // }
+    try {
+      const params = {
+        phoneNumber,
+        city,
+        postalCode,
+        street,
+        apartmentNumber,
+      };
+
+      const respone = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Account/${userId}`, {
+        cache: 'no-cache',
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify(params),
+      });
+
+      console.log('respone', respone);
+    } catch (error) {
+      console.log('AccountSettingsForm - error ', error);
+    }
   };
 
-  const userIdFromCookie = Cookies.get();
-  console.log('userId', userIdFromCookie);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-full gap-10' noValidate>
-      <Controller
-        render={({ field: { onChange, value } }) => (
-          <div className='flex flex-col relative'>
-            <Input
-              placeholder={translation.dateOfBirth}
-              value={value}
-              onChange={onChange}
-              required={!!errors.dateOfBirth}
-            />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
-              {errors.dateOfBirth?.message}
-            </span>
-          </div>
-        )}
-        rules={{
-          required: {
-            value: true,
-            message: translation.errorMessage.thisFieldIsRequired,
-          },
-        }}
-        control={control}
-        defaultValue=''
-        name='dateOfBirth'
-      />
       <Controller
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
@@ -92,6 +108,12 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
           required: {
             value: true,
             message: translation.errorMessage.thisFieldIsRequired,
+          },
+          validate: {
+            isPhoneNumberLengthValid: (value) =>
+              value.length <= 9 || translation.errorMessage.isPhoneNumberLengthValid,
+            isValidPhoneNumber: (value) =>
+              phoneNumberRegex.test(value) || translation.errorMessage.isValidPhoneNumber,
           },
         }}
         control={control}
@@ -140,6 +162,10 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
           required: {
             value: true,
             message: translation.errorMessage.thisFieldIsRequired,
+          },
+          pattern: {
+            value: postalCodeRegex,
+            message: translation.errorMessage.invalidFormatOfPostalCode,
           },
         }}
         control={control}

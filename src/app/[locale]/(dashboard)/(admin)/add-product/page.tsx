@@ -1,6 +1,6 @@
 import AddProductForm from '@/components/AddProductForm/AddProductForm';
-import { Locale } from '../../../../../i18n.config';
-import { getDictionary } from '../../../../../lib/dictionary';
+import { Locale } from '../../../../../../i18n.config';
+import { getDictionary } from '../../../../../../lib/dictionary';
 
 const AddProductPage = async ({ params: { locale } }: { params: { locale: Locale } }) => {
   const translation = await getDictionary(locale);

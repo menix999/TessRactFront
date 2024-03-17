@@ -1,13 +1,13 @@
 import Button from '@/components/Button/Button';
-import { Locale } from '../../../../../../i18n.config';
-import { getDictionary } from '../../../../../../lib/dictionary';
+import { Locale } from '../../../../../../../i18n.config';
+import { getDictionary } from '../../../../../../../lib/dictionary';
 import DeliveryIcon from '@/assets/DeliveryIcon';
 import Stars from '@/components/Stars/Stars';
 import UserAvatar from '@/components/UserAvatar/UserAvatar';
 import BuyProduct from '@/components/BuyProduct/BuyProduct';
 
 const getProduct = async (id: number) => {
-  const response = await fetch(`${process.env.DB_BASEURL}/api/Product/${id}`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Product/${id}`, {
     cache: 'no-cache',
   });
 

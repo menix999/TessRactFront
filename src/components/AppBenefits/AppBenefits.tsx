@@ -9,6 +9,7 @@ import Button from '@/components/Button/Button';
 import { IAppBenefits } from './AppBenefits.types';
 import Link from 'next/link';
 import { routes } from '@/constants/constants';
+import ContinueWithoutRegistrationButton from '../ContinueWithoutRegistrationButton/ContinueWithoutRegistrationButton';
 
 const AppBenefits = async ({ locale, isLackOfAccount, isWithoutAccount }: IAppBenefits) => {
   const translation = await getDictionary(locale);
@@ -61,11 +62,11 @@ const AppBenefits = async ({ locale, isLackOfAccount, isWithoutAccount }: IAppBe
               {translation.dontHaveAccount}
             </h3>
             <p className='text-title-gray text-xl font-medium'>{translation.buyWithoutAccount}</p>
-            <div className='max-w-sm w-full'>
+            <Link href={routes.deliverySummary} className='max-w-sm w-full'>
               <Button type='button' variant='bordered'>
                 {translation.continueWithoutRegistration}
               </Button>
-            </div>
+            </Link>
           </div>
         )}
       </div>

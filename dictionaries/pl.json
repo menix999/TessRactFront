@@ -83,6 +83,7 @@
     "productDetails": "Szczegóły produktu",
     "productName": "Nazwa produktu",
     "opinions": "Opinie",
+    "shipAddress": "Adres wysyłki",
 
     "advertisementSmartwatch": {
         "news": "Nowości",
@@ -128,6 +129,9 @@
         "youEnteredTheWrongFormatOfEmailAddress": "Wprowadziłeś zły format adresu e-mail",
         "thisFieldIsRequired": "To pole jest wymagane",
         "passwordsDoNotMatch": "Hasła nie są takie same",
-        "thereIsAProblemWithActivatingYourAccount": "Wystąpił problem z aktywacją Twojego konta"
+        "thereIsAProblemWithActivatingYourAccount": "Wystąpił problem z aktywacją Twojego konta",
+        "isPhoneNumberLengthValid": "Numer telefonu musi posiadać 9 cyfr",
+        "isValidPhoneNumber": "Wprowadzony numer telefonu jest nieprawidłowy",
+        "invalidFormatOfPostalCode": "Nieprawidłowy format kodu pocztowego"
     }
 }

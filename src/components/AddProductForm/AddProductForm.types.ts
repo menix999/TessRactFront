@@ -14,7 +14,7 @@ interface ICategory {
 
 export interface IAddProductForm {
   description: string;
-  quantity?: number;
+  quantity?: string;
   category: ICategory;
   name: string;
   price?: string;

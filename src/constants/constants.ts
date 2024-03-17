@@ -15,6 +15,8 @@ export const routes = {
   productList: '/product-list',
   addProduct: '/add-product',
   cart: '/cart',
+  buyWithoutRegister: '/buy-without-register',
+  deliverySummary: '/delivery-summary',
 };
 
 export const avatarColors = [

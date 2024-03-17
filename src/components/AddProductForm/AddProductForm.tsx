@@ -53,15 +53,11 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
       formData.append('description', description);
       formData.append('quantity', String(quantityValue));
 
-      // In order to see the data in the console
-      // formData.forEach((value, key) => {
-      //   console.log(key, value);
-      // });
-
       const response = await apiClient.post('/api/Product', formData);
 
       if (response) {
         reset();
+        setSelectedImage(null);
       }
     } catch (error) {
       console.log('LoginPanel error', error);
@@ -204,7 +200,7 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
             message: translation.errorMessage.thisFieldIsRequired,
           },
         }}
-        defaultValue={undefined}
+        defaultValue=''
         control={control}
         name='price'
       />
@@ -222,7 +218,7 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
             </span>
           </div>
         )}
-        defaultValue={undefined}
+        defaultValue=''
         control={control}
         name='quantity'
       />

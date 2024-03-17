@@ -1,6 +1,6 @@
 import Button from '@/components/Button/Button';
-import { Locale } from '../../../../../../i18n.config';
-import { getDictionary } from '../../../../../../lib/dictionary';
+import { Locale } from '../../../../../../../i18n.config';
+import { getDictionary } from '../../../../../../../lib/dictionary';
 import DeliveryIcon from '@/assets/DeliveryIcon';
 import Stars from '@/components/Stars/Stars';
 import UserAvatar from '@/components/UserAvatar/UserAvatar';
@@ -18,7 +18,7 @@ const getListProduct = async (slug: string) => {
     sortBy: slug,
   });
 
-  const respone = await fetch(`${process.env.DB_BASEURL}/api/Product?${params}`, {
+  const respone = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Product?${params}`, {
     cache: 'no-cache',
   });
 
