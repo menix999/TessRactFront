@@ -9,8 +9,9 @@ import Button from '../Button/Button';
 import Link from 'next/link';
 import { routes } from '@/constants/constants';
 import { useState } from 'react';
+import CustomLink from '../CustomLink/CustomLink';
 
-const RecoveryPasswordForm = ({ translation }: IRecoverPasswordPageProps) => {
+const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps) => {
   const [isLinkSent, setIsLinkSent] = useState(false);
 
   const {
@@ -70,11 +71,11 @@ const RecoveryPasswordForm = ({ translation }: IRecoverPasswordPageProps) => {
               name='email'
             />
             <div className='flex gap-4'>
-              <Link href={routes.login} className='w-full'>
+              <CustomLink href={routes.login} locale={locale} className='w-full'>
                 <Button type='submit' variant='bordered'>
                   {translation.return}
                 </Button>
-              </Link>
+              </CustomLink>
               <div className='w-full'>
                 <Button type='submit'>{translation.recoverPassword}</Button>
               </div>

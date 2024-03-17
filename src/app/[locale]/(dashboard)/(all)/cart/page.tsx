@@ -13,7 +13,7 @@ const CartPage = async ({ params: { locale } }: { params: { locale: Locale } }) 
 
   return (
     <div className='flex flex-col xl:flex-row items-center xl:items-start gap-12 justify-between mt-24'>
-      <CartSummary translation={translation} />
+      <CartSummary translation={translation} locale={locale} />
     </div>
   );
 };

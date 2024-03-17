@@ -6,12 +6,14 @@ import { useEffect, useState } from 'react';
 import { getDictionary } from '../../../lib/dictionary';
 import Link from 'next/link';
 import { routes } from '@/constants/constants';
+import CustomLink from '../CustomLink/CustomLink';
 
 interface IActivateLinkFormProps {
   translation: Awaited<ReturnType<typeof getDictionary>>;
+  locale: string;
 }
 
-const ActivateLinkForm = ({ translation }: IActivateLinkFormProps) => {
+const ActivateLinkForm = ({ translation, locale }: IActivateLinkFormProps) => {
   const [isVerified, setIsVerified] = useState(false);
 
   const handleActivateAccount = async () => {
@@ -40,9 +42,9 @@ const ActivateLinkForm = ({ translation }: IActivateLinkFormProps) => {
       ) : (
         <span>{translation.errorMessage.thereIsAProblemWithActivatingYourAccount}</span>
       )}
-      <Link className='mt-4' href={routes.main}>
+      <CustomLink className='mt-4' href={routes.main} locale={locale}>
         <Button type='button'>Powrót do strony głównej</Button>
-      </Link>
+      </CustomLink>
     </div>
   );
 };

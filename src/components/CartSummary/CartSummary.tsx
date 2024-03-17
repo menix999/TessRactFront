@@ -7,7 +7,7 @@ import { ICartSummaryProps } from './CartSummary.types';
 import { useCart } from '@/context/CartContext/CartContext';
 import BuyOrPayNowSummary from '../BuyOrPayNowSummary/BuyOrPayNowSummary';
 
-const CartSummary = ({ translation }: ICartSummaryProps) => {
+const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
   const [cartList, setCartList] = useState<IProductProperties[]>([]);
   const [cartListTotalAmount, setCartListTotalAmount] = useState<number>(0);
 
@@ -87,6 +87,7 @@ const CartSummary = ({ translation }: ICartSummaryProps) => {
         isCartDiscount
         isAcceptedMethodsOfPayment
         total={cartListTotalAmount}
+        locale={locale}
       />
     </>
   );

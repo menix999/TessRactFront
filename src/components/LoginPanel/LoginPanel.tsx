@@ -15,8 +15,9 @@ import { emailRegex } from '@/constants/regex';
 import Link from 'next/link';
 import { routes } from '@/constants/constants';
 import { useAuth } from '@/context/AuthContext/AuthContext';
+import CustomLink from '../CustomLink/CustomLink';
 
-const LoginPanel = ({ translation }: ILoginPanel) => {
+const LoginPanel = ({ translation, locale }: ILoginPanel) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
 
   const {
@@ -96,11 +97,11 @@ const LoginPanel = ({ translation }: ILoginPanel) => {
             >
               {isEyeOpen ? <OpenEyeIcon /> : <ClosedEyeIcon />}
             </div>
-            <Link href={routes.recoverPassword}>
+            <CustomLink href={routes.recoverPassword} locale={locale}>
               <span className='absolute w-full -top-6 text-right text-main-purple text-sm hover:text-main-purple-hover cursor-pointer'>
                 {translation.forgotPassword}
               </span>
-            </Link>
+            </CustomLink>
             <Input
               placeholder={translation.password}
               type={isEyeOpen ? 'text' : 'password'}

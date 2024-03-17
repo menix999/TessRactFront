@@ -12,7 +12,7 @@ const ResetPasswordPage = async ({ params: { locale } }: { params: { locale: Loc
         <span className='mb-6 text-secondary-gray'>
           {translation.enterNewPasswordForYourAccount}
         </span>
-        <ResetPasswordForm translation={translation} />
+        <ResetPasswordForm translation={translation} locale={locale} />
       </div>
     </div>
   );

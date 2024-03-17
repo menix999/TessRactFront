@@ -21,8 +21,6 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
     setValue,
   } = useForm<IAccountSettingsForm>();
 
-  console.log('userId', userId);
-  console.log('userToken', userToken);
   const getAccountSettingsData = async () => {
     try {
       if (!userId || !userToken) return;
@@ -45,8 +43,6 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
       setValue('postalCode', data.postalCode);
       setValue('street', data.street);
       setValue('apartmentNumber', data.apartmentNumber);
-
-      console.log('respone', data);
     } catch (error) {
       console.log('getAccountSettingsData - error', error);
     }
@@ -81,8 +77,6 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
         },
         body: JSON.stringify(params),
       });
-
-      console.log('respone', respone);
     } catch (error) {
       console.log('AccountSettingsForm - error ', error);
     }

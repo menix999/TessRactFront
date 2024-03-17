@@ -14,7 +14,7 @@ import { emailRegex } from '@/constants/regex';
 import BuyOrPayNowSummary from '../BuyOrPayNowSummary/BuyOrPayNowSummary';
 import { useAuth } from '@/context/AuthContext/AuthContext';
 
-const DeliverySummaryForm = ({ translation }: IDeliverySummaryFormProps) => {
+const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps) => {
   const router = useRouter();
 
   const {
@@ -319,7 +319,12 @@ const DeliverySummaryForm = ({ translation }: IDeliverySummaryFormProps) => {
         name='phoneNumber'
       />
       {/* <button onClick={handleTest}>Checkout</button> */}
-      <BuyOrPayNowSummary translation={translation} isCartDiscount isAcceptedMethodsOfPayment />
+      <BuyOrPayNowSummary
+        translation={translation}
+        isCartDiscount
+        isAcceptedMethodsOfPayment
+        locale={locale}
+      />
     </div>
     // </form>
   );

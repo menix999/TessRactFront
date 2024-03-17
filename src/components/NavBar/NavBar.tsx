@@ -32,8 +32,8 @@ const NavBar = ({ translation, locale }: INavBar) => {
               <ChangeLanguage locale={locale} />
               <span className='flex text-xs sm:text-base'>{locale.toUpperCase()}</span>
             </div>
-            <AccountTooltip translation={translation} />
-            <CartTooltip translation={translation} />
+            <AccountTooltip translation={translation} locale={locale} />
+            <CartTooltip translation={translation} locale={locale} />
           </div>
         </div>
         <div className='w-full max-w-sm order-2 flex items-center justify-center'>

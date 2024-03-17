@@ -2,6 +2,7 @@ import { type getDictionary } from '../../../lib/dictionary';
 
 export interface IDeliverySummaryFormProps {
   translation: Awaited<ReturnType<typeof getDictionary>>;
+  locale: string;
 }
 
 export interface IDeliverySummaryForm {

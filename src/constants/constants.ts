@@ -19,6 +19,12 @@ export const routes = {
   deliverySummary: '/delivery-summary',
 };
 
+export const categories = {
+  headphones: 'Headphones',
+  smartwatch: 'Smartwatch',
+  watch: 'Watch',
+};
+
 export const avatarColors = [
   '#ff7f0e',
   '#1f77b4',

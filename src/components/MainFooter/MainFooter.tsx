@@ -10,8 +10,9 @@ import MapIcon from '@/assets/MapIcon';
 import useIsMobile from '@/hooks/useIsMobile';
 import PlusIcon from '@/assets/PlusIcon';
 import { routes } from '@/constants/constants';
+import CustomLink from '../CustomLink/CustomLink';
 
-const MainFooter = ({ translation }: IMainFooterProps) => {
+const MainFooter = ({ translation, locale }: IMainFooterProps) => {
   const isMobile = useIsMobile();
   const [infoOpen, setInfoOpen] = useState(false);
   const [tessRactOpen, setTessRactOpen] = useState(false);
@@ -29,9 +30,13 @@ const MainFooter = ({ translation }: IMainFooterProps) => {
             <PlusIcon />
           </button>
           {infoOpen && (
-            <Link href={routes.regulations} className='hover:underline cursor-pointer'>
+            <CustomLink
+              href={routes.regulations}
+              locale={locale}
+              className='hover:underline cursor-pointer'
+            >
               {translation.footer.regulations}
-            </Link>
+            </CustomLink>
           )}
 
           <button
@@ -43,9 +48,13 @@ const MainFooter = ({ translation }: IMainFooterProps) => {
           </button>
           {tessRactOpen && (
             <div className='flex flex-col gap-3'>
-              <Link href={routes.aboutUs} className='hover:underline cursor-pointer'>
+              <CustomLink
+                href={routes.aboutUs}
+                locale={locale}
+                className='hover:underline cursor-pointer'
+              >
                 {translation.footer.aboutUs}
-              </Link>
+              </CustomLink>
             </div>
           )}
 
@@ -81,16 +90,24 @@ const MainFooter = ({ translation }: IMainFooterProps) => {
         <div className='flex flex-col sm:flex-row w-full items-start'>
           <div className='flex flex-col w-full items-start'>
             <p className='font-bold mb-6'>{translation.footer.informations}</p>
-            <Link href={routes.regulations} className='hover:underline cursor-pointer'>
+            <CustomLink
+              href={routes.regulations}
+              locale={locale}
+              className='hover:underline cursor-pointer'
+            >
               {translation.footer.regulations}
-            </Link>
+            </CustomLink>
           </div>
 
           <div className='flex flex-col w-full items-start'>
             <p className='font-bold mb-6'>Tess-ract</p>
-            <Link href={routes.aboutUs} className='hover:underline cursor-pointer'>
+            <CustomLink
+              href={routes.aboutUs}
+              locale={locale}
+              className='hover:underline cursor-pointer'
+            >
               {translation.footer.aboutUs}
-            </Link>
+            </CustomLink>
           </div>
 
           <div className='flex flex-col w-full items-start'>

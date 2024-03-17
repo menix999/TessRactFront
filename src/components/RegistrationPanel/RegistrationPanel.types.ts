@@ -11,4 +11,5 @@ export interface IRegistrationForm {
 
 export interface IRegistration {
   translation: Awaited<ReturnType<typeof getDictionary>>;
+  locale: string;
 }
