@@ -7,7 +7,7 @@ const ActivateLinkPage = async ({ params: { locale } }: { params: { locale: Loca
   console.log('translation', translation);
   return (
     <div className='flex justify-center items-center mt-6'>
-      <ActivateLinkForm translation={translation} />
+      <ActivateLinkForm translation={translation} locale={locale} />
     </div>
   );
 };

@@ -8,15 +8,17 @@ import { routes } from '@/constants/constants';
 import CartIcon from '@/assets/CartIcon';
 import { ICartTooltipProps } from './CartTooltip.types';
 import { useCart } from '@/context/CartContext/CartContext';
+import CustomLink from '../CustomLink/CustomLink';
 
-const CartTooltip = ({ translation }: ICartTooltipProps) => {
+const CartTooltip = ({ translation, locale }: ICartTooltipProps) => {
   const [isToolTipVisible, setIsToolTipVisible] = useState(true);
 
   const { numberOfProductsInCart } = useCart();
 
   return (
-    <Link
+    <CustomLink
       href={routes.cart}
+      locale={locale}
       className='flex flex-col relative sm:flex-row items-center sm:gap-3 cursor-pointer sm:w-36 whitespace-nowrap'
     >
       {!!numberOfProductsInCart && (
@@ -32,7 +34,7 @@ const CartTooltip = ({ translation }: ICartTooltipProps) => {
         <CartIcon />
       </div>
       <span className='flex text-xs sm:text-base'>{translation.cart}</span>
-    </Link>
+    </CustomLink>
   );
 };
 

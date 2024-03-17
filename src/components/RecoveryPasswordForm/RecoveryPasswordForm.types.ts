@@ -6,4 +6,5 @@ export interface IRecoverPasswordForm {
 
 export interface IRecoverPasswordPageProps {
   translation: Awaited<ReturnType<typeof getDictionary>>;
+  locale: string;
 }

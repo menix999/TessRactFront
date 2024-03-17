@@ -10,8 +10,9 @@ import { useState } from 'react';
 import OpenEyeIcon from '@/assets/OpenEyeIcon';
 import ClosedEyeIcon from '@/assets/ClosedEyeIcon';
 import { routes } from '@/constants/constants';
+import { createLanguagePath } from '@/utils/functions';
 
-const ResetPasswordForm = ({ translation }: IResetPasswordFormProps) => {
+const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
   const [isConfirmPasswordEye, setIsConfirmPasswordEyeOpen] = useState(false);
 
@@ -42,7 +43,7 @@ const ResetPasswordForm = ({ translation }: IResetPasswordFormProps) => {
       );
 
       if (response) {
-        router.push(routes.login);
+        router.push(createLanguagePath({ href: routes.login, locale }));
       }
       console.log('response', response);
     } catch (error) {

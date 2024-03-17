@@ -12,8 +12,9 @@ import { IRegistration, IRegistrationForm } from './RegistrationPanel.types';
 import Checkbox from '../Checkbox/Checkbox';
 import { emailRegex } from '@/constants/regex';
 import { routes } from '@/constants/constants';
+import { createLanguagePath } from '@/utils/functions';
 
-const RegistrationPanel = ({ translation }: IRegistration) => {
+const RegistrationPanel = ({ translation, locale }: IRegistration) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
   const [isConfirmPasswordEye, setIsConfirmPasswordEyeOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -45,8 +46,7 @@ const RegistrationPanel = ({ translation }: IRegistration) => {
       });
 
       if (response) {
-        // Write nawigation to login page in next js
-        router.push(routes.login);
+        router.push(createLanguagePath({ href: routes.login, locale }));
       }
       console.log('response', response);
     } catch (error) {

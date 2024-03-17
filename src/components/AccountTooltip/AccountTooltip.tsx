@@ -14,8 +14,9 @@ import ProductToRateIcon from '@/assets/ProductToRateIcon';
 import ManageOrdersIcon from '@/assets/ManageOrdersIcon';
 import { useAuth } from '@/context/AuthContext/AuthContext';
 import AddProductIcon from '@/assets/AddProductIcon';
+import CustomLink from '../CustomLink/CustomLink';
 
-const AccountTooltip = ({ translation }: IAccountTooltipProps) => {
+const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
   const [isToolTipVisible, setIsToolTipVisible] = useState(false);
 
   const { logout, userToken, userRole } = useAuth();
@@ -49,13 +50,15 @@ const AccountTooltip = ({ translation }: IAccountTooltipProps) => {
     logout();
   };
 
+  console.log('loginRef', loginRef);
   return (
     <div className='relative'>
-      <Link
+      <CustomLink
         href={!userToken ? routes.login : ''}
+        locale={locale}
         className='flex flex-col sm:flex-row items-center sm:gap-3 cursor-pointer sm:w-36 whitespace-nowrap z-50'
         onMouseOver={() => setIsToolTipVisible(true)}
-        ref={loginRef}
+        customRef={loginRef}
       >
         <div className='w-8 h-8 z-50'>
           <PersonIcon />
@@ -65,7 +68,7 @@ const AccountTooltip = ({ translation }: IAccountTooltipProps) => {
         ) : (
           <span className='flex text-xs sm:text-base'>{translation.myAccount}</span>
         )}
-      </Link>
+      </CustomLink>
       {isToolTipVisible && userToken && (
         <Tooltip tooltipRef={tooltipRef}>
           <div className='flex flex-col bg-white rounded-xl w-60'>
@@ -83,13 +86,14 @@ const AccountTooltip = ({ translation }: IAccountTooltipProps) => {
               <ReturnAndComplaintsIcon />
               <span className='text-sm'>{translation.tooltipAccount.returnAndComplaints}</span>
             </div>
-            <Link
+            <CustomLink
               href={routes.accountSettings}
+              locale={locale}
               className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'
             >
               <SettingsIcon />
               <span className='text-sm'>{translation.tooltipAccount.settingsAccount}</span>
-            </Link>
+            </CustomLink>
             <div className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'>
               <ProductToRateIcon />
               <span className='text-sm'>{translation.tooltipAccount.productToRate}</span>
@@ -100,13 +104,14 @@ const AccountTooltip = ({ translation }: IAccountTooltipProps) => {
                   <ManageOrdersIcon />
                   <span className='text-sm'>{translation.tooltipAccount.manageOrders}</span>
                 </div>
-                <Link
+                <CustomLink
                   href={routes.addProduct}
+                  locale={locale}
                   className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'
                 >
                   <AddProductIcon />
                   <span className='text-sm'>{translation.tooltipAccount.addProduct}</span>
-                </Link>
+                </CustomLink>
               </>
             )}
             <div

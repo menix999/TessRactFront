@@ -7,4 +7,5 @@ export interface IResetPasswordForm {
 
 export interface IResetPasswordFormProps {
   translation: Awaited<ReturnType<typeof getDictionary>>;
+  locale: string;
 }

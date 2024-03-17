@@ -33,6 +33,7 @@ const Home = async ({ params: { locale } }: { params: { locale: Locale } }) => {
   const { items } = await getNewProducts();
 
   const newItems = items.slice(0, 3);
+  console.log('locale', locale);
 
   return (
     <div className='flex flex-col sm:px-8 px-4 mb-64 '>
@@ -84,6 +85,7 @@ const Home = async ({ params: { locale } }: { params: { locale: Locale } }) => {
                   productId={id}
                   price={`${price} zł`}
                   translation={translation}
+                  locale={locale}
                 />
               </div>
             );

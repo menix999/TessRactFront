@@ -48,6 +48,7 @@ const productListPage = async ({
                   productId={id}
                   price={`${price} zł`}
                   translation={translation}
+                  locale={locale}
                 />
               </div>
             );

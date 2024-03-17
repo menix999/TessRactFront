@@ -5,4 +5,5 @@ export interface IBuyOrPayNowSummaryProps {
   isCartDiscount?: boolean;
   isAcceptedMethodsOfPayment?: boolean;
   total: number;
+  locale: string;
 }

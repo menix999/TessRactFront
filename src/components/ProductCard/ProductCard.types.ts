@@ -7,4 +7,5 @@ export interface IProductCardProps {
   price: string;
   translation: Awaited<ReturnType<typeof getDictionary>>;
   productId: string;
+  locale: string;
 }

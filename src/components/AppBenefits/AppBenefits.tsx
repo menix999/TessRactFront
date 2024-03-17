@@ -10,6 +10,7 @@ import { IAppBenefits } from './AppBenefits.types';
 import Link from 'next/link';
 import { routes } from '@/constants/constants';
 import ContinueWithoutRegistrationButton from '../ContinueWithoutRegistrationButton/ContinueWithoutRegistrationButton';
+import CustomLink from '../CustomLink/CustomLink';
 
 const AppBenefits = async ({ locale, isLackOfAccount, isWithoutAccount }: IAppBenefits) => {
   const translation = await getDictionary(locale);
@@ -48,11 +49,11 @@ const AppBenefits = async ({ locale, isLackOfAccount, isWithoutAccount }: IAppBe
               {translation.dontHaveAccount}
             </h3>
             <div className='max-w-sm w-full'>
-              <Link href={routes.register}>
+              <CustomLink href={routes.register} locale={locale}>
                 <Button type='button' variant='bordered'>
                   {translation.register}
                 </Button>
-              </Link>
+              </CustomLink>
             </div>
           </div>
         )}
@@ -62,11 +63,11 @@ const AppBenefits = async ({ locale, isLackOfAccount, isWithoutAccount }: IAppBe
               {translation.dontHaveAccount}
             </h3>
             <p className='text-title-gray text-xl font-medium'>{translation.buyWithoutAccount}</p>
-            <Link href={routes.deliverySummary} className='max-w-sm w-full'>
+            <CustomLink href={routes.deliverySummary} locale={locale} className='max-w-sm w-full'>
               <Button type='button' variant='bordered'>
                 {translation.continueWithoutRegistration}
               </Button>
-            </Link>
+            </CustomLink>
           </div>
         )}
       </div>

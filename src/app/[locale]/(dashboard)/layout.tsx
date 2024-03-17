@@ -17,11 +17,11 @@ const DashboardLayout = async ({ params: { locale }, children }: IDashboardLayou
   return (
     <div>
       <NavBar translation={translation} locale={locale} />
-      <CategoriesNavBar translation={translation} />
+      <CategoriesNavBar translation={translation} locale={locale} />
       <div className='flex w-full justify-center'>
         <div className='w-full lg:max-w-7xl sm:px-8 px-4'>
           {children}
-          <MainFooter translation={translation} />
+          <MainFooter translation={translation} locale={locale} />
         </div>
       </div>
     </div>

@@ -37,7 +37,6 @@ const ProductPage = async ({
     base64Image,
   } = productData;
 
-  console.log('productId', productId);
   return (
     <div className='flex flex-col items-center'>
       <div className='flex mt-52 w-full md:w-auto h-fit flex-col md:flex-row'>

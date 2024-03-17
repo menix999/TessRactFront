@@ -8,4 +8,5 @@ export interface ILoginForm {
 
 export interface ILoginPanel {
   translation: Awaited<ReturnType<typeof getDictionary>>;
+  locale: string;
 }

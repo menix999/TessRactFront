@@ -11,12 +11,14 @@ import StripeIcon from '@/assets/StripeIcon';
 import { useAuth } from '@/context/AuthContext/AuthContext';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/constants/constants';
+import { createLanguagePath } from '@/utils/functions';
 
 const BuyOrPayNowSummary = ({
   translation,
   isCartDiscount,
   isAcceptedMethodsOfPayment,
   total,
+  locale,
 }: IBuyOrPayNowSummaryProps) => {
   const { userToken, userRole } = useAuth();
 
@@ -24,9 +26,9 @@ const BuyOrPayNowSummary = ({
 
   const handleGoToDelivery = () => {
     if (!userToken) {
-      router.push(routes.buyWithoutRegister);
+      router.push(createLanguagePath({ href: routes.buyWithoutRegister, locale }));
     } else {
-      router.push(routes.deliverySummary);
+      router.push(createLanguagePath({ href: routes.deliverySummary, locale }));
     }
   };
 
