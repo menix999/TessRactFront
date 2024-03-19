@@ -6,4 +6,5 @@ export interface IBuyOrPayNowSummaryProps {
   isAcceptedMethodsOfPayment?: boolean;
   total: number;
   locale: string;
+  numberOfProducts?: Record<string, number>;
 }

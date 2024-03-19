@@ -10,6 +10,7 @@ import BuyOrPayNowSummary from '../BuyOrPayNowSummary/BuyOrPayNowSummary';
 const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
   const [cartList, setCartList] = useState<IProductProperties[]>([]);
   const [cartListTotalAmount, setCartListTotalAmount] = useState<number>(0);
+  const [numberOfProducts, setNumberOfProducts] = useState<Record<string, number>>({});
 
   const { deleteProductFromTheCart, numberOfProductsInCart } = useCart();
 
@@ -24,12 +25,50 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
       return totalPrice;
     }, 0);
 
+    const initialNumberOfProducts: Record<string, number> = {};
+    cartList.forEach((product) => {
+      initialNumberOfProducts[product.id] = 1; // Ustawiamy domyślną wartość 0 dla każdego produktu
+    });
+
+    setNumberOfProducts(initialNumberOfProducts);
     setCartList(cartList);
     setCartListTotalAmount(totalAmount);
   }, []);
 
+  useEffect(() => {
+    let newTotalPrice = 0;
+    cartList.forEach((product) => {
+      newTotalPrice += (numberOfProducts[product.id] || 0) * product.price;
+    });
+    setCartListTotalAmount(Number(newTotalPrice.toFixed(2)));
+  }, [numberOfProducts]);
+
   const handleDeleteProduct = (id: string) => {
     deleteProductFromTheCart(id);
+  };
+
+  const handleChangeNumberOfProducs = (productId: string, quantity: number) => {
+    setNumberOfProducts((prevQuantities) => ({
+      ...prevQuantities,
+      [productId]: quantity,
+    }));
+  };
+
+  const handleIncrement = (productId: number) => {
+    if (numberOfProducts[productId] >= 99) return;
+    setNumberOfProducts((prevQuantities) => ({
+      ...prevQuantities,
+      [productId]: (numberOfProducts[productId] || 1) + 1,
+    }));
+  };
+
+  const handleDecrement = (productId: number) => {
+    if (numberOfProducts[productId] > 1) {
+      setNumberOfProducts((prevQuantities) => ({
+        ...prevQuantities,
+        [productId]: (numberOfProducts[productId] || 1) - 1,
+      }));
+    }
   };
 
   return (
@@ -38,6 +77,7 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
         <div className='flex flex-col w-full max-w-[700px]'>
           <h2 className='font-bold text-xl sm:text-3xl mb-4'>Koszyk ({numberOfProductsInCart})</h2>
           {cartList.map(({ id, base64Image, name, price, color }: IProductProperties) => {
+            const totalPrice = (numberOfProducts[id] * price).toFixed(2);
             return (
               <Fragment key={id}>
                 <div className='border w-full rounded-2xl border-main-gray' />
@@ -55,7 +95,7 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
                       <div className='flex justify-between'>
                         <span className='text-base sm:text-xl'>{name}</span>
                         <span className='text-base sm:text-xl font-bold whitespace-nowrap'>
-                          {price} zł
+                          {totalPrice} zł
                         </span>
                       </div>
                       <span className='text-main-purple text-sm sm:text-base'>Dostępne</span>
@@ -66,7 +106,21 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
                     </div>
 
                     <div className='flex items-center'>
-                      <span>Wybierz ilość</span>
+                      <button onClick={() => handleDecrement(+id)} className='mr-2'>
+                        -
+                      </button>
+                      <div className='flex w-10 justify-center items-center '>
+                        <input
+                          type='text'
+                          maxLength={2}
+                          value={numberOfProducts[id] || 0}
+                          onChange={(e) => handleChangeNumberOfProducs(id, +e.target.value)}
+                          className='h-6 w-6 text-center text-sm outline-none border border-solid rounded-lg border-main-gray focus:border-2 focus:border-main-purple'
+                        />
+                      </div>
+                      <button onClick={() => handleIncrement(+id)} className='ml-2'>
+                        +
+                      </button>
                       <div className='border h-4 rounded-2xl mx-5 border-main-gray' />
                       <span
                         onClick={() => handleDeleteProduct(id)}
@@ -87,6 +141,7 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
         isCartDiscount
         isAcceptedMethodsOfPayment
         total={cartListTotalAmount}
+        numberOfProducts={numberOfProducts}
         locale={locale}
       />
     </>
