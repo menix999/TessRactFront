@@ -24,7 +24,7 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
 
   const deleteProductFromTheCart = (id: string) => {
     const newCart = cart.filter((item) => item.id !== id);
-    console.log('newCart', newCart);
+
     setCart(newCart);
 
     localStorage.setItem('cart', JSON.stringify(newCart));
