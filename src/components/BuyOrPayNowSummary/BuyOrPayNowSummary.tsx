@@ -19,6 +19,7 @@ const BuyOrPayNowSummary = ({
   isAcceptedMethodsOfPayment,
   total,
   locale,
+  numberOfProducts,
 }: IBuyOrPayNowSummaryProps) => {
   const { userToken, userRole } = useAuth();
 

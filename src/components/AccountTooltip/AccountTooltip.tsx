@@ -50,7 +50,6 @@ const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
     logout();
   };
 
-  console.log('loginRef', loginRef);
   return (
     <div className='relative'>
       <CustomLink
