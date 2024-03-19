@@ -8,11 +8,10 @@ import { useCart } from '@/context/CartContext/CartContext';
 import BuyOrPayNowSummary from '../BuyOrPayNowSummary/BuyOrPayNowSummary';
 
 const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
-  const [cartList, setCartList] = useState<IProductProperties[]>([]);
   const [cartListTotalAmount, setCartListTotalAmount] = useState<number>(0);
   const [numberOfProducts, setNumberOfProducts] = useState<Record<string, number>>({});
 
-  const { deleteProductFromTheCart, numberOfProductsInCart } = useCart();
+  const { deleteProductFromTheCart, numberOfProductsInCart, cart } = useCart();
 
   useEffect(() => {
     const cartList: IProductProperties[] =
@@ -31,13 +30,12 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
     });
 
     setNumberOfProducts(initialNumberOfProducts);
-    setCartList(cartList);
     setCartListTotalAmount(totalAmount);
   }, []);
 
   useEffect(() => {
     let newTotalPrice = 0;
-    cartList.forEach((product) => {
+    cart.forEach((product) => {
       newTotalPrice += (numberOfProducts[product.id] || 0) * product.price;
     });
     setCartListTotalAmount(Number(newTotalPrice.toFixed(2)));
@@ -76,7 +74,7 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
       <div className='flex flex-col w-full items-center'>
         <div className='flex flex-col w-full max-w-[700px]'>
           <h2 className='font-bold text-xl sm:text-3xl mb-4'>Koszyk ({numberOfProductsInCart})</h2>
-          {cartList.map(({ id, base64Image, name, price, color }: IProductProperties) => {
+          {cart.map(({ id, base64Image, name, price, color }: IProductProperties) => {
             const totalPrice = (numberOfProducts[id] * price).toFixed(2);
             return (
               <Fragment key={id}>
