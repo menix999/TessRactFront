@@ -8,48 +8,35 @@ import { useCart } from '@/context/CartContext/CartContext';
 import BuyOrPayNowSummary from '../BuyOrPayNowSummary/BuyOrPayNowSummary';
 
 const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
-  const [cartListTotalAmount, setCartListTotalAmount] = useState<number>(0);
-  const [numberOfProducts, setNumberOfProducts] = useState<Record<string, number>>({});
-
-  const { deleteProductFromTheCart, numberOfProductsInCart, cart } = useCart();
+  const {
+    deleteProductFromTheCart,
+    numberOfProductsInCart,
+    cart,
+    setNumberOfProducts,
+    setCartListTotalAmount,
+    numberOfProducts,
+    cartListTotalAmount,
+  } = useCart();
 
   useEffect(() => {
-    const cartList: IProductProperties[] =
-      (localStorage.getItem('cart') && JSON.parse(localStorage.getItem('cart')!)) || [];
+    if (!cart.length) return;
 
-    if (!cartList.length) return;
-
-    const totalAmount = cartList.reduce((acc: number, item: IProductProperties) => {
+    const totalAmount = cart.reduce((acc: number, item: IProductProperties) => {
       const totalPrice: number = acc + item.price;
       return totalPrice;
     }, 0);
 
     const initialNumberOfProducts: Record<string, number> = {};
-    cartList.forEach((product) => {
-      initialNumberOfProducts[product.id] = 1; // Ustawiamy domyślną wartość 0 dla każdego produktu
+    cart.forEach((product: IProductProperties) => {
+      initialNumberOfProducts[product.id] = 1;
     });
 
     setNumberOfProducts(initialNumberOfProducts);
     setCartListTotalAmount(totalAmount);
   }, []);
 
-  useEffect(() => {
-    let newTotalPrice = 0;
-    cart.forEach((product) => {
-      newTotalPrice += (numberOfProducts[product.id] || 0) * product.price;
-    });
-    setCartListTotalAmount(Number(newTotalPrice.toFixed(2)));
-  }, [numberOfProducts]);
-
   const handleDeleteProduct = (id: string) => {
     deleteProductFromTheCart(id);
-  };
-
-  const handleChangeNumberOfProducs = (productId: string, quantity: number) => {
-    setNumberOfProducts((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: quantity,
-    }));
   };
 
   const handleIncrement = (productId: number) => {
@@ -58,6 +45,17 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
       ...prevQuantities,
       [productId]: (numberOfProducts[productId] || 1) + 1,
     }));
+
+    localStorage.setItem('numberOfProducts', JSON.stringify(numberOfProducts));
+  };
+
+  const handleChangeNumberOfProducs = (productId: string, quantity: number) => {
+    setNumberOfProducts((prevQuantities) => ({
+      ...prevQuantities,
+      [productId]: quantity,
+    }));
+
+    localStorage.setItem('numberOfProducts', JSON.stringify(numberOfProducts));
   };
 
   const handleDecrement = (productId: number) => {
@@ -66,6 +64,8 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
         ...prevQuantities,
         [productId]: (numberOfProducts[productId] || 1) - 1,
       }));
+
+      localStorage.setItem('numberOfProducts', JSON.stringify(numberOfProducts));
     }
   };
 
@@ -141,6 +141,7 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
         total={cartListTotalAmount}
         numberOfProducts={numberOfProducts}
         locale={locale}
+        isCartSummary
       />
     </>
   );

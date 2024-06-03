@@ -1,5 +1,5 @@
 import { IProductProperties } from '@/constants/globalConstant.types';
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 export interface IAuthContextProps {
   children: ReactNode;
@@ -10,4 +10,8 @@ export interface ICart<T> {
   addProductToCart: (product: IProductProperties) => void;
   deleteProductFromTheCart: (id: string) => void;
   numberOfProductsInCart: number;
+  cartListTotalAmount: number;
+  numberOfProducts: Record<string, number>;
+  setNumberOfProducts: Dispatch<SetStateAction<Record<string, number>>>;
+  setCartListTotalAmount: Dispatch<SetStateAction<number>>;
 }

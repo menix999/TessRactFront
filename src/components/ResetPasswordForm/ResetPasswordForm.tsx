@@ -45,7 +45,6 @@ const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => 
       if (response) {
         router.push(createLanguagePath({ href: routes.login, locale }));
       }
-      console.log('response', response);
     } catch (error) {
       console.log('LoginPanel error', error);
     }

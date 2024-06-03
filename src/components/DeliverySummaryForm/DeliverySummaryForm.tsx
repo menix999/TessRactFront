@@ -51,8 +51,6 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
       setValue('postalCode', data.postalCode);
       setValue('street', data.street);
       setValue('apartmentNumber', data.apartmentNumber);
-
-      console.log('respone', data);
     } catch (error) {
       console.log('Delivery summary getAccountSettingsData - error', error);
     }

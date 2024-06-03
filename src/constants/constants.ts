@@ -25,6 +25,24 @@ export const categories = {
   watch: 'Watch',
 };
 
+// create routesPermission variable and give themm
+
+export const routesPermissionConfig = [
+  { path: '/login', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/register', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/recover-password', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/regulations', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/about-us', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/account-settings', roles: ['Administrator', 'User'] },
+  { path: '/product', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/product-list', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/add-product', roles: ['Administrator'] },
+  { path: '/cart', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/buy-without-register', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/delivery-summary', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/', roles: ['Administrator', 'User', 'Guest'] },
+];
+
 export const avatarColors = [
   '#ff7f0e',
   '#1f77b4',

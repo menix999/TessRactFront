@@ -9,10 +9,16 @@ export const CartContext = createContext<ICart<IProductProperties[]>>({
   addProductToCart: () => {},
   deleteProductFromTheCart: () => {},
   numberOfProductsInCart: 0,
+  cartListTotalAmount: 0,
+  numberOfProducts: {},
+  setNumberOfProducts: () => {},
+  setCartListTotalAmount: () => {},
 });
 
 export const CartProvider = ({ children }: IAuthContextProps) => {
   const [cart, setCart] = useState<IProductProperties[]>([]);
+  const [numberOfProducts, setNumberOfProducts] = useState<Record<string, number>>({});
+  const [cartListTotalAmount, setCartListTotalAmount] = useState<number>(0);
 
   const addProductToCart = (product: IProductProperties) => {
     const loadedCart = [...cart, product];
@@ -24,19 +30,33 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
 
   const deleteProductFromTheCart = (id: string) => {
     const newCart = cart.filter((item) => item.id !== id);
+    const newNumberOfProducts = { ...numberOfProducts };
 
     setCart(newCart);
+    delete newNumberOfProducts[id];
+    setNumberOfProducts(newNumberOfProducts);
 
+    localStorage.setItem('numberOfProducts', JSON.stringify(newNumberOfProducts));
     localStorage.setItem('cart', JSON.stringify(newCart));
   };
 
   useEffect(() => {
     const cart = localStorage.getItem('cart');
 
-    if (cart) {
-      setCart(JSON.parse(cart));
-    }
+    const parsedCart = JSON.parse(cart || '');
+
+    if (!parsedCart.length) return;
+
+    setCart(parsedCart);
   }, []);
+
+  useEffect(() => {
+    let newTotalPrice = 0;
+    cart.forEach((product) => {
+      newTotalPrice += (numberOfProducts[product.id] || 0) * product.price;
+    });
+    setCartListTotalAmount(Number(newTotalPrice.toFixed(2)));
+  }, [numberOfProducts, cart]);
 
   const contextValue = useMemo(
     () => ({
@@ -44,10 +64,14 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
       addProductToCart,
       deleteProductFromTheCart,
       numberOfProductsInCart: cart.length,
+      numberOfProducts,
+      cartListTotalAmount,
+      setNumberOfProducts,
+      setCartListTotalAmount,
     }),
 
     // eslint-disable-next-line
-    [cart]
+    [cart, numberOfProducts, cartListTotalAmount]
   );
 
   return <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>;

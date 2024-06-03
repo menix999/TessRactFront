@@ -19,13 +19,16 @@ const BuyOrPayNowSummary = ({
   isAcceptedMethodsOfPayment,
   total,
   locale,
+  isCartSummary,
   numberOfProducts,
 }: IBuyOrPayNowSummaryProps) => {
-  const { userToken, userRole } = useAuth();
+  const { userToken } = useAuth();
 
   const router = useRouter();
 
   const handleGoToDelivery = () => {
+    if (isCartSummary) return;
+
     if (!userToken) {
       router.push(createLanguagePath({ href: routes.buyWithoutRegister, locale }));
     } else {

@@ -21,6 +21,9 @@ const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
 
   const { logout, userToken, userRole } = useAuth();
 
+  console.log('userToken', userToken);
+  console.log('userRole', userRole);
+
   const loginRef = useRef<HTMLAnchorElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
