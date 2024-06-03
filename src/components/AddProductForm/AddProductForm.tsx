@@ -14,7 +14,6 @@ import TrashIcon from '@/assets/TrashIcon';
 
 const AddProductForm = ({ translation }: IAddProductFormProps) => {
   const [selectedImage, setSelectedImage] = useState(null);
-  console.log('selectedImage', selectedImage);
 
   const { categoryOptions } = ConstantProduct();
 
@@ -43,7 +42,6 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
         formData.append('imageFile', selectedImage);
       }
 
-      console.log('category', category);
       formData.append('name', name);
       formData.append('mark', mark);
       formData.append('category', category.nameValue);
@@ -71,7 +69,6 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
       file &&
       (file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png')
     ) {
-      console.log('file', file);
       setSelectedImage(file);
     } else {
       setSelectedImage(null);

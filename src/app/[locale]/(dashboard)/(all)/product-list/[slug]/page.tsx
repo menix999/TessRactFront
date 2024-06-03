@@ -25,7 +25,7 @@ const getListProduct = async (slug: string) => {
   return respone.json();
 };
 
-const productListPage = async ({
+const ProductListPage = async ({
   params: { locale, slug },
 }: {
   params: { locale: Locale; slug: string };
@@ -59,4 +59,4 @@ const productListPage = async ({
   );
 };
 
-export default productListPage;
+export default ProductListPage;

@@ -7,4 +7,5 @@ export interface IBuyOrPayNowSummaryProps {
   total: number;
   locale: string;
   numberOfProducts?: Record<string, number>;
+  isCartSummary?: boolean;
 }

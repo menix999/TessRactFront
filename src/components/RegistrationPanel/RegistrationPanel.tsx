@@ -48,13 +48,10 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
       if (response) {
         router.push(createLanguagePath({ href: routes.login, locale }));
       }
-      console.log('response', response);
     } catch (error) {
       console.log('LoginPanel error', error);
     }
   };
-
-  console.log('errors', errors);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-full gap-10' noValidate>

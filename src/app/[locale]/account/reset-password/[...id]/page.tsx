@@ -5,7 +5,7 @@ import { Locale } from '../../../../../../i18n.config';
 
 const ResetPasswordPage = async ({ params: { locale } }: { params: { locale: Locale } }) => {
   const translation = await getDictionary(locale);
-  console.log('translation', translation);
+
   return (
     <div className='flex justify-center items-center mt-64 w-full'>
       <div className='flex flex-col max-w-96 w-full h-full'>

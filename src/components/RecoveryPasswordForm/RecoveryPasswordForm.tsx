@@ -29,8 +29,6 @@ const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps
       if (response) {
         setIsLinkSent(true);
       }
-
-      console.log('response', response);
     } catch (error) {
       setIsLinkSent(false);
       console.log('LoginPanel error', error);
