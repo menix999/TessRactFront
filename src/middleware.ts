@@ -31,7 +31,6 @@ export function middleware(request: NextRequest) {
 
   if (routeConfig) {
     if (!routeConfig.roles.includes(role)) {
-      console.log('KURWAAA');
       return NextResponse.redirect(new URL(`/${myPersonalLocale}`, request.url));
     }
   }

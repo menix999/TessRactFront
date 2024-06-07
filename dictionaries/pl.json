@@ -84,6 +84,29 @@
     "productName": "Nazwa produktu",
     "opinions": "Opinie",
     "shipAddress": "Adres wysyłki",
+    "noDataToDisplay": "Brak danych do wyświetlenia",
+    "orderNumber": "Numer zamówienia",
+    "orderDate": "Data zamówienia",
+    "client": "Klient",
+    "deliveryAddress": "Adres dostawy",
+    "sum": "Suma",
+    "status": "Status",
+    "goToOrder": "Przejdź do zamówienia",
+    "yourCartIsActuallyEmpty": "Twój koszyk jest aktualnie pusty",
+
+    "orderThanksSummary": {
+        "thanksForOrder": "Dziękujemy za złożenie zamówienia",
+        "inOrderToTrack": "W celu śledzenia statusu zamówienia, sprawdź swoją skrzynkę pocztową",
+        "followYourOrder": "Możesz również śledzić status swojego zamówienia klikając poniżej"
+    },
+
+    "statuses": {
+        "new": "Nowe",
+        "inProgress": "W trakcie",
+        "sent": "Wysłane",
+        "delivered": "Dostarczone",
+        "canceled": "Anulowane"
+    },
 
     "advertisementSmartwatch": {
         "news": "Nowości",

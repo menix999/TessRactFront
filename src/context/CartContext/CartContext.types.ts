@@ -14,4 +14,5 @@ export interface ICart<T> {
   numberOfProducts: Record<string, number>;
   setNumberOfProducts: Dispatch<SetStateAction<Record<string, number>>>;
   setCartListTotalAmount: Dispatch<SetStateAction<number>>;
+  handleQuantityChange: (productId: number, quantity: number) => void;
 }

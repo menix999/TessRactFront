@@ -27,6 +27,7 @@ const config: Config = {
         'google-content': '#0E435C',
         'main-green': '#32CD32',
         'category-background': '#FBFBFB',
+        'table-background': '#FCFCFC',
 
         'dashboard-watch-background': '#EFEFEF',
         'dashboard-watch-title': '#333333',

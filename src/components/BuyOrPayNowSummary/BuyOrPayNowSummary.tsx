@@ -20,6 +20,7 @@ const BuyOrPayNowSummary = ({
   total,
   locale,
   isCartSummary,
+  type,
   numberOfProducts,
 }: IBuyOrPayNowSummaryProps) => {
   const { userToken } = useAuth();
@@ -27,12 +28,12 @@ const BuyOrPayNowSummary = ({
   const router = useRouter();
 
   const handleGoToDelivery = () => {
-    if (isCartSummary) return;
-
-    if (!userToken) {
-      router.push(createLanguagePath({ href: routes.buyWithoutRegister, locale }));
-    } else {
-      router.push(createLanguagePath({ href: routes.deliverySummary, locale }));
+    if (isCartSummary) {
+      if (!userToken) {
+        router.push(createLanguagePath({ href: routes.buyWithoutRegister, locale }));
+      } else {
+        router.push(createLanguagePath({ href: routes.deliverySummary, locale }));
+      }
     }
   };
 
@@ -48,7 +49,7 @@ const BuyOrPayNowSummary = ({
           <span className='text-sm sm:text-base whitespace-nowrap'>{translation.totalAmount}</span>
           <span className='font-bold text-xl sm:text-3xl whitespace-nowrap'>{total} zł</span>
         </div>
-        <Button type='button' onClick={handleGoToDelivery}>
+        <Button type={type} onClick={handleGoToDelivery}>
           {translation.goToDelivery}
         </Button>
       </div>

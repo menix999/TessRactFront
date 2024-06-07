@@ -8,4 +8,5 @@ export interface IBuyOrPayNowSummaryProps {
   locale: string;
   numberOfProducts?: Record<string, number>;
   isCartSummary?: boolean;
+  type: 'button' | 'reset' | 'submit';
 }

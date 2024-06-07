@@ -13,6 +13,7 @@ export const CartContext = createContext<ICart<IProductProperties[]>>({
   numberOfProducts: {},
   setNumberOfProducts: () => {},
   setCartListTotalAmount: () => {},
+  handleQuantityChange: () => {},
 });
 
 export const CartProvider = ({ children }: IAuthContextProps) => {
@@ -21,7 +22,28 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
   const [cartListTotalAmount, setCartListTotalAmount] = useState<number>(0);
 
   const addProductToCart = (product: IProductProperties) => {
-    const loadedCart = [...cart, product];
+    const preparedProduct = {
+      ...product,
+      quantity: 1,
+    };
+
+    const isProductExist = cart.some((product) => product.id === preparedProduct.id);
+
+    let loadedCart = [...cart];
+
+    if (isProductExist) {
+      loadedCart = cart.map((product) => {
+        if (product.id === preparedProduct.id) {
+          return {
+            ...product,
+            quantity: product.quantity + 1,
+          };
+        }
+        return product;
+      });
+    } else {
+      loadedCart = [...cart, preparedProduct];
+    }
 
     setCart(loadedCart);
 
@@ -40,6 +62,21 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
     localStorage.setItem('cart', JSON.stringify(newCart));
   };
 
+  const handleQuantityChange = (id: string, quantity: number) => {
+    const newCart = cart.map((product) => {
+      if (product.id === id) {
+        return {
+          ...product,
+          quantity,
+        };
+      }
+      return product;
+    });
+
+    setCart(newCart);
+    localStorage.setItem('cart', JSON.stringify(newCart));
+  };
+
   useEffect(() => {
     const cart = localStorage.getItem('cart');
 
@@ -52,9 +89,11 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
 
   useEffect(() => {
     let newTotalPrice = 0;
+
     cart.forEach((product) => {
-      newTotalPrice += (numberOfProducts[product.id] || 0) * product.price;
+      newTotalPrice += product.quantity * product.price;
     });
+
     setCartListTotalAmount(Number(newTotalPrice.toFixed(2)));
   }, [numberOfProducts, cart]);
 
@@ -68,6 +107,7 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
       cartListTotalAmount,
       setNumberOfProducts,
       setCartListTotalAmount,
+      handleQuantityChange,
     }),
 
     // eslint-disable-next-line

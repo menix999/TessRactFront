@@ -13,6 +13,8 @@ import { IDeliverySummaryForm, IDeliverySummaryFormProps } from './DeliverySumma
 import { emailRegex } from '@/constants/regex';
 import BuyOrPayNowSummary from '../BuyOrPayNowSummary/BuyOrPayNowSummary';
 import { useAuth } from '@/context/AuthContext/AuthContext';
+import { useCart } from '@/context/CartContext/CartContext';
+import apiClient from '@/utils/api';
 
 const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps) => {
   const router = useRouter();
@@ -25,6 +27,16 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
   } = useForm<IDeliverySummaryForm>();
 
   const { userId, userToken } = useAuth();
+
+  const {
+    deleteProductFromTheCart,
+    numberOfProductsInCart,
+    cart,
+    setNumberOfProducts,
+    setCartListTotalAmount,
+    numberOfProducts,
+    cartListTotalAmount,
+  } = useCart();
 
   const getAccountSettingsData = async () => {
     try {
@@ -80,251 +92,242 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
       apartmentNumber,
       phoneNumber,
     });
-    // try {
-    //   const response = await axios.post('http://localhost:5250/api/Account/register', {
-    //     firstName: name,
-    //     surname,
-    //     email,
-    //     password,
-    //     confirmPassword,
-    //   });
-    //   if (response) {
-    //     // Write nawigation to login page in next js
-    //     router.push(routes.login);
-    //   }
-    //   console.log('response', response);
-    // } catch (error) {
-    //   console.log('LoginPanel error', error);
-    // }
+    try {
+      const preparedOrderPosition = cart.map((item) => ({
+        productId: item.id,
+        productName: item.name,
+        quantity: item.quantity,
+        price: item.price,
+      }));
+
+      const response = await axios.post('http://localhost:5250/api/Order', {
+        firstName: name,
+        surname,
+        email,
+        postalCode,
+        street,
+        city,
+        apartmentNumber,
+        orderPosition: preparedOrderPosition,
+      });
+
+      if (response) {
+      }
+      console.log('response', response);
+    } catch (error) {
+      console.log('LoginPanel error', error);
+    }
   };
-
-  // const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
-
-  // const handleTest = async () => {
-  //   const stripe = await stripePromise;
-
-  //   if (!stripe) return;
-
-  //   const { error } = await stripe.redirectToCheckout({
-  //     mode: 'payment',
-  //     lineItems: [{ price: '1', quantity: 1 }],
-  //     successUrl: 'http://localhost:3000/success',
-  //     cancelUrl: 'http://localhost:3000/canceled',
-  //   });
-
-  //   if (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
 
   return (
     <div className='flex flex-col w-full gap-10'>
-      {/* <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-full gap-10' noValidate> */}
-      <Controller
-        render={({ field: { onChange, value } }) => (
-          <div className='flex flex-col relative'>
-            <Input
-              placeholder={translation.name}
-              value={value}
-              onChange={onChange}
-              required={!!errors.name}
-            />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
-              {errors.name?.message}
-            </span>
-          </div>
-        )}
-        rules={{
-          required: {
-            value: true,
-            message: translation.errorMessage.thisFieldIsRequired,
-          },
-        }}
-        control={control}
-        defaultValue=''
-        name='name'
-      />
-      <Controller
-        render={({ field: { onChange, value } }) => (
-          <div className='flex flex-col relative'>
-            <Input
-              placeholder={translation.surname}
-              value={value}
-              onChange={onChange}
-              required={!!errors.surname}
-            />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
-              {errors.surname?.message}
-            </span>
-          </div>
-        )}
-        rules={{
-          required: {
-            value: true,
-            message: translation.errorMessage.thisFieldIsRequired,
-          },
-        }}
-        control={control}
-        defaultValue=''
-        name='surname'
-      />
-      <Controller
-        render={({ field: { onChange, value } }) => (
-          <div className='flex flex-col relative'>
-            <Input
-              placeholder={translation.email}
-              value={value}
-              onChange={onChange}
-              required={!!errors.email}
-            />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
-              {errors.email?.message}
-            </span>
-          </div>
-        )}
-        rules={{
-          required: {
-            value: true,
-            message: translation.errorMessage.thisFieldIsRequired,
-          },
-          pattern: {
-            value: emailRegex,
-            message: translation.errorMessage.youEnteredTheWrongFormatOfEmailAddress,
-          },
-        }}
-        control={control}
-        defaultValue=''
-        name='email'
-      />
-      <Controller
-        render={({ field: { onChange, value } }) => (
-          <div className='flex flex-col relative'>
-            <Input
-              placeholder={translation.city}
-              value={value}
-              onChange={onChange}
-              required={!!errors.city}
-            />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
-              {errors.city?.message}
-            </span>
-          </div>
-        )}
-        rules={{
-          required: {
-            value: true,
-            message: translation.errorMessage.thisFieldIsRequired,
-          },
-        }}
-        control={control}
-        defaultValue=''
-        name='city'
-      />
-      <Controller
-        render={({ field: { onChange, value } }) => (
-          <div className='flex flex-col relative'>
-            <Input
-              placeholder={translation.street}
-              value={value}
-              onChange={onChange}
-              required={!!errors.street}
-            />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
-              {errors.street?.message}
-            </span>
-          </div>
-        )}
-        rules={{
-          required: {
-            value: true,
-            message: translation.errorMessage.thisFieldIsRequired,
-          },
-        }}
-        control={control}
-        defaultValue=''
-        name='street'
-      />
-      <Controller
-        render={({ field: { onChange, value } }) => (
-          <div className='flex flex-col relative'>
-            <Input
-              placeholder={translation.postalCode}
-              value={value}
-              onChange={onChange}
-              required={!!errors.postalCode}
-            />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
-              {errors.postalCode?.message}
-            </span>
-          </div>
-        )}
-        rules={{
-          required: {
-            value: true,
-            message: translation.errorMessage.thisFieldIsRequired,
-          },
-        }}
-        control={control}
-        defaultValue=''
-        name='postalCode'
-      />
-      <Controller
-        render={({ field: { onChange, value } }) => (
-          <div className='flex flex-col relative'>
-            <Input
-              placeholder={translation.apartmentNumber}
-              value={value}
-              onChange={onChange}
-              required={!!errors.apartmentNumber}
-            />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
-              {errors.apartmentNumber?.message}
-            </span>
-          </div>
-        )}
-        rules={{
-          required: {
-            value: true,
-            message: translation.errorMessage.thisFieldIsRequired,
-          },
-        }}
-        control={control}
-        defaultValue=''
-        name='apartmentNumber'
-      />
-      <Controller
-        render={({ field: { onChange, value } }) => (
-          <div className='flex flex-col relative'>
-            <Input
-              placeholder={translation.phoneNumber}
-              value={value}
-              onChange={onChange}
-              required={!!errors.phoneNumber}
-            />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
-              {errors.phoneNumber?.message}
-            </span>
-          </div>
-        )}
-        rules={{
-          required: {
-            value: true,
-            message: translation.errorMessage.thisFieldIsRequired,
-          },
-        }}
-        control={control}
-        defaultValue=''
-        name='phoneNumber'
-      />
-      {/* <button onClick={handleTest}>Checkout</button> */}
-      <BuyOrPayNowSummary
-        translation={translation}
-        isCartDiscount
-        isAcceptedMethodsOfPayment
-        locale={locale}
-      />
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-full gap-10' noValidate>
+        <Controller
+          render={({ field: { onChange, value } }) => (
+            <div className='flex flex-col relative'>
+              <Input
+                placeholder={translation.name}
+                value={value}
+                onChange={onChange}
+                required={!!errors.name}
+              />
+              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+                {errors.name?.message}
+              </span>
+            </div>
+          )}
+          rules={{
+            required: {
+              value: true,
+              message: translation.errorMessage.thisFieldIsRequired,
+            },
+          }}
+          control={control}
+          defaultValue=''
+          name='name'
+        />
+        <Controller
+          render={({ field: { onChange, value } }) => (
+            <div className='flex flex-col relative'>
+              <Input
+                placeholder={translation.surname}
+                value={value}
+                onChange={onChange}
+                required={!!errors.surname}
+              />
+              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+                {errors.surname?.message}
+              </span>
+            </div>
+          )}
+          rules={{
+            required: {
+              value: true,
+              message: translation.errorMessage.thisFieldIsRequired,
+            },
+          }}
+          control={control}
+          defaultValue=''
+          name='surname'
+        />
+        <Controller
+          render={({ field: { onChange, value } }) => (
+            <div className='flex flex-col relative'>
+              <Input
+                placeholder={translation.email}
+                value={value}
+                onChange={onChange}
+                required={!!errors.email}
+              />
+              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+                {errors.email?.message}
+              </span>
+            </div>
+          )}
+          rules={{
+            required: {
+              value: true,
+              message: translation.errorMessage.thisFieldIsRequired,
+            },
+            pattern: {
+              value: emailRegex,
+              message: translation.errorMessage.youEnteredTheWrongFormatOfEmailAddress,
+            },
+          }}
+          control={control}
+          defaultValue=''
+          name='email'
+        />
+        <Controller
+          render={({ field: { onChange, value } }) => (
+            <div className='flex flex-col relative'>
+              <Input
+                placeholder={translation.city}
+                value={value}
+                onChange={onChange}
+                required={!!errors.city}
+              />
+              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+                {errors.city?.message}
+              </span>
+            </div>
+          )}
+          rules={{
+            required: {
+              value: true,
+              message: translation.errorMessage.thisFieldIsRequired,
+            },
+          }}
+          control={control}
+          defaultValue=''
+          name='city'
+        />
+        <Controller
+          render={({ field: { onChange, value } }) => (
+            <div className='flex flex-col relative'>
+              <Input
+                placeholder={translation.street}
+                value={value}
+                onChange={onChange}
+                required={!!errors.street}
+              />
+              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+                {errors.street?.message}
+              </span>
+            </div>
+          )}
+          rules={{
+            required: {
+              value: true,
+              message: translation.errorMessage.thisFieldIsRequired,
+            },
+          }}
+          control={control}
+          defaultValue=''
+          name='street'
+        />
+        <Controller
+          render={({ field: { onChange, value } }) => (
+            <div className='flex flex-col relative'>
+              <Input
+                placeholder={translation.postalCode}
+                value={value}
+                onChange={onChange}
+                required={!!errors.postalCode}
+              />
+              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+                {errors.postalCode?.message}
+              </span>
+            </div>
+          )}
+          rules={{
+            required: {
+              value: true,
+              message: translation.errorMessage.thisFieldIsRequired,
+            },
+          }}
+          control={control}
+          defaultValue=''
+          name='postalCode'
+        />
+        <Controller
+          render={({ field: { onChange, value } }) => (
+            <div className='flex flex-col relative'>
+              <Input
+                placeholder={translation.apartmentNumber}
+                value={value}
+                onChange={onChange}
+                required={!!errors.apartmentNumber}
+              />
+              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+                {errors.apartmentNumber?.message}
+              </span>
+            </div>
+          )}
+          rules={{
+            required: {
+              value: true,
+              message: translation.errorMessage.thisFieldIsRequired,
+            },
+          }}
+          control={control}
+          defaultValue=''
+          name='apartmentNumber'
+        />
+        <Controller
+          render={({ field: { onChange, value } }) => (
+            <div className='flex flex-col relative'>
+              <Input
+                placeholder={translation.phoneNumber}
+                value={value}
+                onChange={onChange}
+                required={!!errors.phoneNumber}
+              />
+              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+                {errors.phoneNumber?.message}
+              </span>
+            </div>
+          )}
+          rules={{
+            required: {
+              value: true,
+              message: translation.errorMessage.thisFieldIsRequired,
+            },
+          }}
+          control={control}
+          defaultValue=''
+          name='phoneNumber'
+        />
+        <BuyOrPayNowSummary
+          translation={translation}
+          isCartDiscount
+          isAcceptedMethodsOfPayment
+          locale={locale}
+          total={cartListTotalAmount}
+          type='submit'
+        />
+      </form>
     </div>
-    // </form>
   );
 };
 
