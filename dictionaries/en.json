@@ -84,6 +84,29 @@
     "productName": "Product name",
     "opinions": "Opinions",
     "shipAddress": "Shipping address",
+    "noDataToDisplay": "No data to display",
+    "orderNumber": "Order number",
+    "orderDate": "Order date",
+    "client": "Client",
+    "deliveryAddress": "Delivery address",
+    "sum": "Sum",
+    "status": "Status",
+    "goToOrder": "Go to order",
+    "yourCartIsActuallyEmpty": "Your cart is actually empty",
+
+    "orderThanksSummary": {
+        "thanksForOrder": "Thank you for your order",
+        "inOrderToTrack": "To track your order status, please check your email",
+        "followYourOrder": "You can also track the status of your order by clicking below"
+    },
+
+    "statuses": {
+        "new": "New",
+        "inProgress": "In progress",
+        "sent": "Sent",
+        "delivered": "Delivered",
+        "canceled": "Canceled"
+    },
 
     "advertisementSmartwatch": {
         "news": "News",

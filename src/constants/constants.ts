@@ -17,6 +17,8 @@ export const routes = {
   cart: '/cart',
   buyWithoutRegister: '/buy-without-register',
   deliverySummary: '/delivery-summary',
+  manageOrders: '/manage-orders',
+  orderSummary: '/order-summary',
 };
 
 export const categories = {
@@ -40,6 +42,7 @@ export const routesPermissionConfig = [
   { path: '/cart', roles: ['Administrator', 'User', 'Guest'] },
   { path: '/buy-without-register', roles: ['Administrator', 'User', 'Guest'] },
   { path: '/delivery-summary', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/manage-orders', roles: ['Administrator'] },
   { path: '/', roles: ['Administrator', 'User', 'Guest'] },
 ];
 

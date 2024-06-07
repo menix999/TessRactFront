@@ -21,9 +21,6 @@ const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
 
   const { logout, userToken, userRole } = useAuth();
 
-  console.log('userToken', userToken);
-  console.log('userRole', userRole);
-
   const loginRef = useRef<HTMLAnchorElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
@@ -102,10 +99,14 @@ const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
             </div>
             {userRole === 'Administrator' && (
               <>
-                <div className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'>
+                <CustomLink
+                  href={routes.manageOrders}
+                  locale={locale}
+                  className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'
+                >
                   <ManageOrdersIcon />
                   <span className='text-sm'>{translation.tooltipAccount.manageOrders}</span>
-                </div>
+                </CustomLink>
                 <CustomLink
                   href={routes.addProduct}
                   locale={locale}
