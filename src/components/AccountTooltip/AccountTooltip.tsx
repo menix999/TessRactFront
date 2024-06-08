@@ -77,10 +77,14 @@ const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
               </div>
               <span className='text-sm'>{translation.tooltipAccount.myAccount}</span>
             </div>
-            <div className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'>
+            <CustomLink
+              href={routes.myOrders}
+              locale={locale}
+              className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'
+            >
               <OrdersIcon />
               <span className='text-sm'>{translation.tooltipAccount.orders}</span>
-            </div>
+            </CustomLink>
             <div className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'>
               <ReturnAndComplaintsIcon />
               <span className='text-sm'>{translation.tooltipAccount.returnAndComplaints}</span>
