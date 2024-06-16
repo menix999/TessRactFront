@@ -27,8 +27,6 @@ const MyOrdersPage = async ({ params: { locale } }: { params: { locale: Locale }
 
   const userOrders = await getUserOrders(userId);
 
-  console.log('userOrders', userOrders);
-
   return (
     <div className='flex flex-col justify-center items-center h-[calc(100%-64px)]'>
       <div className='flex flex-col w-full max-w-[700px] gap-12 mt-20'>

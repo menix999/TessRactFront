@@ -20,6 +20,7 @@ export const routes = {
   manageOrders: '/manage-orders',
   orderSummary: '/order-summary',
   myOrders: '/my-orders',
+  myAccount: '/my-account',
 };
 
 export const categories = {
@@ -31,22 +32,23 @@ export const categories = {
 // create routesPermission variable and give themm
 
 export const routesPermissionConfig = [
-  { path: '/login', roles: ['Administrator', 'User', 'Guest'] },
-  { path: '/register', roles: ['Administrator', 'User', 'Guest'] },
-  { path: '/recover-password', roles: ['Administrator', 'User', 'Guest'] },
-  { path: '/regulations', roles: ['Administrator', 'User', 'Guest'] },
-  { path: '/about-us', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/login', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
+  { path: '/register', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
+  { path: '/recover-password', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
+  { path: '/regulations', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
+  { path: '/about-us', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
   { path: '/account-settings', roles: ['Administrator', 'User'] },
-  { path: '/product', roles: ['Administrator', 'User', 'Guest'] },
-  { path: '/product-list', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/product', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
+  { path: '/product-list', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
   { path: '/add-product', roles: ['Administrator'] },
-  { path: '/cart', roles: ['Administrator', 'User', 'Guest'] },
-  { path: '/buy-without-register', roles: ['Administrator', 'User', 'Guest'] },
-  { path: '/delivery-summary', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/cart', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
+  { path: '/buy-without-register', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
+  { path: '/delivery-summary', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
   { path: '/manage-orders', roles: ['Administrator'] },
-  { path: '/order-summary', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/order-summary', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
   { path: '/my-orders', roles: ['Administrator', 'User'] },
-  { path: '/', roles: ['Administrator', 'User', 'Guest'] },
+  { path: '/my-account', roles: ['Administrator', 'User'] },
+  { path: '/', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
 ];
 
 export const avatarColors = [

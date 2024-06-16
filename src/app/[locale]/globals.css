@@ -29,3 +29,15 @@ html {
 body {
   height: calc(100% - 64px);
 }
+
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  @apply bg-green-200 text-white;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--error {
+  @apply bg-red-500 text-white;
+}
+
+.Toastify__zoom-enter {
+  @apply h-6 w-6;
+}

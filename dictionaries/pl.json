@@ -93,6 +93,11 @@
     "status": "Status",
     "goToOrder": "Przejdź do zamówienia",
     "yourCartIsActuallyEmpty": "Twój koszyk jest aktualnie pusty",
+    "enterYourName": "Wprowadź swoje imię",
+    "enterYourSurname": "Wprowadź swoje nazwisko",
+    "enterYourEmail": "Wprowadź swój adres e-mail",
+    "enterYourPassword": "Wprowadź swoje hasło",
+    "enterYourConfirmPassword": "Potwierdź swoje hasło",
 
     "orderThanksSummary": {
         "thanksForOrder": "Dziękujemy za złożenie zamówienia",
@@ -155,6 +160,28 @@
         "thereIsAProblemWithActivatingYourAccount": "Wystąpił problem z aktywacją Twojego konta",
         "isPhoneNumberLengthValid": "Numer telefonu musi posiadać 9 cyfr",
         "isValidPhoneNumber": "Wprowadzony numer telefonu jest nieprawidłowy",
-        "invalidFormatOfPostalCode": "Nieprawidłowy format kodu pocztowego"
+        "invalidFormatOfPostalCode": "Nieprawidłowy format kodu pocztowego",
+        "onlyLettersAllowed": "Niepoprawny format, dozwolone są tylko litery"
+    },
+
+    "toastifyMessages": {
+        "title": {
+            "success": "Sukces",
+            "error": "Błąd",
+            "warning": "Ostrzeżenie"
+        },
+
+        "descriptionSuccess": {
+            "accountCreatedSuccessfully": "Konto zostało utworzone pomyślnie. Sprawdz swoją skrzynkę pocztową w celu aktywacji konta",
+            "productAddedSuccessfully": "Produkt został dodany pomyślnie"
+        },
+
+        "descriptionError": {
+           "problemAddingProduct": "Wystąpił problem podczas dodawania produktu spróbuj ponownie później ",
+           "problemWithServer": "Wystąpił problem z serwerem spróbuj ponownie później",
+           "incorrectEmailOrPassword": "Nieprawidłowy adres e-mail lub hasło",
+           "noResponseFromServer": "Brak odpowiedzi z serwera",
+           "unexpectedError": "Wystąpił nieoczekiwany błąd"
+        }
     }
 }
