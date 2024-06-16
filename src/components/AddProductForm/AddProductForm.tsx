@@ -1,6 +1,7 @@
 'use client';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -11,6 +12,7 @@ import UploadPhotoIcon from '@/assets/UploadPhotoIcon';
 import TextareaInput from '../TextareaInput/TextareaInput';
 import apiClient from '@/utils/api';
 import TrashIcon from '@/assets/TrashIcon';
+import ToastifyText from '../ToastifyText/ToastifyText';
 
 const AddProductForm = ({ translation }: IAddProductFormProps) => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -54,11 +56,27 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
       const response = await apiClient.post('/api/Product', formData);
 
       if (response) {
+        toast.success(
+          <ToastifyText
+            title={translation.toastifyMessages.title.success}
+            description={translation.toastifyMessages.descriptionSuccess.productAddedSuccessfully}
+            type='success'
+          />
+        );
+
         reset();
         setSelectedImage(null);
       }
     } catch (error) {
       console.log('LoginPanel error', error);
+
+      toast.error(
+        <ToastifyText
+          title={translation.toastifyMessages.title.error}
+          description={translation.toastifyMessages.descriptionError.problemAddingProduct}
+          type='error'
+        />
+      );
     }
   };
 

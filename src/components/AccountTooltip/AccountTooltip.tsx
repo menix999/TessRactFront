@@ -71,12 +71,14 @@ const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
       {isToolTipVisible && userToken && (
         <Tooltip tooltipRef={tooltipRef}>
           <div className='flex flex-col bg-white rounded-xl w-60'>
-            <div className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'>
-              <div className='text-sm'>
-                <PersonIcon width='16' height='16' isBlack />
-              </div>
+            <CustomLink
+              href={routes.myAccount}
+              locale={locale}
+              className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'
+            >
+              <PersonIcon width='16' height='16' isBlack />
               <span className='text-sm'>{translation.tooltipAccount.myAccount}</span>
-            </div>
+            </CustomLink>
             <CustomLink
               href={routes.myOrders}
               locale={locale}
@@ -85,10 +87,6 @@ const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
               <OrdersIcon />
               <span className='text-sm'>{translation.tooltipAccount.orders}</span>
             </CustomLink>
-            <div className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'>
-              <ReturnAndComplaintsIcon />
-              <span className='text-sm'>{translation.tooltipAccount.returnAndComplaints}</span>
-            </div>
             <CustomLink
               href={routes.accountSettings}
               locale={locale}
@@ -97,10 +95,6 @@ const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
               <SettingsIcon />
               <span className='text-sm'>{translation.tooltipAccount.settingsAccount}</span>
             </CustomLink>
-            <div className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'>
-              <ProductToRateIcon />
-              <span className='text-sm'>{translation.tooltipAccount.productToRate}</span>
-            </div>
             {userRole === 'Administrator' && (
               <>
                 <CustomLink

@@ -93,6 +93,11 @@
     "status": "Status",
     "goToOrder": "Go to order",
     "yourCartIsActuallyEmpty": "Your cart is actually empty",
+    "enterYourName": "Enter your name",
+    "enterYourSurname": "Enter your surname",
+    "enterYourEmail": "Enter your email",
+    "enterYourPassword": "Enter your password",
+    "enterYourConfirmPassword": "Enter your confirm password",
 
     "orderThanksSummary": {
         "thanksForOrder": "Thank you for your order",
@@ -154,6 +159,28 @@
         "thereIsAProblemWithActivatingYourAccount": "There is a problem with activating your account",
         "isPhoneNumberLengthValid": "Phone number must be 9 digits or less",
         "isValidPhoneNumber": "Invalid phone number",
-        "invalidFormatOfPostalCode": "Invalid format of postal code"
+        "invalidFormatOfPostalCode": "Invalid format of postal code",
+        "onlyLettersAllowed": "incorrect format, only letters allowed"
+    },
+
+    "toastifyMessages": {
+        "title": {
+            "success": "Success",
+            "error": "Error",
+            "warning": "Warning"
+        },
+
+        "descriptionSuccess": {
+            "accountCreatedSuccessfully": "The account has been created successfully. Please check your mailbox to activate your account",
+            "productAddedSuccessfully": "Product added successfully"
+        },
+
+        "descriptionError": {
+            "problemAddingProduct": "There was a problem adding the product, please try again later",
+            "problemWithServer": "There was a problem with the server, please try again later",
+            "incorrectEmailOrPassword": "incorrect email or password",
+            "noResponseFromServer": "No response from the server",
+            "unexpectedError": "An unexpected error occurred"
+         }
     }
 }

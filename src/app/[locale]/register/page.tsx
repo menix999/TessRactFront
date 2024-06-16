@@ -8,6 +8,7 @@ import RegistrationPanel from '@/components/RegistrationPanel/RegistrationPanel'
 import { routes } from '@/constants/constants';
 import Link from 'next/link';
 import CustomLink from '@/components/CustomLink/CustomLink';
+import ToastifyAppearance from '@/components/ToastifyAppearance/ToastifyAppearance';
 
 const RegisterPage = async ({ params: { locale } }: { params: { locale: Locale } }) => {
   const translation = await getDictionary(locale);
@@ -27,6 +28,7 @@ const RegisterPage = async ({ params: { locale } }: { params: { locale: Locale }
       </div>
       <div className='border border-main-gray rounded w-0 lg:w-auto' />
       <AppBenefits locale={locale} />
+      <ToastifyAppearance />
     </div>
   );
 };

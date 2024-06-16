@@ -32,6 +32,7 @@ const config: Config = {
         'dashboard-watch-background': '#EFEFEF',
         'dashboard-watch-title': '#333333',
         'dashboard-watch-text': '#737373',
+        'toastify-description': '#eaeaea',
       },
     },
     screens: {
