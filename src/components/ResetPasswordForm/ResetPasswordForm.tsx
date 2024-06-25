@@ -11,6 +11,8 @@ import OpenEyeIcon from '@/assets/OpenEyeIcon';
 import ClosedEyeIcon from '@/assets/ClosedEyeIcon';
 import { routes } from '@/constants/constants';
 import { createLanguagePath } from '@/utils/functions';
+import ToastifyText from '../ToastifyText/ToastifyText';
+import { toast } from 'react-toastify';
 
 const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
@@ -43,12 +45,22 @@ const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => 
       );
 
       if (response) {
+        toast.success(
+          <ToastifyText
+            title={translation.toastifyMessages.title.success}
+            description={
+              translation.toastifyMessages.descriptionSuccess.passwordHasBenChangedSuccessfully
+            }
+            type='success'
+          />
+        );
         router.push(createLanguagePath({ href: routes.login, locale }));
       }
     } catch (error) {
       console.log('LoginPanel error', error);
     }
   };
+
   return (
     <form className='flex flex-col gap-8 w-full' onSubmit={handleSubmit(onSubmit)}>
       <Controller
@@ -56,18 +68,19 @@ const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => 
           <div className='relative flex flex-col'>
             <div
               onClick={() => setIsEyeOpen((prevValue) => !prevValue)}
-              className='flex items-center absolute right-8 bottom-0 top-0 cursor-pointer'
+              className='flex items-center absolute right-8 bottom-0 top-6 cursor-pointer'
             >
               {isEyeOpen ? <OpenEyeIcon /> : <ClosedEyeIcon />}
             </div>
             <Input
-              placeholder={translation.password}
+              placeholder={translation.enterYourPassword}
+              title={translation.password}
               type={isEyeOpen ? 'text' : 'password'}
               value={value}
               onChange={onChange}
-              required={!!errors.password}
+              isError={!!errors.password}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.password?.message}
             </span>
           </div>
@@ -87,18 +100,19 @@ const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => 
           <div className='relative flex flex-col'>
             <div
               onClick={() => setIsConfirmPasswordEyeOpen((prevValue) => !prevValue)}
-              className='flex items-center absolute right-8 bottom-0 top-0 cursor-pointer'
+              className='flex items-center absolute right-8 bottom-0 top-6 cursor-pointer'
             >
               {isConfirmPasswordEye ? <OpenEyeIcon /> : <ClosedEyeIcon />}
             </div>
             <Input
-              placeholder={translation.confirmPassword}
+              placeholder={translation.enterYourConfirmPassword}
+              title={translation.confirmPassword}
               type={isConfirmPasswordEye ? 'text' : 'password'}
               value={value}
               onChange={onChange}
-              required={!!errors.confirmPassword}
+              isError={!!errors.confirmPassword}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.confirmPassword?.message}
             </span>
           </div>

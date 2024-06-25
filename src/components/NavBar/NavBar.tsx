@@ -37,7 +37,7 @@ const NavBar = ({ translation, locale }: INavBar) => {
           </div>
         </div>
         <div className='w-full max-w-sm order-2 flex items-center justify-center'>
-          <SearchBar placeholder={translation.search} locale={locale} />
+          <SearchBar placeholder={translation.search} locale={locale} translation={translation} />
         </div>
       </header>
     </div>

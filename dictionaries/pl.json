@@ -2,7 +2,7 @@
     "name": "Imię",
     "surname": "Nazwisko",
     "email": "E-mail",
-    "login": "login",
+    "login": "Login",
     "password": "Hasło",
     "signIn": "Zaloguj się",
     "signInWinWithGoogle": "Zaloguj się z Google",
@@ -42,7 +42,7 @@
     "companyName": "Nazwa firmy",
     "category": "Kategoria",
     "price": "Cena",
-    "quantityOfProduct": "Ilość domyślnie: 1",
+    "quantityOfProduct": "Ilość produktu",
     "color": "Kolor",
     "productMaterial": "Materiał produktu",
     "material": "Materiał",
@@ -97,7 +97,22 @@
     "enterYourSurname": "Wprowadź swoje nazwisko",
     "enterYourEmail": "Wprowadź swój adres e-mail",
     "enterYourPassword": "Wprowadź swoje hasło",
+    "enterYourLogin": "Wprowadź swój login",
+    "enterYourPhoneNumber": "Wprowadź swój numer telefonu",
+    "enterYourCity": "Wprowadź swoje miasto",
+    "enterYourStreet": "Wprowadź swoją ulicę",
+    "enterYourApartmentNumber": "Wprowadź numer domu / mieszkania",
+    "enterYourPostalCode": "Wprowadź swój kod pocztowy",
     "enterYourConfirmPassword": "Potwierdź swoje hasło",
+    "enterYourNameOfProduct": "Wprowadź nazwę produktu",
+    "enterYourCompanyName": "Wprowadź nazwę firmy",
+    "enterYourCategory": "Wprowadź kategorię",
+    "enterYourPrice": "Wprowadź cenę",
+    "enterYourColor": "Wprowadź kolor",
+    "enterYourProductMaterial": "Wprowadź materiał produktu",
+    "enterYourDescription": "Wprowadź opis",
+    "enterYourAmountOfProduct": "Wprowadź ilość produktu domyślnie: 1",
+    "lackOfSearchedProducts": "Brak wyszukiwanych produktów",
 
     "orderThanksSummary": {
         "thanksForOrder": "Dziękujemy za złożenie zamówienia",
@@ -161,7 +176,8 @@
         "isPhoneNumberLengthValid": "Numer telefonu musi posiadać 9 cyfr",
         "isValidPhoneNumber": "Wprowadzony numer telefonu jest nieprawidłowy",
         "invalidFormatOfPostalCode": "Nieprawidłowy format kodu pocztowego",
-        "onlyLettersAllowed": "Niepoprawny format, dozwolone są tylko litery"
+        "onlyLettersAllowed": "Niepoprawny format, dozwolone są tylko litery",
+        "onlyNumbersAllowed": "Niepoprawny format, dozwolone są tylko cyfry"
     },
 
     "toastifyMessages": {
@@ -173,7 +189,11 @@
 
         "descriptionSuccess": {
             "accountCreatedSuccessfully": "Konto zostało utworzone pomyślnie. Sprawdz swoją skrzynkę pocztową w celu aktywacji konta",
-            "productAddedSuccessfully": "Produkt został dodany pomyślnie"
+            "productAddedSuccessfully": "Produkt został dodany pomyślnie",
+            "passwordReset": "Na podany przez ciebie adres e-mail został wysłany link z resetowaniem hasła",
+            "passwordHasBenChangedSuccessfully": "Hasło zostało zmienione pomyślnie",
+            "settingsOfAccountHasBeenChanged": "Ustawienia konta zostały zmienione pomyślnie",
+            "yourOrderHasBeenPlaced": "Twoje zamówienie zostało złożone pomyślnie"
         },
 
         "descriptionError": {

@@ -11,7 +11,6 @@ const AddProductPage = async ({ params: { locale } }: { params: { locale: Locale
       <div className='flex flex-col w-full md:w-1/2 gap-8 '>
         <h1 className='text-xl font-bold'>{translation.addProduct}</h1>
         <AddProductForm translation={translation} />
-        <ToastifyAppearance />
       </div>
     </div>
   );

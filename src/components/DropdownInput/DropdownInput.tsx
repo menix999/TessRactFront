@@ -54,10 +54,11 @@ const DropdownInput = ({
     }
   }, [value]);
 
+  console.log('value', value);
   return (
     <div ref={refDropdown} className='flex flex-col relative w-full'>
       {inputTitle && (
-        <span className='flex ml-0 mb-2 w-auto text-sm text-main-gray'>
+        <span className='flex ml-0 mb-2 w-auto text-sm'>
           {inputTitle}
           {isRequired && <div className='h-4 ml-1 text-base text-main-error-red'>*</div>}
         </span>
@@ -92,7 +93,7 @@ const DropdownInput = ({
         <div
           className={`flex flex-col absolute max-h-56 z-20 top-20 bg-white w-full border border-main-gray rounded-xl overflow-y-auto cursor-pointer ${
             isDropdownListPositionOnUp && '-top-40'
-          } top-[44px]`}
+          } top-[74px]`}
         >
           {!!options ? (
             options.map(({ id, name, nameValue }) => (

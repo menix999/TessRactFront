@@ -1,3 +1,5 @@
+import { type getDictionary } from '../../lib/dictionary';
+
 export const BREAKPOINTS = {
   mobile: 768,
   tablet: 1280,
@@ -64,20 +66,20 @@ export const avatarColors = [
   '#17becf',
 ];
 
-export const ConstantProduct = () => {
+export const ConstantProduct = (translation: Awaited<ReturnType<typeof getDictionary>>) => {
   const categoryOptions = [
     {
-      name: 'Headphones',
+      name: translation.headphones,
       id: 1,
       nameValue: 'Headphones',
     },
     {
-      name: 'Smartwatch',
+      name: translation.smartWatch,
       id: 2,
       nameValue: 'Smartwatch',
     },
     {
-      name: 'Watch',
+      name: translation.watch,
       id: 3,
       nameValue: 'Watch',
     },

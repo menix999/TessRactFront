@@ -26,7 +26,7 @@ const Input = ({ placeholder, type, value, onChange, isError, title }: IInput) =
         // className='invalid:border-main-error-red invalid:border-2 h-10 w-full text-sm p-3 transition duration-100 outline-none border border-solid rounded-xl border-main-gray focus:border-2 focus:border-main-purple'
         className={`${
           isError ? 'border-2 border-main-error-red' : 'border-main-gray'
-        } h-10 w-full text-sm p-3 transition duration-100 outline-none border border-solid rounded-xl  focus:border-2 focus:border-main-purple`}
+        } h-10 w-full placeholder:text-xs text-sm p-3 transition duration-100 outline-none border border-solid rounded-xl  focus:border-2 focus:border-main-purple`}
       />
     </>
   );

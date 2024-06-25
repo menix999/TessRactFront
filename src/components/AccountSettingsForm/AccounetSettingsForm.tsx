@@ -8,6 +8,8 @@ import { IAccountSettingsFormProps, IAccountSettingsForm } from './AccountSettin
 import { phoneNumberRegex, postalCodeRegex } from '@/constants/regex';
 import { useAuth } from '@/context/AuthContext/AuthContext';
 import { useEffect } from 'react';
+import ToastifyText from '../ToastifyText/ToastifyText';
+import { toast } from 'react-toastify';
 
 const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
   const router = useRouter();
@@ -33,16 +35,31 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
         },
       });
 
+      console.log('response', response);
       if (!response) return;
 
       const data = await response.json();
+      console.log('data', data);
 
-      if (!data) return;
-      setValue('phoneNumber', data.phoneNumber);
-      setValue('city', data.city);
-      setValue('postalCode', data.postalCode);
-      setValue('street', data.street);
-      setValue('apartmentNumber', data.apartmentNumber);
+      if (data.phoneNumber) {
+        setValue('phoneNumber', data.phoneNumber);
+      }
+
+      if (data.city) {
+        setValue('city', data.city);
+      }
+
+      if (data.postalCode) {
+        setValue('postalCode', data.postalCode);
+      }
+
+      if (data.street) {
+        setValue('street', data.street);
+      }
+
+      if (data.apartmentNumber) {
+        setValue('apartmentNumber', data.apartmentNumber);
+      }
     } catch (error) {
       console.log('getAccountSettingsData - error', error);
     }
@@ -68,7 +85,15 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
         apartmentNumber,
       };
 
-      const respone = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Account/${userId}`, {
+      console.log('USTAWIENIA', {
+        phoneNumber,
+        city,
+        postalCode,
+        street,
+        apartmentNumber,
+      });
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Account/${userId}`, {
         cache: 'no-cache',
         method: 'PUT',
         headers: {
@@ -77,6 +102,18 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
         },
         body: JSON.stringify(params),
       });
+
+      if (response) {
+        toast.success(
+          <ToastifyText
+            title={translation.toastifyMessages.title.success}
+            description={
+              translation.toastifyMessages.descriptionSuccess.settingsOfAccountHasBeenChanged
+            }
+            type='success'
+          />
+        );
+      }
     } catch (error) {
       console.log('AccountSettingsForm - error ', error);
     }
@@ -88,12 +125,13 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <Input
-              placeholder={translation.phoneNumber}
+              placeholder={translation.enterYourPhoneNumber}
               value={value}
+              title={translation.phoneNumber}
               onChange={onChange}
-              required={!!errors.phoneNumber}
+              isError={!!errors.phoneNumber}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.phoneNumber?.message}
             </span>
           </div>
@@ -118,12 +156,13 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <Input
-              placeholder={translation.city}
+              placeholder={translation.enterYourCity}
               value={value}
               onChange={onChange}
-              required={!!errors.city}
+              title={translation.city}
+              isError={!!errors.city}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.city?.message}
             </span>
           </div>
@@ -142,12 +181,13 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <Input
-              placeholder={translation.postalCode}
+              placeholder={translation.enterYourPostalCode}
               value={value}
               onChange={onChange}
-              required={!!errors.postalCode}
+              isError={!!errors.postalCode}
+              title={translation.postalCode}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.postalCode?.message}
             </span>
           </div>
@@ -170,12 +210,13 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <Input
-              placeholder={translation.street}
+              placeholder={translation.enterYourStreet}
               value={value}
               onChange={onChange}
-              required={!!errors.street}
+              title={translation.street}
+              isError={!!errors.street}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.street?.message}
             </span>
           </div>
@@ -194,12 +235,13 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <Input
-              placeholder={translation.apartmentNumber}
+              placeholder={translation.enterYourApartmentNumber}
               value={value}
               onChange={onChange}
-              required={!!errors.apartmentNumber}
+              title={translation.apartmentNumber}
+              isError={!!errors.apartmentNumber}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.apartmentNumber?.message}
             </span>
           </div>

@@ -1,7 +1,7 @@
 'use client';
 import axios, { AxiosError } from 'axios';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 
@@ -20,7 +20,9 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
   const [isConfirmPasswordEye, setIsConfirmPasswordEyeOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
+  console.log('isLoading', isLoading);
   const router = useRouter();
 
   const {
@@ -39,6 +41,7 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
     confirmPassword,
   }) => {
     try {
+      setIsLoading(true);
       const response = await axios.post('http://localhost:5250/api/Account/register', {
         firstName: name,
         surname,
@@ -46,9 +49,9 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
         password,
         confirmPassword,
       });
-      console.log('response', response);
 
       if (response) {
+        setIsLoading(false);
         toast.success(
           <ToastifyText
             title={translation.toastifyMessages.title.success}
@@ -59,6 +62,7 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
         router.push(createLanguagePath({ href: routes.login, locale }));
       }
     } catch (error) {
+      setIsLoading(false);
       console.log('error', error);
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;
@@ -104,7 +108,7 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
               isError={!!errors.name}
               title={translation.name}
             />
-            <span className='text-main-error-red pt-2 text-sm absolute whitespace-nowrap -bottom-6'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.name?.message}
             </span>
           </div>
@@ -133,7 +137,7 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
               isError={!!errors.surname}
               title={translation.surname}
             />
-            <span className='text-main-error-red pt-2 text-sm absolute whitespace-nowrap -bottom-6'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.surname?.message}
             </span>
           </div>
@@ -162,7 +166,7 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
               isError={!!errors.email}
               title={translation.email}
             />
-            <span className='text-main-error-red pt-2 text-sm absolute whitespace-nowrap -bottom-6'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.email?.message}
             </span>
           </div>
@@ -198,7 +202,7 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
               isError={!!errors.password}
               title={translation.password}
             />
-            <span className='text-main-error-red pt-2 text-sm absolute whitespace-nowrap -bottom-6'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.password?.message}
             </span>
           </div>
@@ -230,7 +234,7 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
               isError={!!errors.confirmPassword}
               title={translation.confirmPassword}
             />
-            <span className='text-main-error-red pt-2 text-sm absolute whitespace-nowrap -bottom-6'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.confirmPassword?.message}
             </span>
           </div>
@@ -252,10 +256,10 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
       />
       <Controller
         render={({ field: { onChange, value } }) => (
-          <label htmlFor='acceptRules' className='flex cursor-pointer relative'>
+          <label htmlFor='acceptRules' className='flex cursor-pointer relative my-1'>
             <Checkbox onChange={onChange} checked={value} id='acceptRules' />
             {translation.acceptTermsAndConditions}
-            <span className='text-main-error-red pt-2 text-sm absolute whitespace-nowrap top-4'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap top-4'>
               {errors.isAcceptedRules?.message}
             </span>
           </label>
@@ -270,7 +274,7 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
         defaultValue={false}
         name='isAcceptedRules'
       />
-      <Button type='submit'>{translation.createAccount}</Button>
+      <Button type='submit'>{isLoading ? '...loading' : translation.createAccount}</Button>
     </form>
   );
 };

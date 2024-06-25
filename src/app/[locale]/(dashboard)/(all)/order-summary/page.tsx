@@ -14,7 +14,7 @@ const OrderSummaryPage = async ({ params: { locale } }: { params: { locale: Loca
       </span>
       <span className='mb-8 text-base'>{translation.orderThanksSummary.inOrderToTrack}</span>
       <span className='mb-8 text-base'>{translation.orderThanksSummary.followYourOrder}</span>
-      <CustomLink href={`${routes.main}`} locale={locale} className='mt-2 w-96 bg-white'>
+      <CustomLink href={`${routes.myOrders}`} locale={locale} className='mt-2 w-96 bg-white'>
         <Button type='button'>{translation.goToOrder}</Button>
       </CustomLink>
     </div>
