@@ -42,7 +42,7 @@
     "companyName": "Company name",
     "category": "Category",
     "price": "Price",
-    "quantityOfProduct": "Quantity default: 1",
+    "quantityOfProduct": "Quantity of product",
     "color": "Color",
     "productMaterial": "Product material",
     "material": "Material",
@@ -97,7 +97,22 @@
     "enterYourSurname": "Enter your surname",
     "enterYourEmail": "Enter your email",
     "enterYourPassword": "Enter your password",
+    "enterYourLogin": "Enter your login",
+    "enterYourPhoneNumber": "Enter your phone number",
+    "enterYourCity": "Enter your city",
+    "enterYourStreet": "Enter your street",
+    "enterYourApartmentNumber": "Enter your apartment number",
+    "enterYourPostalCode": "Enter your postal code",
     "enterYourConfirmPassword": "Enter your confirm password",
+    "enterYourNameOfProduct": "Enter the name of the product",
+    "enterYourCompanyName": "Enter your company name",
+    "enterYourCategory": "Enter your category",
+    "enterYourPrice": "Enter your price",
+    "enterYourColor": "Enter your color",
+    "enterYourProductMaterial": "Enter your product of the material",
+    "enterYourDescription": "Enter your description",
+    "enterYourAmountOfProduct": "Enter the amount of the product default: 1",
+    "lackOfSearchedProducts": "No products searched",
 
     "orderThanksSummary": {
         "thanksForOrder": "Thank you for your order",
@@ -160,7 +175,8 @@
         "isPhoneNumberLengthValid": "Phone number must be 9 digits or less",
         "isValidPhoneNumber": "Invalid phone number",
         "invalidFormatOfPostalCode": "Invalid format of postal code",
-        "onlyLettersAllowed": "incorrect format, only letters allowed"
+        "onlyLettersAllowed": "incorrect format, only letters allowed",
+        "onlyNumbersAllowed": "incorrect format, only numbers allowed"
     },
 
     "toastifyMessages": {
@@ -172,7 +188,11 @@
 
         "descriptionSuccess": {
             "accountCreatedSuccessfully": "The account has been created successfully. Please check your mailbox to activate your account",
-            "productAddedSuccessfully": "Product added successfully"
+            "productAddedSuccessfully": "Product added successfully",
+            "passwordReset": "A password reset link has been sent to the email address you provided",
+            "passwordHasBenChangedSuccessfully": "Password has been changed successfully",
+            "settingsOfAccountHasBeenChanged": "The settings of the account have been changed successfully",
+            "yourOrderHasBeenPlaced": "Your order has been placed successfully"
         },
 
         "descriptionError": {

@@ -5,7 +5,7 @@ const ToastifyAppearance = () => {
   return (
     <ToastContainer
       position='bottom-right'
-      autoClose={2000}
+      autoClose={3000}
       theme='colored'
       closeButton={false}
       limit={3}

@@ -6,10 +6,11 @@ import { IRecoverPasswordPageProps, IRecoverPasswordForm } from './RecoveryPassw
 import Input from '../Input/Input';
 import { emailRegex } from '@/constants/regex';
 import Button from '../Button/Button';
-import Link from 'next/link';
 import { routes } from '@/constants/constants';
 import { useState } from 'react';
 import CustomLink from '../CustomLink/CustomLink';
+import { toast } from 'react-toastify';
+import ToastifyText from '../ToastifyText/ToastifyText';
 
 const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps) => {
   const [isLinkSent, setIsLinkSent] = useState(false);
@@ -26,7 +27,15 @@ const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps
         email,
       });
 
+      console.log('response', response);
       if (response) {
+        toast.success(
+          <ToastifyText
+            title={translation.toastifyMessages.title.success}
+            description={translation.toastifyMessages.descriptionSuccess.passwordReset}
+            type='success'
+          />
+        );
         setIsLinkSent(true);
       }
     } catch (error) {
@@ -34,22 +43,24 @@ const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps
       console.log('LoginPanel error', error);
     }
   };
+
   return (
     <>
       {!isLinkSent ? (
         <div className='flex flex-col gap-6'>
-          <span className=' text-secondary-gray'>{translation.enterAdresEmailToVerificate}</span>
+          <span className='text-xl font-medium'>{translation.enterAdresEmailToVerificate}</span>
           <form className='flex flex-col gap-8 w-full' onSubmit={handleSubmit(onSubmit)}>
             <Controller
               render={({ field: { onChange, value } }) => (
                 <div className='flex flex-col relative'>
                   <Input
-                    placeholder={translation.email}
+                    placeholder={translation.enterYourEmail}
                     value={value}
                     onChange={onChange}
-                    required={!!errors.email?.message}
+                    title={translation.email}
+                    isError={!!errors.email?.message}
                   />
-                  <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+                  <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
                     {errors.email?.message}
                   </span>
                 </div>
@@ -70,7 +81,7 @@ const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps
             />
             <div className='flex gap-4'>
               <CustomLink href={routes.login} locale={locale} className='w-full'>
-                <Button type='submit' variant='bordered'>
+                <Button type='button' variant='bordered'>
                   {translation.return}
                 </Button>
               </CustomLink>

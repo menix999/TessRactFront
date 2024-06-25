@@ -29,6 +29,7 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
 
     const isProductExist = cart.some((product) => product.id === preparedProduct.id);
 
+    console.log('cart', cart);
     let loadedCart = [...cart];
 
     if (isProductExist) {
@@ -45,6 +46,7 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
       loadedCart = [...cart, preparedProduct];
     }
 
+    console.log('loadedCart', loadedCart);
     setCart(loadedCart);
 
     localStorage.setItem('cart', JSON.stringify(loadedCart));
@@ -79,6 +81,8 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
 
   useEffect(() => {
     const cart = localStorage.getItem('cart');
+
+    if (!cart) return;
 
     const parsedCart = JSON.parse(cart || '');
 

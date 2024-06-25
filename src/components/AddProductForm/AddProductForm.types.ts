@@ -8,7 +8,7 @@ type CategoryNameTypes = 'Headphones' | 'Smartwatch' | 'Watch';
 
 interface ICategory {
   id: number;
-  name: CategoryNameTypes;
+  name: CategoryNameTypes | string;
   nameValue: CategoryNameTypes;
 }
 

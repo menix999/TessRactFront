@@ -2,13 +2,19 @@ import OrderStatus from '@/components/OrderStatus/OrderStatus';
 import { Locale } from '../../../../../../i18n.config';
 import { getDictionary } from '../../../../../../lib/dictionary';
 
-import Cookies from 'js-cookie';
 import { cookies } from 'next/headers';
 
-const getUserOrders = async (userId: string) => {
-  const respone = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Order/${userId}`, {
-    cache: 'no-cache',
-  });
+const getUserOrders = async (userId: string, userToken: string) => {
+  const respone = await fetch(
+    `${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Account/${userId}/orders`,
+    {
+      method: 'GET',
+      cache: 'no-cache',
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    }
+  );
 
   return respone.json();
 };
@@ -23,9 +29,10 @@ const MyOrdersPage = async ({ params: { locale } }: { params: { locale: Locale }
   const userToken = cookieStore.get('userToken')?.value;
 
   // TODO: Add proper handling
-  if (!userId) return;
+  if (!userId || !userToken) return;
 
-  const userOrders = await getUserOrders(userId);
+  const userOrders = await getUserOrders(userId, userToken);
+  console.log('userOrders', userOrders);
 
   return (
     <div className='flex flex-col justify-center items-center h-[calc(100%-64px)]'>

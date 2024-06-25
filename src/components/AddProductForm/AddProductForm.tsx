@@ -1,6 +1,6 @@
 'use client';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import Input from '../Input/Input';
@@ -13,11 +13,12 @@ import TextareaInput from '../TextareaInput/TextareaInput';
 import apiClient from '@/utils/api';
 import TrashIcon from '@/assets/TrashIcon';
 import ToastifyText from '../ToastifyText/ToastifyText';
+import { onlyNumbersRegex, priceRegex } from '@/constants/regex';
 
 const AddProductForm = ({ translation }: IAddProductFormProps) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const { categoryOptions } = ConstantProduct();
+  const { categoryOptions } = ConstantProduct(translation);
 
   const {
     control,
@@ -114,17 +115,18 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-full gap-10' noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-full gap-8' noValidate>
       <Controller
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <Input
-              placeholder={translation.nameOfProduct}
+              placeholder={translation.enterYourNameOfProduct}
+              title={translation.nameOfProduct}
               value={value}
               onChange={onChange}
-              required={!!errors.name}
+              isError={!!errors.name}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.name?.message}
             </span>
           </div>
@@ -143,12 +145,13 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <Input
-              placeholder={translation.companyName}
+              placeholder={translation.enterYourCompanyName}
+              title={translation.companyName}
               value={value}
               onChange={onChange}
-              required={!!errors.mark}
+              isError={!!errors.mark}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.mark?.message}
             </span>
           </div>
@@ -167,14 +170,15 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <DropdownInput
-              placeholder={translation.category}
+              inputTitle={translation.category}
+              placeholder={translation.enterYourCategory}
               value={value}
               onChange={onChange}
               error={!!errors.category}
               options={categoryOptions}
               isArrow
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.category?.message}
             </span>
           </div>
@@ -187,7 +191,7 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
         }}
         defaultValue={{
           id: 1,
-          name: 'Headphones',
+          name: translation.headphones,
           nameValue: 'Headphones',
         }}
         control={control}
@@ -198,12 +202,13 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
           return (
             <div className='flex flex-col relative'>
               <Input
-                placeholder={translation.price}
+                placeholder={translation.enterYourPrice}
+                title={translation.price}
                 value={value}
                 onChange={onChange}
-                required={!!errors.price}
+                isError={!!errors.price}
               />
-              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+              <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
                 {errors.price?.message}
               </span>
             </div>
@@ -214,6 +219,10 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
             value: true,
             message: translation.errorMessage.thisFieldIsRequired,
           },
+          pattern: {
+            value: priceRegex,
+            message: translation.errorMessage.onlyNumbersAllowed,
+          },
         }}
         defaultValue=''
         control={control}
@@ -223,16 +232,23 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <Input
-              placeholder={translation.quantityOfProduct}
+              title={translation.quantityOfProduct}
+              placeholder={translation.enterYourAmountOfProduct}
               value={value}
               onChange={onChange}
-              required={!!errors.quantity}
+              isError={!!errors.quantity}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.quantity?.message}
             </span>
           </div>
         )}
+        rules={{
+          pattern: {
+            value: onlyNumbersRegex,
+            message: translation.errorMessage.onlyNumbersAllowed,
+          },
+        }}
         defaultValue=''
         control={control}
         name='quantity'
@@ -241,12 +257,13 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <Input
-              placeholder={translation.color}
+              placeholder={translation.enterYourColor}
+              title={translation.color}
               value={value}
               onChange={onChange}
-              required={!!errors.color}
+              isError={!!errors.color}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.color?.message}
             </span>
           </div>
@@ -265,12 +282,13 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <Input
-              placeholder={translation.productMaterial}
+              placeholder={translation.enterYourProductMaterial}
+              title={translation.productMaterial}
               value={value}
               onChange={onChange}
-              required={!!errors.material}
+              isError={!!errors.material}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.material?.message}
             </span>
           </div>
@@ -289,22 +307,16 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <TextareaInput
-              placeholder={translation.description}
+              title={translation.description}
+              placeholder={translation.enterYourDescription}
               value={value}
               onChange={onChange}
-              required={!!errors.description}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            {/* <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
               {errors.description?.message}
-            </span>
+            </span> */}
           </div>
         )}
-        rules={{
-          required: {
-            value: true,
-            message: translation.errorMessage.thisFieldIsRequired,
-          },
-        }}
         control={control}
         defaultValue=''
         name='description'

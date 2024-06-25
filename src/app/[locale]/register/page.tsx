@@ -14,7 +14,7 @@ const RegisterPage = async ({ params: { locale } }: { params: { locale: Locale }
   const translation = await getDictionary(locale);
 
   return (
-    <div className='h-full min-h-screen flex justify-center sm:p-16 flex-col lg:flex-row'>
+    <div className='min-h-screen flex justify-center sm:p-16 flex-col lg:flex-row'>
       <div className='flex items-center justify-center flex-grow p-6 lg:w-1/2'>
         <div className='flex flex-col items-start  w-full max-w-sm '>
           <CustomLink href={routes.main} locale={locale} className='flex items-center w-full mb-10'>
@@ -28,7 +28,6 @@ const RegisterPage = async ({ params: { locale } }: { params: { locale: Locale }
       </div>
       <div className='border border-main-gray rounded w-0 lg:w-auto' />
       <AppBenefits locale={locale} />
-      <ToastifyAppearance />
     </div>
   );
 };

@@ -64,12 +64,13 @@ const LoginPanel = ({ translation, locale }: ILoginPanel) => {
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col relative'>
             <Input
-              placeholder={translation.login}
+              placeholder={translation.enterYourEmail}
               value={value}
+              title={translation.email}
               onChange={onChange}
-              required={!!errors.email?.message}
+              isError={!!errors.email?.message}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.email?.message}
             </span>
           </div>
@@ -93,23 +94,24 @@ const LoginPanel = ({ translation, locale }: ILoginPanel) => {
           <div className='relative flex flex-col'>
             <div
               onClick={() => setIsEyeOpen((prevValue) => !prevValue)}
-              className='flex items-center absolute right-8 bottom-0 top-0 cursor-pointer'
+              className='flex items-center absolute right-8 bottom-0 top-7 cursor-pointer'
             >
               {isEyeOpen ? <OpenEyeIcon /> : <ClosedEyeIcon />}
             </div>
             <CustomLink href={routes.recoverPassword} locale={locale}>
-              <span className='absolute w-full -top-6 text-right text-main-purple text-sm hover:text-main-purple-hover cursor-pointer'>
+              <span className='absolute right-0 text-right text-main-purple text-sm hover:text-main-purple-hover cursor-pointer'>
                 {translation.forgotPassword}
               </span>
             </CustomLink>
             <Input
-              placeholder={translation.password}
+              placeholder={translation.enterYourPassword}
               type={isEyeOpen ? 'text' : 'password'}
               value={value}
               onChange={onChange}
-              required={!!errors.password}
+              title={translation.password}
+              isError={!!errors.password}
             />
-            <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+            <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.password?.message}
             </span>
           </div>
@@ -124,7 +126,7 @@ const LoginPanel = ({ translation, locale }: ILoginPanel) => {
         defaultValue=''
         name='password'
       />
-      <Controller
+      {/* <Controller
         render={({ field: { onChange, value } }) => (
           <label htmlFor='rememberMe' className='flex cursor-pointer relative mt-[-1rem]'>
             <Checkbox onChange={onChange} checked={value} id='rememberMe' />
@@ -137,7 +139,7 @@ const LoginPanel = ({ translation, locale }: ILoginPanel) => {
         control={control}
         defaultValue={false}
         name='isRememberMe'
-      />
+      /> */}
       <Button type='submit'>{translation.signIn}</Button>
     </form>
   );

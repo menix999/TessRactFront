@@ -36,7 +36,7 @@ const Home = async ({ params: { locale } }: { params: { locale: Locale } }) => {
 
   return (
     <div className='flex flex-col sm:px-8 px-4 mb-64 '>
-      <div className='flex flex-col lg:flex-row mb-40 lg:max-w-7xl mt-32 py-14'>
+      <div className='flex flex-col lg:flex-row mb-40 lg:max-w-7xl py-14'>
         <div className='flex flex-col items-start justify-star w-full gap-8'>
           <h1 className='text-4xl lg:text-6xl text-dashboard-watch-title font-extrabold'>
             {translation.bestAccessoriesToReach}

@@ -4,3 +4,5 @@ export const emailRegex =
 export const phoneNumberRegex = /^\d{9}$/;
 export const postalCodeRegex = /^\d{2}-\d{3}$/;
 export const onlyLettersRegex = /^[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*$/;
+export const priceRegex = /^\d+(\.\d{1,2})?$/;
+export const onlyNumbersRegex = /^\d+$/;

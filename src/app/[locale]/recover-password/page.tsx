@@ -5,9 +5,10 @@ import RecoveryPasswordForm from '@/components/RecoveryPasswordForm/RecoveryPass
 const RecoverPasswordPage = async ({ params: { locale } }: { params: { locale: Locale } }) => {
   const translation = await getDictionary(locale);
 
+  console.log('testasdas');
   return (
     <div className='flex justify-center items-center mt-64 w-full'>
-      <div className='flex flex-col max-w-96 w-full h-full'>
+      <div className='flex flex-col max-w-96 w-full h-full p-6'>
         <RecoveryPasswordForm translation={translation} locale={locale} />
       </div>
     </div>

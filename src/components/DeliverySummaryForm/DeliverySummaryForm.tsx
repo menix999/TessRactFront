@@ -1,20 +1,20 @@
 'use client';
 import axios from 'axios';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
 // import { loadStripe } from '@stripe/stripe-js';
 
 import Input from '../Input/Input';
-import Button from '../Button/Button';
-import { routes } from '@/constants/constants';
 import { IDeliverySummaryForm, IDeliverySummaryFormProps } from './DeliverySummaryForm.types';
 import { emailRegex } from '@/constants/regex';
 import BuyOrPayNowSummary from '../BuyOrPayNowSummary/BuyOrPayNowSummary';
 import { useAuth } from '@/context/AuthContext/AuthContext';
 import { useCart } from '@/context/CartContext/CartContext';
-import apiClient from '@/utils/api';
+import { toast } from 'react-toastify';
+import ToastifyText from '../ToastifyText/ToastifyText';
+import { createLanguagePath } from '@/utils/functions';
+import { routes } from '@/constants/constants';
 
 const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps) => {
   const router = useRouter();
@@ -54,15 +54,37 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
 
       const data = await response.json();
 
-      if (!data) return;
-      setValue('name', data.firstName);
-      setValue('surname', data.surname);
-      setValue('email', data.email);
-      setValue('phoneNumber', data.phoneNumber);
-      setValue('city', data.city);
-      setValue('postalCode', data.postalCode);
-      setValue('street', data.street);
-      setValue('apartmentNumber', data.apartmentNumber);
+      if (data.firstName) {
+        setValue('name', data.firstName);
+      }
+
+      if (data.surname) {
+        setValue('surname', data.surname);
+      }
+
+      if (data.email) {
+        setValue('email', data.email);
+      }
+
+      if (data.phoneNumber) {
+        setValue('phoneNumber', data.phoneNumber);
+      }
+
+      if (data.city) {
+        setValue('city', data.city);
+      }
+
+      if (data.postalCode) {
+        setValue('postalCode', data.postalCode);
+      }
+
+      if (data.street) {
+        setValue('street', data.street);
+      }
+
+      if (data.apartmentNumber) {
+        setValue('apartmentNumber', data.apartmentNumber);
+      }
     } catch (error) {
       console.log('Delivery summary getAccountSettingsData - error', error);
     }
@@ -100,18 +122,35 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
         price: item.price,
       }));
 
-      const response = await axios.post('http://localhost:5250/api/Order', {
-        firstName: name,
-        surname,
-        email,
-        postalCode,
-        street,
-        city,
-        apartmentNumber,
-        orderPosition: preparedOrderPosition,
-      });
+      const response = await axios.post(
+        'http://localhost:5250/api/Order',
+        {
+          firstName: name,
+          surname,
+          email,
+          postalCode,
+          street,
+          city,
+          apartmentNumber,
+          orderPosition: preparedOrderPosition,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
 
+      console.log('response', response);
       if (response) {
+        toast.success(
+          <ToastifyText
+            title={translation.toastifyMessages.title.success}
+            description={translation.toastifyMessages.descriptionSuccess.yourOrderHasBeenPlaced}
+            type='success'
+          />
+        );
+        router.push(createLanguagePath({ href: routes.orderSummary, locale }));
       }
       console.log('response', response);
     } catch (error) {
@@ -126,12 +165,13 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
           render={({ field: { onChange, value } }) => (
             <div className='flex flex-col relative'>
               <Input
-                placeholder={translation.name}
+                placeholder={translation.enterYourName}
+                title={translation.name}
                 value={value}
                 onChange={onChange}
-                required={!!errors.name}
+                isError={!!errors.name}
               />
-              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+              <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
                 {errors.name?.message}
               </span>
             </div>
@@ -150,12 +190,13 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
           render={({ field: { onChange, value } }) => (
             <div className='flex flex-col relative'>
               <Input
-                placeholder={translation.surname}
+                placeholder={translation.enterYourSurname}
+                title={translation.surname}
                 value={value}
                 onChange={onChange}
-                required={!!errors.surname}
+                isError={!!errors.surname}
               />
-              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+              <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
                 {errors.surname?.message}
               </span>
             </div>
@@ -174,12 +215,13 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
           render={({ field: { onChange, value } }) => (
             <div className='flex flex-col relative'>
               <Input
-                placeholder={translation.email}
+                placeholder={translation.enterYourEmail}
+                title={translation.email}
                 value={value}
                 onChange={onChange}
-                required={!!errors.email}
+                isError={!!errors.email}
               />
-              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+              <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
                 {errors.email?.message}
               </span>
             </div>
@@ -202,12 +244,13 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
           render={({ field: { onChange, value } }) => (
             <div className='flex flex-col relative'>
               <Input
-                placeholder={translation.city}
+                placeholder={translation.enterYourCity}
+                title={translation.city}
                 value={value}
                 onChange={onChange}
-                required={!!errors.city}
+                isError={!!errors.city}
               />
-              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+              <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
                 {errors.city?.message}
               </span>
             </div>
@@ -226,12 +269,13 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
           render={({ field: { onChange, value } }) => (
             <div className='flex flex-col relative'>
               <Input
-                placeholder={translation.street}
+                placeholder={translation.enterYourStreet}
+                title={translation.street}
                 value={value}
                 onChange={onChange}
-                required={!!errors.street}
+                isError={!!errors.street}
               />
-              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+              <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
                 {errors.street?.message}
               </span>
             </div>
@@ -250,12 +294,13 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
           render={({ field: { onChange, value } }) => (
             <div className='flex flex-col relative'>
               <Input
-                placeholder={translation.postalCode}
+                placeholder={translation.enterYourPostalCode}
+                title={translation.postalCode}
                 value={value}
                 onChange={onChange}
-                required={!!errors.postalCode}
+                isError={!!errors.postalCode}
               />
-              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+              <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
                 {errors.postalCode?.message}
               </span>
             </div>
@@ -274,12 +319,13 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
           render={({ field: { onChange, value } }) => (
             <div className='flex flex-col relative'>
               <Input
+                title={translation.apartmentNumber}
                 placeholder={translation.apartmentNumber}
                 value={value}
                 onChange={onChange}
-                required={!!errors.apartmentNumber}
+                isError={!!errors.apartmentNumber}
               />
-              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+              <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
                 {errors.apartmentNumber?.message}
               </span>
             </div>
@@ -298,12 +344,13 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
           render={({ field: { onChange, value } }) => (
             <div className='flex flex-col relative'>
               <Input
-                placeholder={translation.phoneNumber}
+                placeholder={translation.enterYourPhoneNumber}
+                title={translation.phoneNumber}
                 value={value}
                 onChange={onChange}
-                required={!!errors.phoneNumber}
+                isError={!!errors.phoneNumber}
               />
-              <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
+              <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
                 {errors.phoneNumber?.message}
               </span>
             </div>
