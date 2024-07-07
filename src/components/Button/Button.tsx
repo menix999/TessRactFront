@@ -2,9 +2,10 @@
 import React from 'react';
 
 import { IButtonProps } from './Button.types';
+import CircleLoader from '../CircleLoader/CircleLoader';
 
 //TODO: Dodać children żeby loader był komponentem serwerowym
-const Button = ({ type, onClick, variant, children }: IButtonProps) => {
+const Button = ({ type, onClick, variant, children, isLoading }: IButtonProps) => {
   return (
     <button
       type={type}
@@ -17,7 +18,7 @@ const Button = ({ type, onClick, variant, children }: IButtonProps) => {
           : 'flex justify-center items-center h-10 py-3 px-6 text-sm font-medium rounded-xl w-full transition duration-100 ease-in-out cursor-pointer whitespace-nowrap bg-main-purple hover:bg-main-purple-hover hover:duration-200 text-white'
       }
     >
-      {children}
+      {isLoading ? <CircleLoader/> : children}
     </button>
   );
 };

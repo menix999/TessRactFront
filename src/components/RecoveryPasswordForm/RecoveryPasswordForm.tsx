@@ -14,6 +14,7 @@ import ToastifyText from '../ToastifyText/ToastifyText';
 
 const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps) => {
   const [isLinkSent, setIsLinkSent] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     control,
@@ -23,12 +24,14 @@ const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps
 
   const onSubmit: SubmitHandler<IRecoverPasswordForm> = async ({ email }) => {
     try {
+      setIsLoading(true)
       const response = await axios.put('http://localhost:5250/api/Account/password', {
         email,
       });
 
       console.log('response', response);
       if (response) {
+        setIsLoading(false)
         toast.success(
           <ToastifyText
             title={translation.toastifyMessages.title.success}
@@ -38,8 +41,27 @@ const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps
         );
         setIsLinkSent(true);
       }
-    } catch (error) {
+    } catch (error: any) {
+      setIsLoading(false)
       setIsLinkSent(false);
+
+      if(error.response.data === "EmailNotFound") {
+        toast.error(
+          <ToastifyText
+          title={translation.toastifyMessages.title.error}
+          description={translation.toastifyMessages.descriptionError.emailNotFound}
+          type='error'
+          />
+        );
+      } else {
+        toast.error(
+          <ToastifyText
+          title={translation.toastifyMessages.title.error}
+          description={translation.toastifyMessages.descriptionError.problemWithServer}
+          type='error'
+          />
+        );
+      }
       console.log('LoginPanel error', error);
     }
   };
@@ -86,7 +108,7 @@ const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps
                 </Button>
               </CustomLink>
               <div className='w-full'>
-                <Button type='submit'>{translation.recoverPassword}</Button>
+                <Button type='submit' isLoading={isLoading}>{translation.recoverPassword}</Button>
               </div>
             </div>
           </form>

@@ -1,25 +1,29 @@
 import React from 'react';
+import clsx from 'clsx';
 
 import { IOrderStatusProps } from './OrderStatus.types';
+import { OrderStatuses } from '@/constants/constants';
 
 const OrderStatus = ({ status, translation }: IOrderStatusProps) => {
   const handleContentStatus = (status: string) => {
-    return 'asd';
+    return statuses.map(({ nameValue, name, color, id }) => {
+      if (status === nameValue) {
+        return (
+          <div
+            className={'flex justify-center items-center rounded h-8 w-[120px]'}
+            key={id}
+            style={{ backgroundColor: color }}
+          >
+            <span className='text-white text-base'>{name}</span>
+          </div>
+        );
+      }
+    });
   };
 
-  const colorStatuses = {
-    New: '#4CAF50',
-    InProgress: '#03A9F4',
-    Sent: '#9C27B0',
-    Delivered: '#84DA21',
-    Cancelled: '#FF3434',
-  };
+  const { statuses } = OrderStatuses(translation);
 
-  return (
-    <div className='flex justify-center items-center rounded h-8 w-[120px] bg-main-green'>
-      <span className='text-white text-base'>{translation.statuses.new}</span>
-    </div>
-  );
+  return handleContentStatus(status);
 };
 
 export default OrderStatus;

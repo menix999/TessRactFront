@@ -10,15 +10,16 @@ import { ILoginForm, ILoginPanel } from './LoginPanel.types';
 import { useState } from 'react';
 import OpenEyeIcon from '@/assets/OpenEyeIcon';
 import ClosedEyeIcon from '@/assets/ClosedEyeIcon';
-import Checkbox from '../Checkbox/Checkbox';
 import { emailRegex } from '@/constants/regex';
-import Link from 'next/link';
 import { routes } from '@/constants/constants';
 import { useAuth } from '@/context/AuthContext/AuthContext';
 import CustomLink from '../CustomLink/CustomLink';
+import { toast } from 'react-toastify';
+import ToastifyText from '../ToastifyText/ToastifyText';
 
 const LoginPanel = ({ translation, locale }: ILoginPanel) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     control,
@@ -32,6 +33,7 @@ const LoginPanel = ({ translation, locale }: ILoginPanel) => {
 
   const onSubmit: SubmitHandler<ILoginForm> = async ({ email, password }) => {
     try {
+      setIsLoading(true);
       const { data } = await axios.post('http://localhost:5250/api/Account/login', {
         email,
         password,
@@ -39,6 +41,7 @@ const LoginPanel = ({ translation, locale }: ILoginPanel) => {
       const userToken = data;
 
       if (userToken) {
+        setIsLoading(false);
         const decodedToken = jwtDecode(data);
 
         const userId = (decodedToken as any)[
@@ -53,7 +56,26 @@ const LoginPanel = ({ translation, locale }: ILoginPanel) => {
 
         router.push(routes.main);
       }
-    } catch (error) {
+    } catch (error: any) {
+      setIsLoading(false);
+
+      if(error.response.data === "ValidCredentials") {
+        toast.error(
+          <ToastifyText
+          title={translation.toastifyMessages.title.error}
+          description={translation.toastifyMessages.descriptionError.incorrectEmailOrPassword}
+          type='error'
+          />
+        );
+      } else {
+        toast.error(
+          <ToastifyText
+          title={translation.toastifyMessages.title.error}
+          description={translation.toastifyMessages.descriptionError.problemWithServer}
+          type='error'
+          />
+        );
+      }
       console.log('LoginPanel error', error);
     }
   };
@@ -140,7 +162,7 @@ const LoginPanel = ({ translation, locale }: ILoginPanel) => {
         defaultValue={false}
         name='isRememberMe'
       /> */}
-      <Button type='submit'>{translation.signIn}</Button>
+      <Button type='submit' isLoading={isLoading}>{translation.signIn}</Button>
     </form>
   );
 };

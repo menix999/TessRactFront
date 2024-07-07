@@ -54,7 +54,6 @@ const DropdownInput = ({
     }
   }, [value]);
 
-  console.log('value', value);
   return (
     <div ref={refDropdown} className='flex flex-col relative w-full'>
       {inputTitle && (

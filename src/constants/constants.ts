@@ -89,3 +89,40 @@ export const ConstantProduct = (translation: Awaited<ReturnType<typeof getDictio
     categoryOptions,
   };
 };
+
+export const OrderStatuses = (translation: Awaited<ReturnType<typeof getDictionary>>) => {
+  const statuses = [
+    {
+      name: translation.statuses.new,
+      nameValue: 'new',
+      color: '#4CAF50',
+      id: 1,
+    },
+    {
+      name: translation.statuses.inProgress,
+      nameValue: 'inprogress',
+      color: '#03A9F4',
+      id: 2,
+    },
+    {
+      name: translation.statuses.sent,
+      nameValue: 'sent',
+      color: '#9C27B0',
+      id: 3,
+    },
+    {
+      name: translation.statuses.delivered,
+      nameValue: 'delivered',
+      color: '#84DA21',
+      id: 4,
+    },
+    {
+      name: translation.statuses.cancelled,
+      nameValue: 'cancelled',
+      color: '#FF3434',
+      id: 5,
+    },
+  ];
+
+  return { statuses };
+};

@@ -113,21 +113,20 @@
     "enterYourDescription": "Enter your description",
     "enterYourAmountOfProduct": "Enter the amount of the product default: 1",
     "lackOfSearchedProducts": "No products searched",
-
+    "yourOrders": "Your orders",
+    "actuallyYouDontHaveAnyOrders": "You don't have any orders yet",
     "orderThanksSummary": {
         "thanksForOrder": "Thank you for your order",
         "inOrderToTrack": "To track your order status, please check your email",
         "followYourOrder": "You can also track the status of your order by clicking below"
     },
-
     "statuses": {
         "new": "New",
         "inProgress": "In progress",
         "sent": "Sent",
         "delivered": "Delivered",
-        "canceled": "Canceled"
+        "cancelled": "Cancelled"
     },
-
     "advertisementSmartwatch": {
         "news": "News",
         "description": "Discover a new dimension of functionality and style with our smartwatch!",
@@ -136,8 +135,6 @@
         "healthControl": "Talk and write with others",
         "healthControlDescription": "The smartwatch allows for heart rate, sleep, calorie control, and more"
     },
-
-
     "footer": {
         "regulations": "Regulations",
         "contact": "Contact",
@@ -145,7 +142,6 @@
         "aboutUs": "About us",
         "informations": "Informations"
     },
-
     "tooltipAccount": {
         "myAccount": "My account",
         "orders": "Orders",
@@ -156,7 +152,6 @@
         "addProduct": "Add product",
         "logout": "Logout"
     },
-
     "emailVerification": {
         "checkYourEmail": "Check your email",
         "haveNotReceivedYourEmail": "Haven't received your email?",
@@ -166,7 +161,6 @@
         "areYouSendIncorrectEmail": "Are you entered the incorrect email address?",
         "completeTheFormAgain": "Complete the form again"
     },
-
     "errorMessage": {
         "youEnteredTheWrongFormatOfEmailAddress": "You entered the wrong format of email address",
         "thisFieldIsRequired": "This field is required",
@@ -178,29 +172,30 @@
         "onlyLettersAllowed": "incorrect format, only letters allowed",
         "onlyNumbersAllowed": "incorrect format, only numbers allowed"
     },
-
     "toastifyMessages": {
         "title": {
             "success": "Success",
             "error": "Error",
             "warning": "Warning"
         },
-
         "descriptionSuccess": {
             "accountCreatedSuccessfully": "The account has been created successfully. Please check your mailbox to activate your account",
             "productAddedSuccessfully": "Product added successfully",
             "passwordReset": "A password reset link has been sent to the email address you provided",
             "passwordHasBenChangedSuccessfully": "Password has been changed successfully",
             "settingsOfAccountHasBeenChanged": "The settings of the account have been changed successfully",
-            "yourOrderHasBeenPlaced": "Your order has been placed successfully"
+            "yourOrderHasBeenPlaced": "Your order has been placed successfully",
+            "yourStatusHasBeenChanged": "The order status has been updated successfully"
         },
-
         "descriptionError": {
             "problemAddingProduct": "There was a problem adding the product, please try again later",
             "problemWithServer": "There was a problem with the server, please try again later",
             "incorrectEmailOrPassword": "incorrect email or password",
             "noResponseFromServer": "No response from the server",
-            "unexpectedError": "An unexpected error occurred"
-         }
+            "unexpectedError": "An unexpected error occurred",
+            "unexpectedErrorWhileChangingStatus": "An unexpected error occurred while changing the order status",
+            "emailNotFound": "The email address you provided was not found",
+            "errorWhileChangingPassword": "An error occurred while changing the password"
+        }
     }
 }

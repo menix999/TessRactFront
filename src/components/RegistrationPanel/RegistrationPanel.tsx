@@ -1,7 +1,7 @@
 'use client';
 import axios, { AxiosError } from 'axios';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 
@@ -19,10 +19,8 @@ import ToastifyText from '../ToastifyText/ToastifyText';
 const RegistrationPanel = ({ translation, locale }: IRegistration) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
   const [isConfirmPasswordEye, setIsConfirmPasswordEyeOpen] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log('isLoading', isLoading);
   const router = useRouter();
 
   const {
@@ -37,7 +35,6 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
     surname,
     email,
     password,
-    isAcceptedRules,
     confirmPassword,
   }) => {
     try {
@@ -107,6 +104,7 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
               onChange={onChange}
               isError={!!errors.name}
               title={translation.name}
+              maxLength={100}
             />
             <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.name?.message}
@@ -136,6 +134,7 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
               onChange={onChange}
               isError={!!errors.surname}
               title={translation.surname}
+              maxLength={100}
             />
             <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap -bottom-5'>
               {errors.surname?.message}
@@ -257,7 +256,7 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
       <Controller
         render={({ field: { onChange, value } }) => (
           <label htmlFor='acceptRules' className='flex cursor-pointer relative my-1'>
-            <Checkbox onChange={onChange} checked={value} id='acceptRules' />
+            <Checkbox onChange={onChange} isChecked={value} id='acceptRules' isError={!!errors.isAcceptedRules?.message}/>
             {translation.acceptTermsAndConditions}
             <span className='text-main-error-red pt-2 text-xs absolute whitespace-nowrap top-4'>
               {errors.isAcceptedRules?.message}
@@ -274,7 +273,7 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
         defaultValue={false}
         name='isAcceptedRules'
       />
-      <Button type='submit'>{isLoading ? '...loading' : translation.createAccount}</Button>
+      <Button type='submit' isLoading={isLoading}>{translation.createAccount}</Button>
     </form>
   );
 };

@@ -7,11 +7,16 @@ import UserAvatar from '@/components/UserAvatar/UserAvatar';
 import BuyProduct from '@/components/BuyProduct/BuyProduct';
 
 const getProduct = async (id: number) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Product/${id}`, {
-    cache: 'no-cache',
-  });
+  try {
 
-  return response.json();
+    const response = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Product/${id}`, {
+      cache: 'no-cache',
+    });
+    
+    return response.json();
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const ProductPage = async ({

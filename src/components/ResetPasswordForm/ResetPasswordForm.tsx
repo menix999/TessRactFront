@@ -17,6 +17,7 @@ import { toast } from 'react-toastify';
 const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
   const [isConfirmPasswordEye, setIsConfirmPasswordEyeOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     control,
@@ -29,6 +30,7 @@ const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => 
 
   const onSubmit: SubmitHandler<IResetPasswordForm> = async ({ password, confirmPassword }) => {
     try {
+      setIsLoading(true);
       const urlParams = new URLSearchParams(window.location.search);
       const path = window.location.pathname;
       const match = path.match(/reset-password\/([^/]+)/);
@@ -45,6 +47,7 @@ const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => 
       );
 
       if (response) {
+        setIsLoading(false)
         toast.success(
           <ToastifyText
             title={translation.toastifyMessages.title.success}
@@ -57,6 +60,16 @@ const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => 
         router.push(createLanguagePath({ href: routes.login, locale }));
       }
     } catch (error) {
+      setIsLoading(false)
+
+      toast.error(
+        <ToastifyText
+        title={translation.toastifyMessages.title.error}
+        description={translation.toastifyMessages.descriptionError.errorWhileChangingPassword}
+        type='error'
+        />
+      );
+
       console.log('LoginPanel error', error);
     }
   };
@@ -132,7 +145,7 @@ const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => 
         defaultValue=''
         name='confirmPassword'
       />
-      <Button type='submit'>{translation.recoverPassword}</Button>
+      <Button type='submit' isLoading={isLoading}>{translation.recoverPassword}</Button>
     </form>
   );
 };

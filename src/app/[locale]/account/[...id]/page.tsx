@@ -6,7 +6,7 @@ const ActivateLinkPage = async ({ params: { locale } }: { params: { locale: Loca
   const translation = await getDictionary(locale);
 
   return (
-    <div className='flex justify-center items-center mt-6'>
+    <div className='flex justify-center min-h-full items-center mt-6'>
       <ActivateLinkForm translation={translation} locale={locale} />
     </div>
   );
