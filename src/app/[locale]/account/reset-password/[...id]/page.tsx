@@ -7,7 +7,7 @@ const ResetPasswordPage = async ({ params: { locale } }: { params: { locale: Loc
   const translation = await getDictionary(locale);
 
   return (
-    <div className='flex justify-center items-center mt-64 w-full'>
+    <div className='flex justify-center items-center min-h-full w-full'>
       <div className='flex flex-col max-w-96 w-full h-full p-6'>
         <span className='mb-6 text-xl font-medium'>
           {translation.enterNewPasswordForYourAccount}

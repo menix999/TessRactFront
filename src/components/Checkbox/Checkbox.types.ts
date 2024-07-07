@@ -1,6 +1,7 @@
 export interface ICheckbox {
   id: string;
-  checked: any;
+  isChecked: boolean;
   onChange: any;
   indeterminateCheckbox?: boolean;
+  isError?: boolean;
 }

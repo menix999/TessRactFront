@@ -5,4 +5,5 @@ export interface IButtonProps {
   onClick?: () => void;
   variant?: 'filled' | 'bordered' | 'google';
   children: ReactNode;
+  isLoading?: boolean;
 }

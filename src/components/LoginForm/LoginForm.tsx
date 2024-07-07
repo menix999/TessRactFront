@@ -10,9 +10,6 @@ import LoginPanel from '../LoginPanel/LoginPanel';
 import { routes } from '@/constants/constants';
 import CustomLink from '../CustomLink/CustomLink';
 
-interface ILoginForm {
-  lcoale: Locale;
-}
 const LoginForm = async ({ locale }: { locale: Locale }) => {
   const translation = await getDictionary(locale);
   return (
@@ -25,7 +22,7 @@ const LoginForm = async ({ locale }: { locale: Locale }) => {
         </CustomLink>
         <h2 className='text-left mb-14 text-2xl'>{translation.signIn}</h2>
         <LoginPanel translation={translation} locale={locale} />
-        <div className='flex w-full items-center gap-2 my-14'>
+        {/* <div className='flex w-full items-center gap-2 my-14'>
           <div className='border border-main-gray h-0 w-full' />
           <span className='text-main-gray'>{translation.or}</span>
           <div className='border border-main-gray h-0 w-full' />
@@ -37,7 +34,7 @@ const LoginForm = async ({ locale }: { locale: Locale }) => {
               {translation.signInWinWithGoogle}
             </div>
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

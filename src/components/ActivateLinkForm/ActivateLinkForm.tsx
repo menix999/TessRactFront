@@ -36,7 +36,7 @@ const ActivateLinkForm = ({ translation, locale }: IActivateLinkFormProps) => {
   }, []);
 
   return (
-    <div className='ml-4'>
+    <div className='flex flex-col ml-4'>
       {isVerified ? (
         <span>{translation.yourAccountHasBeenActivated}</span>
       ) : (

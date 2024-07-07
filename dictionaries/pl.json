@@ -61,7 +61,7 @@
     "seeMore": "Zobacz więcej",
     "popular": "POPULARNE",
     "newProducts": "NOWE PRODUKTY",
-    "check": "Sprawdź", 
+    "check": "Sprawdź",
     "onlinePayments": "Płatności online",
     "satisfactionGuaranteed": "Gwarancja satysfakcji",
     "secureTransactions": "Bezpieczne transakcje",
@@ -113,21 +113,20 @@
     "enterYourDescription": "Wprowadź opis",
     "enterYourAmountOfProduct": "Wprowadź ilość produktu domyślnie: 1",
     "lackOfSearchedProducts": "Brak wyszukiwanych produktów",
-
+    "yourOrders": "Twoje zamówienia",
+    "actuallyYouDontHaveAnyOrders": "Aktualnie nie masz żadnych zamówień",
     "orderThanksSummary": {
         "thanksForOrder": "Dziękujemy za złożenie zamówienia",
         "inOrderToTrack": "W celu śledzenia statusu zamówienia, sprawdź swoją skrzynkę pocztową",
         "followYourOrder": "Możesz również śledzić status swojego zamówienia klikając poniżej"
     },
-
     "statuses": {
         "new": "Nowe",
         "inProgress": "W trakcie",
         "sent": "Wysłane",
         "delivered": "Dostarczone",
-        "canceled": "Anulowane"
+        "cancelled": "Anulowane"
     },
-
     "advertisementSmartwatch": {
         "news": "Nowości",
         "description": "Odkryj nowy wymiar funkcjonalności i stylu z naszym smartwatchem!",
@@ -136,8 +135,6 @@
         "healthControl": "Zadbaj o swoje zdrowie",
         "healthControlDescription": "Smartwatch umożliwia kontrolę tętna, snu, kalorii i nie tylko"
     },
-
-
     "footer": {
         "regulations": "Regulamin",
         "contact": "Kontakt",
@@ -145,7 +142,6 @@
         "aboutUs": "O nas",
         "informations": "Informacje"
     },
-
     "tooltipAccount": {
         "myAccount": "Moje konto",
         "orders": "Zamówienia",
@@ -156,7 +152,6 @@
         "addProduct": "Dodaj produkt",
         "logout": "Wyloguj się"
     },
-
     "emailVerification": {
         "checkYourEmail": "Sprawdź swoją pocztę",
         "haveNotReceivedYourEmail": "Nie otrzymałeś e-maila?",
@@ -166,8 +161,6 @@
         "areYouSendIncorrectEmail": "Czy podałeś zły adres e-mail?",
         "completeTheFormAgain": "Wypełnij formularz ponownie"
     },
-
-
     "errorMessage": {
         "youEnteredTheWrongFormatOfEmailAddress": "Wprowadziłeś zły format adresu e-mail",
         "thisFieldIsRequired": "To pole jest wymagane",
@@ -179,29 +172,30 @@
         "onlyLettersAllowed": "Niepoprawny format, dozwolone są tylko litery",
         "onlyNumbersAllowed": "Niepoprawny format, dozwolone są tylko cyfry"
     },
-
     "toastifyMessages": {
         "title": {
             "success": "Sukces",
             "error": "Błąd",
             "warning": "Ostrzeżenie"
         },
-
         "descriptionSuccess": {
             "accountCreatedSuccessfully": "Konto zostało utworzone pomyślnie. Sprawdz swoją skrzynkę pocztową w celu aktywacji konta",
             "productAddedSuccessfully": "Produkt został dodany pomyślnie",
             "passwordReset": "Na podany przez ciebie adres e-mail został wysłany link z resetowaniem hasła",
             "passwordHasBenChangedSuccessfully": "Hasło zostało zmienione pomyślnie",
             "settingsOfAccountHasBeenChanged": "Ustawienia konta zostały zmienione pomyślnie",
-            "yourOrderHasBeenPlaced": "Twoje zamówienie zostało złożone pomyślnie"
+            "yourOrderHasBeenPlaced": "Twoje zamówienie zostało złożone pomyślnie",
+            "yourStatusHasBeenChanged": "Status zamówienia został zaktualizowany pomyślnie"
         },
-
         "descriptionError": {
-           "problemAddingProduct": "Wystąpił problem podczas dodawania produktu spróbuj ponownie później ",
-           "problemWithServer": "Wystąpił problem z serwerem spróbuj ponownie później",
-           "incorrectEmailOrPassword": "Nieprawidłowy adres e-mail lub hasło",
-           "noResponseFromServer": "Brak odpowiedzi z serwera",
-           "unexpectedError": "Wystąpił nieoczekiwany błąd"
+            "problemAddingProduct": "Wystąpił problem podczas dodawania produktu spróbuj ponownie później ",
+            "problemWithServer": "Wystąpił problem z serwerem spróbuj ponownie później",
+            "incorrectEmailOrPassword": "Nieprawidłowy adres e-mail lub hasło",
+            "noResponseFromServer": "Brak odpowiedzi z serwera",
+            "unexpectedError": "Wystąpił nieoczekiwany błąd",
+            "unexpectedErrorWhileChangingStatus": "Wystąpił nieoczekiwany błąd podczas zmiany statusu zamówienia",
+            "emailNotFound": "Podany adres e-mail nie został znaleziony",
+            "errorWhileChangingPassword": "Wystąpił błąd podczas zmiany hasła"
         }
     }
 }

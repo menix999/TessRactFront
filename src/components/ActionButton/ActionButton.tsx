@@ -14,13 +14,12 @@ const ActionButton = ({ handleContent }: IActionButtonProps) => {
   const actionRef = useRef<HTMLDivElement>(null);
 
   useDetectOutsideClick(actionRef, () => setIsOpen(false));
-  console.log('isOpen', isOpen);
 
   return (
-    <div ref={actionRef} className='cursor-pointer' onClick={() => setIsOpen(true)}>
+    <div ref={actionRef} className='cursor-pointer' onClick={() => setIsOpen((prevValue) => !prevValue)}>
       <ActionIcon />
 
-      {isOpen && <div className='absolute top-10 right-8 z-50'>{handleContent()}</div>}
+      {isOpen && <div className='absolute top-7 right-5 z-50'>{handleContent()}</div>}
     </div>
   );
 };

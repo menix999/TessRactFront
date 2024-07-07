@@ -33,6 +33,10 @@ const config: Config = {
         'dashboard-watch-title': '#333333',
         'dashboard-watch-text': '#737373',
         'toastify-description': '#eaeaea',
+
+        'status-new': '#4CAF50',
+        // 'status-inprogress': '#03A9F4',
+        // 'status-sent': '#9C27B0',
       },
     },
     screens: {
