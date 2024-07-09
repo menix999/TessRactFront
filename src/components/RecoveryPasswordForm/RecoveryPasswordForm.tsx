@@ -29,7 +29,6 @@ const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps
         email,
       });
 
-      console.log('response', response);
       if (response) {
         setIsLoading(false)
         toast.success(

@@ -36,8 +36,8 @@ const ProductListPage = async ({
 
   return (
     <div className='h-full mt-24'>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-32'>
-        {productListData.map(
+      {!!productListData.length ? <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-32'>
+        { productListData.map(
           ({ id, base64Image, name, price, averageRate }: IProductProperties) => {
             return (
               <div className='flex justify-center items-start' key={id}>
@@ -54,7 +54,7 @@ const ProductListPage = async ({
             );
           }
         )}
-      </div>
+      </div> : <span className='flex justify-center items-center w-full h-full text-4xl font-medium'>{translation.noAvailableProducts}</span>}
     </div>
   );
 };

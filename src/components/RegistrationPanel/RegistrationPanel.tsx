@@ -11,7 +11,7 @@ import OpenEyeIcon from '@/assets/OpenEyeIcon';
 import ClosedEyeIcon from '@/assets/ClosedEyeIcon';
 import { IRegistration, IRegistrationForm } from './RegistrationPanel.types';
 import Checkbox from '../Checkbox/Checkbox';
-import { emailRegex, onlyLettersRegex } from '@/constants/regex';
+import { emailRegex, oneNumberRegex, onlyLettersRegex } from '@/constants/regex';
 import { routes } from '@/constants/constants';
 import { createLanguagePath } from '@/utils/functions';
 import ToastifyText from '../ToastifyText/ToastifyText';
@@ -120,6 +120,10 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
             value: onlyLettersRegex,
             message: translation.errorMessage.onlyLettersAllowed,
           },
+          maxLength: {
+            value: 50,
+            message: translation.errorMessage.maxCharacters,
+          },
         }}
         control={control}
         defaultValue=''
@@ -149,6 +153,10 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
           pattern: {
             value: onlyLettersRegex,
             message: translation.errorMessage.onlyLettersAllowed,
+          },
+          maxLength: {
+            value: 50,
+            message: translation.errorMessage.maxCharacters,
           },
         }}
         control={control}
@@ -211,7 +219,17 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
             value: true,
             message: translation.errorMessage.thisFieldIsRequired,
           },
-        }}
+          minLength: {
+            value: 8,
+            message: translation.errorMessage.minCharactersAndSpecialCharacters,
+          },
+          validate: (value) => {
+            const hasNumber = oneNumberRegex.test(value);
+            if (!hasNumber) {
+              return translation.errorMessage.minCharactersAndSpecialCharacters;
+            }
+            return true;
+          },        }}
         control={control}
         defaultValue=''
         name='password'
@@ -248,6 +266,7 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
               return translation.errorMessage.passwordsDoNotMatch;
             }
           },
+          
         }}
         control={control}
         defaultValue=''

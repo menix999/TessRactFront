@@ -34,6 +34,7 @@ const ManageProductsPage = async ({ params: { locale } }: { params: { locale: Lo
 
   const ordersList = await getOrdersList(userToken);
 
+
   return (
     <div className='flex flex-col justify-center items-center h-[calc(100%-64px)] px-8'>
       <ManageOrdersForm translation={translation} ordersListData={ordersList.items} />

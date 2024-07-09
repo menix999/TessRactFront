@@ -115,6 +115,11 @@
     "lackOfSearchedProducts": "No products searched",
     "yourOrders": "Your orders",
     "actuallyYouDontHaveAnyOrders": "You don't have any orders yet",
+    "noAvailableProducts": "Currently there are no available products",
+    "isAvailable": "is now available",
+    "apply": "Apply",
+    "addToCart": "Add to cart",
+    "buyAndPay": "Buy and pay",
     "orderThanksSummary": {
         "thanksForOrder": "Thank you for your order",
         "inOrderToTrack": "To track your order status, please check your email",
@@ -170,7 +175,9 @@
         "isValidPhoneNumber": "Invalid phone number",
         "invalidFormatOfPostalCode": "Invalid format of postal code",
         "onlyLettersAllowed": "incorrect format, only letters allowed",
-        "onlyNumbersAllowed": "incorrect format, only numbers allowed"
+        "onlyNumbersAllowed": "incorrect format, only numbers allowed",
+        "minCharactersAndSpecialCharacters": "Password must contain at least 8 characters, including one digit",
+        "maxCharacters": "Maximum number of characters is 50"
     },
     "toastifyMessages": {
         "title": {

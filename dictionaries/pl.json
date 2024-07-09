@@ -115,6 +115,11 @@
     "lackOfSearchedProducts": "Brak wyszukiwanych produktów",
     "yourOrders": "Twoje zamówienia",
     "actuallyYouDontHaveAnyOrders": "Aktualnie nie masz żadnych zamówień",
+    "noAvailableProducts": "Aktualnie brak dostępnych produktów",
+    "isAvailable": "już dostępny",
+    "apply": "Zastosuj",
+    "addToCart": "Dodaj do koszyka",
+    "buyAndPay": "Kup i zapłać",
     "orderThanksSummary": {
         "thanksForOrder": "Dziękujemy za złożenie zamówienia",
         "inOrderToTrack": "W celu śledzenia statusu zamówienia, sprawdź swoją skrzynkę pocztową",
@@ -170,7 +175,9 @@
         "isValidPhoneNumber": "Wprowadzony numer telefonu jest nieprawidłowy",
         "invalidFormatOfPostalCode": "Nieprawidłowy format kodu pocztowego",
         "onlyLettersAllowed": "Niepoprawny format, dozwolone są tylko litery",
-        "onlyNumbersAllowed": "Niepoprawny format, dozwolone są tylko cyfry"
+        "onlyNumbersAllowed": "Niepoprawny format, dozwolone są tylko cyfry",
+        "minCharactersAndSpecialCharacters": "Hasło musi zawierać minimum 8 znaków, w tym jedną cyfrę",
+        "maxCharacters": "Maksymalna liczba znaków to 50"
     },
     "toastifyMessages": {
         "title": {

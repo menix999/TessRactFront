@@ -41,7 +41,6 @@ const MyOrdersPage = async ({ params: { locale } }: { params: { locale: Locale }
       <div className='flex flex-col w-full max-w-[700px] gap-12 mt-20'>
         {!!userOrders.length && <h1 className='font-medium text-5xl'>{translation.yourOrders}</h1>}
         {!!userOrders.length ? userOrders.map(({id, orderDate, status, totalPrice, positions}) => {
-          console.log('positions', positions);
           return (
             <div className='flex flex-col' key={id}>
           <h2 className='font-medium text-3xl mb-6'>{translation.orderNumber}: {id}</h2>

@@ -11,12 +11,14 @@ import OnlinePaymentIcon from '@/assets/OnlinePaymentIcon';
 import GuaranteeIcon from '@/assets/GuaranteeIcon';
 import SafetyTransactionIcon from '@/assets/SafetyTransactionIcon';
 import ProductCard from '@/components/ProductCard/ProductCard';
+import CustomLink from '@/components/CustomLink/CustomLink';
+import { categories, routes } from '@/constants/constants';
 
 const getNewProducts = async () => {
   const params = new URLSearchParams({
     pageSize: '50',
     sortDirection: '0',
-    pageNumber: '1',
+    pageNumber: '1',                                                  
     // sortBy: 'Headphones',
   });
 
@@ -43,24 +45,49 @@ const Home = async ({ params: { locale } }: { params: { locale: Locale } }) => {
           </h1>
           <span className='text-dashboard-watch-text'>{translation.presentCompanyMainPage}</span>
           <div className='flex-col sm:flex-row gap-4 lg:w-96 w-full z-10 hidden lg:flex'>
+          <CustomLink
+          href={`${routes.productList}/${categories.smartwatch}`}
+          locale={locale}
+          className='w-full'
+          >
             <Button type='button' variant='bordered'>
               {translation.seeMore}
             </Button>
-            <Button type='button'>{translation.buyNow}</Button>
+        </CustomLink>
+        <CustomLink
+          href={`${routes.product}/3`}
+          locale={locale}
+          className='w-full'
+        >
+          <Button type='button'>{translation.buyNow}</Button>
+        </CustomLink>
           </div>
         </div>
-        <div className='flex justify-center w-full '>
+        <div className='flex items-center w-full flex-col gap-4 lg:gap-8'>
           <img
             src={logo.src}
             alt='watch'
-            className='transform rotate-12 max-w-40 max-h-40 sm:max-w-80 sm:max-h-80 my-8 sm:my-12 lg:my-0'
+            className='transform rotate-12 max-w-40 max-h-40 sm:max-w-72 sm:max-h-72 my-8 sm:my-12 lg:my-0'
           />
+          <span className='font-bold text-2xl text-dashboard-watch-title mb-8'>G3X Elite Smartwatch {translation.isAvailable} !!!</span>
         </div>
         <div className='flex flex-col sm:flex-row gap-4 lg:w-96 w-full z-10 lg:hidden'>
+        <CustomLink
+          href={`${routes.productList}/${categories.smartwatch}`}
+          locale={locale}
+          className='w-full'
+        >
           <Button type='button' variant='bordered'>
             {translation.seeMore}
           </Button>
+        </CustomLink>
+        <CustomLink
+          href={`${routes.product}/3`}
+          locale={locale}
+          className='w-full'
+        >
           <Button type='button'>{translation.buyNow}</Button>
+        </CustomLink>
         </div>
       </div>
 
