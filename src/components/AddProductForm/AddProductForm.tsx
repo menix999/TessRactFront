@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import { ConstantProduct, routes } from '@/constants/constants';
+import { ConstantProduct } from '@/constants/constants';
 import { IAddProductForm, IAddProductFormProps } from './AddProductForm.types';
 import DropdownInput from '../DropdownInput/DropdownInput';
 import UploadPhotoIcon from '@/assets/UploadPhotoIcon';
@@ -312,9 +312,6 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
               value={value}
               onChange={onChange}
             />
-            {/* <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
-              {errors.description?.message}
-            </span> */}
           </div>
         )}
         control={control}

@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect } from 'react';
 
 import { IProductProperties } from '@/constants/globalConstant.types';
 import { ICartSummaryProps } from './CartSummary.types';
@@ -19,7 +19,6 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
     handleQuantityChange,
   } = useCart();
 
-  console.log('cart', cart);
   useEffect(() => {
     if (!cart.length) return;
 
@@ -63,7 +62,7 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
         <div className='flex flex-col w-full max-w-[700px] h-full'>
           {!!cart.length && (
             <h2 className='font-bold text-xl sm:text-3xl mb-4'>
-              Koszyk ({numberOfProductsInCart})
+              {translation.cart} ({numberOfProductsInCart})
             </h2>
           )}
           {!cart.length ? (
@@ -93,7 +92,7 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
                             {totalPrice} zł
                           </span>
                         </div>
-                        <span className='text-main-purple text-sm sm:text-base'>Dostępne</span>
+                        <span className='text-main-purple text-sm sm:text-base'>{translation.available}</span>
                         <div className='flex'>
                           <span className='text-base font-bold mr-1'>{translation.color}:</span>
                           <span className='text-base'>{color}</span>

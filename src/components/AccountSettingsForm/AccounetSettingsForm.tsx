@@ -1,6 +1,5 @@
 'use client';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -12,7 +11,6 @@ import ToastifyText from '../ToastifyText/ToastifyText';
 import { toast } from 'react-toastify';
 
 const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
-  const router = useRouter();
 
   const { userId, userToken } = useAuth();
 
@@ -35,11 +33,9 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
         },
       });
 
-      console.log('response', response);
       if (!response) return;
 
       const data = await response.json();
-      console.log('data', data);
 
       if (data.phoneNumber) {
         setValue('phoneNumber', data.phoneNumber);
@@ -84,14 +80,6 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
         street,
         apartmentNumber,
       };
-
-      console.log('USTAWIENIA', {
-        phoneNumber,
-        city,
-        postalCode,
-        street,
-        apartmentNumber,
-      });
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Account/${userId}`, {
         cache: 'no-cache',

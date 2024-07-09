@@ -21,7 +21,6 @@ const BuyOrPayNowSummary = ({
   locale,
   isCartSummary,
   type,
-  numberOfProducts,
 }: IBuyOrPayNowSummaryProps) => {
   const { userToken } = useAuth();
 
@@ -41,10 +40,6 @@ const BuyOrPayNowSummary = ({
     <div className='flex flex-col w-full max-w-[700px] xl:w-auto gap-6 xl:mt-12'>
       <div className='flex w-full border-2 rounded-xl lg:min-w-[400px] flex-col p-5 gap-4'>
         <p className='text-base'>{translation.orderSummary}</p>
-        {/* <div className='flex justify-between items-center'>
-          <span className='text-sm'>{translation.discountOnProducts}</span>
-          <span className=' text-main-purple text-sm'>-45,00zł</span>
-        </div> */}
         <div className='flex justify-between items-center mt-10'>
           <span className='text-sm sm:text-base whitespace-nowrap'>{translation.totalAmount}</span>
           <span className='font-bold text-xl sm:text-3xl whitespace-nowrap'>{total} zł</span>
@@ -53,7 +48,7 @@ const BuyOrPayNowSummary = ({
           {translation.goToDelivery}
         </Button>
       </div>
-      {isCartDiscount && <CartDiscount />}
+      {isCartDiscount && <CartDiscount translation={translation}/>}
       {isAcceptedMethodsOfPayment && (
         <>
           <span>{translation.acceptedMethodsOfPayment}</span>

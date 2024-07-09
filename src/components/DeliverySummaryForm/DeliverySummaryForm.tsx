@@ -1,9 +1,9 @@
 'use client';
+
 import axios from 'axios';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-// import { loadStripe } from '@stripe/stripe-js';
 
 import Input from '../Input/Input';
 import { IDeliverySummaryForm, IDeliverySummaryFormProps } from './DeliverySummaryForm.types';
@@ -29,12 +29,7 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
   const { userId, userToken } = useAuth();
 
   const {
-    deleteProductFromTheCart,
-    numberOfProductsInCart,
     cart,
-    setNumberOfProducts,
-    setCartListTotalAmount,
-    numberOfProducts,
     cartListTotalAmount,
   } = useCart();
 
@@ -104,16 +99,6 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
     apartmentNumber,
     phoneNumber,
   }) => {
-    console.log('onSubmit', {
-      name,
-      surname,
-      email,
-      city,
-      street,
-      postalCode,
-      apartmentNumber,
-      phoneNumber,
-    });
     try {
       const preparedOrderPosition = cart.map((item) => ({
         productId: item.id,
@@ -141,7 +126,6 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
         }
       );
 
-      console.log('response', response);
       if (response) {
         toast.success(
           <ToastifyText
@@ -152,7 +136,6 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
         );
         router.push(createLanguagePath({ href: routes.orderSummary, locale }));
       }
-      console.log('response', response);
     } catch (error) {
       console.log('LoginPanel error', error);
     }

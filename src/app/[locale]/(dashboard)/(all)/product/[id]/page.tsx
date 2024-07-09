@@ -1,22 +1,17 @@
-import Button from '@/components/Button/Button';
 import { Locale } from '../../../../../../../i18n.config';
 import { getDictionary } from '../../../../../../../lib/dictionary';
 import DeliveryIcon from '@/assets/DeliveryIcon';
 import Stars from '@/components/Stars/Stars';
 import UserAvatar from '@/components/UserAvatar/UserAvatar';
 import BuyProduct from '@/components/BuyProduct/BuyProduct';
+import SeeFullDescription from '@/components/SeeFullDescription/SeeFullDescription';
 
 const getProduct = async (id: number) => {
-  try {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Product/${id}`, {
+    cache: 'no-cache',
+  });
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Product/${id}`, {
-      cache: 'no-cache',
-    });
-    
-    return response.json();
-  } catch (error) {
-    console.error(error);
-  }
+  return response.json();
 };
 
 const ProductPage = async ({
@@ -74,12 +69,12 @@ const ProductPage = async ({
             <span className='text-secondary-gray mr-1'>{translation.color}:</span>
             <span>{color}</span>
           </div>
-          <span className='underline cursor-pointer'>{translation.seeFullDescription}</span>
+          <SeeFullDescription seeFullDescriptionText={translation.seeFullDescription} />
           <span className='flex text-3xl'>{price} zł</span>
-          <BuyProduct productData={productData} />
+          <BuyProduct productData={productData} translation={translation} />
         </div>
       </div>
-      <div className='flex flex-col items-start border-b-2 border-main-gray w-full pb-10 gap-4 mb-12'>
+      <div className='flex flex-col items-start border-b-2 border-main-gray w-full pb-10 gap-4 mb-12' id="full-description">
         <h2 className='text-2xl font-bold'>{translation.description}</h2>
         <span className='text-base max-w-[700px] break-words'>{description}</span>
       </div>

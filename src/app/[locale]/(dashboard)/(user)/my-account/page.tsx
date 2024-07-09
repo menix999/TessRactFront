@@ -1,18 +1,24 @@
 import { cookies } from 'next/headers';
 import { Locale } from '../../../../../../i18n.config';
 import { getDictionary } from '../../../../../../lib/dictionary';
-import AccounetSettingsForm from '@/components/AccountSettingsForm/AccounetSettingsForm';
 
 const getInfoAboutUser = async (userId: string, userToken: string) => {
-  const respone = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Account/1`, {
-    method: 'GET',
-    cache: 'no-cache',
-    headers: {
-      Authorization: `Bearer ${userToken}`,
-    },
-  });
+  try {
 
-  return respone.json();
+    const respone = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Account/${userId}`, {
+      method: 'GET',
+      cache: 'no-cache',
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
+    
+
+    return respone.json();
+  } catch(error) {
+    console.log('error', error);
+  
+  }
 };
 
 interface IInforAboutUser {
@@ -34,11 +40,9 @@ const MyAccountPage = async ({ params: { locale } }: { params: { locale: Locale 
   const userId = cookieStore.get('userId')?.value;
   const userToken = cookieStore.get('userToken')?.value;
 
-  //TODO: Add proper handling
   if (!userId || !userToken) return;
 
   const infoAboutUser: IInforAboutUser = await getInfoAboutUser(userId, userToken);
-  console.log('infoAboutUser', infoAboutUser);
 
   const { firstName, surname, email, phoneNumber, city, postalCode, street, apartmentNumber } =
     infoAboutUser;

@@ -3,11 +3,10 @@
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
+import { ICartDiscountForm, ICartDiscountProps } from './CartDiscount.types';
 
-interface ICartDiscountForm {
-  discountCode: string;
-}
-const CartDiscount = () => {
+
+const CartDiscount = ({translation}: ICartDiscountProps) => {
   const {
     control,
     handleSubmit,
@@ -39,10 +38,9 @@ const CartDiscount = () => {
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col w-full relative'>
             <Input
-              placeholder='Wpisz kod rabatowy'
+              placeholder={translation.enterDiscountCode}
               value={value}
               onChange={onChange}
-              required={!!errors.discountCode}
             />
             <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
               {errors.discountCode?.message}
@@ -55,7 +53,7 @@ const CartDiscount = () => {
       />
       <div>
         <Button type='submit' variant='bordered'>
-          Zastosuj
+          {translation.apply}
         </Button>
       </div>
     </div>
