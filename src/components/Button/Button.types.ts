@@ -6,4 +6,5 @@ export interface IButtonProps {
   variant?: 'filled' | 'bordered' | 'google';
   children: ReactNode;
   isLoading?: boolean;
+  isDisabled?: boolean;
 }

@@ -19,7 +19,7 @@ const Input = ({ placeholder, type, value, onChange, isError, title, maxLength }
         placeholder={placeholder}
         onChange={onChange}
         value={value}
-        maxLength={maxLength || 255}
+        maxLength={maxLength || 100}
         type={type}
         className={`${
           isError ? 'border-2 border-main-error-red' : 'border-main-gray'

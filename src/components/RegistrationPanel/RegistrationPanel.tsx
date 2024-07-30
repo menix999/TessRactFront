@@ -9,7 +9,7 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 import OpenEyeIcon from '@/assets/OpenEyeIcon';
 import ClosedEyeIcon from '@/assets/ClosedEyeIcon';
-import { IRegistration, IRegistrationForm } from './RegistrationPanel.types';
+import { ErrorResponse, IRegistration, IRegistrationForm } from './RegistrationPanel.types';
 import Checkbox from '../Checkbox/Checkbox';
 import { emailRegex, oneNumberRegex, onlyLettersRegex } from '@/constants/regex';
 import { routes } from '@/constants/constants';
@@ -63,12 +63,12 @@ const RegistrationPanel = ({ translation, locale }: IRegistration) => {
       console.log('error', error);
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;
-
-        if (axiosError.response?.status === 400) {
+        
+        if((axiosError.response?.data as ErrorResponse)?.errors?.Email[0] === 'Email was taken') {
           toast.error(
             <ToastifyText
               title={translation.toastifyMessages.title.error}
-              description={translation.toastifyMessages.descriptionError.incorrectEmailOrPassword}
+              description={translation.toastifyMessages.descriptionError.emailWasTaken}
               type='error'
             />
           );

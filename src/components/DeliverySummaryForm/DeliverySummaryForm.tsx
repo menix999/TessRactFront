@@ -28,10 +28,7 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
 
   const { userId, userToken } = useAuth();
 
-  const {
-    cart,
-    cartListTotalAmount,
-  } = useCart();
+  const { cart, cartListTotalAmount, discount } = useCart();
 
   const getAccountSettingsData = async () => {
     try {
@@ -118,6 +115,7 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
           city,
           apartmentNumber,
           orderPosition: preparedOrderPosition,
+          // discountSymbol: discount?.symbol || '',
         },
         {
           headers: {
@@ -350,10 +348,10 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
         />
         <BuyOrPayNowSummary
           translation={translation}
-          isCartDiscount
           isAcceptedMethodsOfPayment
           locale={locale}
           total={cartListTotalAmount}
+          text={translation.submitYourOrder}
           type='submit'
         />
       </form>

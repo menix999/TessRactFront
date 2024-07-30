@@ -13,6 +13,7 @@ import { routes } from '@/constants/constants';
 import { createLanguagePath } from '@/utils/functions';
 import ToastifyText from '../ToastifyText/ToastifyText';
 import { toast } from 'react-toastify';
+import { oneNumberRegex } from '@/constants/regex';
 
 const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
@@ -103,7 +104,18 @@ const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => 
             value: true,
             message: translation.errorMessage.thisFieldIsRequired,
           },
-        }}
+          minLength: {
+            value: 8,
+            message: translation.errorMessage.minCharactersAndSpecialCharacters,
+          },
+          validate: (value) => {
+            const hasNumber = oneNumberRegex.test(value);
+            if (!hasNumber) {
+              return translation.errorMessage.minCharactersAndSpecialCharacters;
+            }
+            return true;
+          },
+         }}
         control={control}
         defaultValue=''
         name='password'

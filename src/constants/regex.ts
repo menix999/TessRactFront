@@ -7,3 +7,4 @@ export const onlyLettersRegex = /^[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*$
 export const priceRegex = /^\d+(\.\d{1,2})?$/;
 export const onlyNumbersRegex = /^\d+$/;
 export const oneNumberRegex = /\d/;
+export const promotionCodeRegex = /^([1-9][0-9]?|100)$/;

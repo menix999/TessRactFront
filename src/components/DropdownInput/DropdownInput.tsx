@@ -55,13 +55,14 @@ const DropdownInput = ({
   }, [value]);
 
   return (
-    <div ref={refDropdown} className='flex flex-col relative w-full'>
+    <>
       {inputTitle && (
         <span className='flex ml-0 mb-2 w-auto text-sm'>
           {inputTitle}
           {isRequired && <div className='h-4 ml-1 text-base text-main-error-red'>*</div>}
         </span>
       )}
+    <div ref={refDropdown} className='flex flex-col relative w-full'>
       <div className='flex w-full relative'>
         <input
           onClick={() => setIsOpen((prevValue) => !prevValue)}
@@ -115,6 +116,7 @@ const DropdownInput = ({
         <span className='flex font-medium mt-1 text-xs text-main-error-red'>{error}</span>
       </div>
     </div>
+    </>
   );
 };
 

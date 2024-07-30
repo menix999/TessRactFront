@@ -75,7 +75,7 @@
     "acceptedMethodsOfPayment": "Akceptowane metody płatności",
     "enterDiscountCode": "Wprowadź kod rabatowy",
     "available": "Dostępne",
-    "unavailable": "Niedostępne",
+    "unavailable": "Niedostępny",
     "delete": "Usuń",
     "company": "Firma",
     "freeDelivery": "Darmowa dostawa",
@@ -116,10 +116,25 @@
     "yourOrders": "Twoje zamówienia",
     "actuallyYouDontHaveAnyOrders": "Aktualnie nie masz żadnych zamówień",
     "noAvailableProducts": "Aktualnie brak dostępnych produktów",
+    "noOpionionsAboutThisProduct": "Aktualnie nie ma żadnych opinii o tym produkcie",
     "isAvailable": "już dostępny",
     "apply": "Zastosuj",
     "addToCart": "Dodaj do koszyka",
     "buyAndPay": "Kup i zapłać",
+    "addDiscount": "Dodawanie zniżki",
+    "nameOfDiscount": "Nazwa zniżki",
+    "valueOfDiscount": "Wartość zniżki",
+    "enterValueOfDiscount": "Wprowadź wartość zniżki",
+    "enterNameOfDiscount": "Wprowadź nazwę zniżki",
+    "expirationDate": "Data wygaśnięcia",
+    "addOpinion": "Dodaj opinię",
+    "leaveReview": "Wystaw opinię",
+    "appliedDiscount": "Zastosowana zniżka",
+    "deleteDiscount": "Usuń zniżkę",   
+    "availableQuantityOfProduct": "Dostępna ilość produktu",
+    "submitYourOrder": "Złóż zamówienie",
+    "product": "Produkt",
+    "soldOut": "Wyprzedane",
     "orderThanksSummary": {
         "thanksForOrder": "Dziękujemy za złożenie zamówienia",
         "inOrderToTrack": "W celu śledzenia statusu zamówienia, sprawdź swoją skrzynkę pocztową",
@@ -155,7 +170,8 @@
         "productToRate": "Produkty do oceny",
         "manageOrders": "Zarządzaj zamówieniami",
         "addProduct": "Dodaj produkt",
-        "logout": "Wyloguj się"
+        "logout": "Wyloguj się",
+        "addDiscountCode": "Dodaj kod rabatowy"
     },
     "emailVerification": {
         "checkYourEmail": "Sprawdź swoją pocztę",
@@ -177,7 +193,8 @@
         "onlyLettersAllowed": "Niepoprawny format, dozwolone są tylko litery",
         "onlyNumbersAllowed": "Niepoprawny format, dozwolone są tylko cyfry",
         "minCharactersAndSpecialCharacters": "Hasło musi zawierać minimum 8 znaków, w tym jedną cyfrę",
-        "maxCharacters": "Maksymalna liczba znaków to 50"
+        "maxCharacters": "Maksymalna liczba znaków to 50",
+        "maxDiscount": "Nieprawidłowy format, maksymalna wartość zniżki to 100%"
     },
     "toastifyMessages": {
         "title": {
@@ -192,17 +209,26 @@
             "passwordHasBenChangedSuccessfully": "Hasło zostało zmienione pomyślnie",
             "settingsOfAccountHasBeenChanged": "Ustawienia konta zostały zmienione pomyślnie",
             "yourOrderHasBeenPlaced": "Twoje zamówienie zostało złożone pomyślnie",
-            "yourStatusHasBeenChanged": "Status zamówienia został zaktualizowany pomyślnie"
+            "yourStatusHasBeenChanged": "Status zamówienia został zaktualizowany pomyślnie",
+            "discountAddedSuccessfully": "Zniżka została dodana pomyślnie",
+            "opinionAddedSuccessfully": "Opinia została dodana pomyślnie"
         },
         "descriptionError": {
             "problemAddingProduct": "Wystąpił problem podczas dodawania produktu spróbuj ponownie później ",
+            "problemAddingDiscount": "Wystąpił problem podczas dodawania zniżki spróbuj ponownie później",
             "problemWithServer": "Wystąpił problem z serwerem spróbuj ponownie później",
             "incorrectEmailOrPassword": "Nieprawidłowy adres e-mail lub hasło",
             "noResponseFromServer": "Brak odpowiedzi z serwera",
             "unexpectedError": "Wystąpił nieoczekiwany błąd",
             "unexpectedErrorWhileChangingStatus": "Wystąpił nieoczekiwany błąd podczas zmiany statusu zamówienia",
             "emailNotFound": "Podany adres e-mail nie został znaleziony",
-            "errorWhileChangingPassword": "Wystąpił błąd podczas zmiany hasła"
+            "errorWhileChangingPassword": "Wystąpił błąd podczas zmiany hasła",
+            "emailWasTaken": "Wybrany przez ciebie adres e-mail jest już zajęty",
+            "verifyYourEmail": "Twoj adres email nie został zweryfikowany, sprawdź swoją skrzynkę pocztową w celu weryfikacji",
+            "errorWhileAddingOpinion": "Wystąpił błąd podczas dodawania opinii, spróbuj ponownie później",
+            "discountNotFound": "Podany kod rabatowy nie został znaleziony",
+            "discountAlreadyInUse": "Kod rabatowy jest już używany, w celu zastosowania innego kodu musisz usunąć aktualny",
+            "exceededAvailableLimitOfProduct": "Realizowane zamówienie przekroczyło limit dostepnych produktów na stanie"
         }
     }
 }

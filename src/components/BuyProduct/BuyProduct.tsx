@@ -6,9 +6,9 @@ import { IBuyProductProps } from './BuyProduct.types';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/constants/constants';
 
-const BuyProduct = ({ productData, translation }: IBuyProductProps) => {
+const BuyProduct = ({ productData, translation, quantity }: IBuyProductProps) => {
   const { addProductToCart } = useCart();
-  
+
   const router = useRouter();
 
   const handleAddToCart = () => {
@@ -22,10 +22,10 @@ const BuyProduct = ({ productData, translation }: IBuyProductProps) => {
 
   return (
     <>
-      <Button type='button' onClick={handleAddToCart}>
+      <Button type='button' onClick={handleAddToCart} isDisabled={!quantity}>
         {translation.addToCart}
       </Button>
-      <Button type='button' onClick={handleBuyAndPay} variant='bordered'>
+      <Button type='button' onClick={handleBuyAndPay} isDisabled={!quantity} variant='bordered'>
         {translation.buyAndPay}
       </Button>
     </>

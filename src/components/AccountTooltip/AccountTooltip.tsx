@@ -15,6 +15,7 @@ import ManageOrdersIcon from '@/assets/ManageOrdersIcon';
 import { useAuth } from '@/context/AuthContext/AuthContext';
 import AddProductIcon from '@/assets/AddProductIcon';
 import CustomLink from '../CustomLink/CustomLink';
+import DiscountIcon from '@/assets/DiscountIcon';
 
 const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
   const [isToolTipVisible, setIsToolTipVisible] = useState(false);
@@ -112,6 +113,14 @@ const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
                 >
                   <AddProductIcon />
                   <span className='text-sm'>{translation.tooltipAccount.addProduct}</span>
+                </CustomLink>
+                <CustomLink
+                  href={routes.addDiscount}
+                  locale={locale}
+                  className='flex items-center gap-3 p-3 cursor-pointer hover:bg-main-gray-hover'
+                >
+                  <DiscountIcon />
+                  <span className='text-sm'>{translation.tooltipAccount.addDiscountCode}</span>
                 </CustomLink>
               </>
             )}

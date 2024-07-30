@@ -1,7 +1,6 @@
 import DeliverySummaryForm from '@/components/DeliverySummaryForm/DeliverySummaryForm';
 import { Locale } from '../../../../../../i18n.config';
 import { getDictionary } from '../../../../../../lib/dictionary';
-import AccounetSettingsForm from '@/components/AccountSettingsForm/AccounetSettingsForm';
 
 const DeliverySummaryPage = async ({ params: { locale } }: { params: { locale: Locale } }) => {
   const translation = await getDictionary(locale);

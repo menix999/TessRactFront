@@ -5,4 +5,6 @@ export interface IStarsProps {
   numberOfRates?: number;
   opinionDateTime?: string;
   translation?: Awaited<ReturnType<typeof getDictionary>>;
+  readonly?: boolean;
+  onChange?: (rate: number) => void;
 }

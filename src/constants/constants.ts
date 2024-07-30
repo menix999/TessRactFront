@@ -23,6 +23,7 @@ export const routes = {
   orderSummary: '/order-summary',
   myOrders: '/my-orders',
   myAccount: '/my-account',
+  addDiscount: '/add-discount',
 };
 
 export const categories = {
@@ -43,6 +44,7 @@ export const routesPermissionConfig = [
   { path: '/product', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
   { path: '/product-list', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
   { path: '/add-product', roles: ['Administrator'] },
+  { path: '/add-discount', roles: ['Administrator'] },
   { path: '/cart', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
   { path: '/buy-without-register', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },
   { path: '/delivery-summary', roles: ['Administrator', 'User', 'UnverifiedUser', 'Guest'] },

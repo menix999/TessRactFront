@@ -98,7 +98,7 @@ const SearchBar = ({ placeholder, type, value, locale, translation }: ISearchBar
                         className='items-center max-w-16 max-h-16'
                       />
                     </div>
-                    <span className='text-base flex-grow ml-4'>{name}</span>
+                    <span className='text-base flex-grow ml-4 max-w-40 text-ellipsis overflow-x-hidden mr-3'>{name}</span>
                     <span className='text-base '>{price} zł</span>
                   </CustomLink>
                   {productList.length !== index + 1 && (

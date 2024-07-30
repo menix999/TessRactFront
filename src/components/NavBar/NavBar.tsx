@@ -2,11 +2,8 @@ import React from 'react';
 
 import SearchBar from '../SearchBar/SearchBar';
 import { INavBar } from './INavBar.types';
-import CartIcon from '@/assets/CartIcon';
 import ChangeLanguage from '../ChangeLanguage/ChangeLanguage';
 import CustomLink from '../CustomLink/CustomLink';
-import Link from 'next/link';
-import { routes } from '@/constants/constants';
 import AccountTooltip from '../AccountTooltip/AccountTooltip';
 import TessRactLogoResize from '@/assets/TessRactLogoResize';
 import CartTooltip from '../CartTooltip/CartTooltip';

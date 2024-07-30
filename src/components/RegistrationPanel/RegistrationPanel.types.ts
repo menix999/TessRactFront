@@ -13,3 +13,9 @@ export interface IRegistration {
   translation: Awaited<ReturnType<typeof getDictionary>>;
   locale: string;
 }
+
+export interface ErrorResponse {
+  errors: {
+    Email: string[];
+  };
+}

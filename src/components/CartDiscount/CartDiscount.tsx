@@ -1,47 +1,97 @@
 'use client';
 
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { toast } from 'react-toastify';
+
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import { ICartDiscountForm, ICartDiscountProps } from './CartDiscount.types';
+import { useAuth } from '@/context/AuthContext/AuthContext';
+import ToastifyText from '../ToastifyText/ToastifyText';
+import axios from 'axios';
+import { useCart } from '@/context/CartContext/CartContext';
 
-
-const CartDiscount = ({translation}: ICartDiscountProps) => {
+const CartDiscount = ({ translation }: ICartDiscountProps) => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ICartDiscountForm>();
 
+  const { userToken } = useAuth();
+
+  const { addDiscountToCart } = useCart();
+
+  const { discount } = useCart();
+
   const onSubmit: SubmitHandler<ICartDiscountForm> = async ({ discountCode }) => {
-    // try {
-    //   const response = await axios.post('http://localhost:5250/api/Account/register', {
-    //     firstName: name,
-    //     surname,
-    //     email,
-    //     password,
-    //     confirmPassword,
-    //   });
-    //   if (response) {
-    //     // Write nawigation to login page in next js
-    //     router.push(routes.login);
-    //   }
-    //   console.log('response', response);
-    // } catch (error) {
-    //   console.log('LoginPanel error', error);
-    // }
+    try {
+      if (discount) {
+        toast.error(
+          <ToastifyText
+            title={translation.toastifyMessages.title.error}
+            description={translation.toastifyMessages.descriptionError.discountAlreadyInUse}
+            type='error'
+          />
+        );
+
+        return;
+      }
+
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Discount/${discountCode}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      if (response) {
+        addDiscountToCart(response.data);
+
+        toast.success(
+          <ToastifyText
+            title={translation.toastifyMessages.title.success}
+            description={translation.toastifyMessages.descriptionSuccess.discountAddedSuccessfully}
+            type='success'
+          />
+        );
+
+        reset();
+      }
+    } catch (error: any) {
+      console.error('cartDiscount - error ', error);
+
+      const errorCode = error.response.statusText;
+
+      if (errorCode === 'Not Found') {
+        toast.error(
+          <ToastifyText
+            title={translation.toastifyMessages.title.error}
+            description={translation.toastifyMessages.descriptionError.discountNotFound}
+            type='error'
+          />
+        );
+      } else {
+        toast.error(
+          <ToastifyText
+            title={translation.toastifyMessages.title.error}
+            description={translation.toastifyMessages.descriptionError.problemAddingDiscount}
+            type='error'
+          />
+        );
+      }
+    }
   };
 
   return (
-    <div className='flex gap-4'>
+    <form className='flex gap-4' onSubmit={handleSubmit(onSubmit)}>
       <Controller
         render={({ field: { onChange, value } }) => (
           <div className='flex flex-col w-full relative'>
-            <Input
-              placeholder={translation.enterDiscountCode}
-              value={value}
-              onChange={onChange}
-            />
+            <Input placeholder={translation.enterDiscountCode} value={value} onChange={onChange} />
             <span className='text-main-error-red pt-2 absolute whitespace-nowrap top-9'>
               {errors.discountCode?.message}
             </span>
@@ -56,7 +106,7 @@ const CartDiscount = ({translation}: ICartDiscountProps) => {
           {translation.apply}
         </Button>
       </div>
-    </div>
+    </form>
   );
 };
 
