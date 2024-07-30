@@ -13,4 +13,5 @@ export interface IProductProperties {
   averageRate: number;
   base64Image: string;
   quantity: number;
+  availableAmountOfProduct: number;
 }

@@ -8,4 +8,5 @@ export interface IProductCardProps {
   translation: Awaited<ReturnType<typeof getDictionary>>;
   productId: string;
   locale: string;
+  quantity?: number;
 }

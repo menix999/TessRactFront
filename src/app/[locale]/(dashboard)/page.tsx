@@ -18,7 +18,7 @@ const getNewProducts = async () => {
   const params = new URLSearchParams({
     pageSize: '50',
     sortDirection: '0',
-    pageNumber: '1',                                                  
+    pageNumber: '1',
     // sortBy: 'Headphones',
   });
 
@@ -45,22 +45,18 @@ const Home = async ({ params: { locale } }: { params: { locale: Locale } }) => {
           </h1>
           <span className='text-dashboard-watch-text'>{translation.presentCompanyMainPage}</span>
           <div className='flex-col sm:flex-row gap-4 lg:w-96 w-full z-10 hidden lg:flex'>
-          <CustomLink
-          href={`${routes.productList}/${categories.smartwatch}`}
-          locale={locale}
-          className='w-full'
-          >
-            <Button type='button' variant='bordered'>
-              {translation.seeMore}
-            </Button>
-        </CustomLink>
-        <CustomLink
-          href={`${routes.product}/3`}
-          locale={locale}
-          className='w-full'
-        >
-          <Button type='button'>{translation.buyNow}</Button>
-        </CustomLink>
+            <CustomLink
+              href={`${routes.productList}/${categories.smartwatch}`}
+              locale={locale}
+              className='w-full'
+            >
+              <Button type='button' variant='bordered'>
+                {translation.seeMore}
+              </Button>
+            </CustomLink>
+            <CustomLink href={`${routes.product}/3`} locale={locale} className='w-full'>
+              <Button type='button'>{translation.buyNow}</Button>
+            </CustomLink>
           </div>
         </div>
         <div className='flex items-center w-full flex-col gap-4 lg:gap-8'>
@@ -69,25 +65,23 @@ const Home = async ({ params: { locale } }: { params: { locale: Locale } }) => {
             alt='watch'
             className='transform rotate-12 max-w-40 max-h-40 sm:max-w-72 sm:max-h-72 my-8 sm:my-12 lg:my-0'
           />
-          <span className='font-bold text-2xl text-dashboard-watch-title mb-8'>G3X Elite Smartwatch {translation.isAvailable} !!!</span>
+          <span className='font-bold text-2xl text-dashboard-watch-title mb-8'>
+            G3X Elite Smartwatch {translation.isAvailable} !!!
+          </span>
         </div>
         <div className='flex flex-col sm:flex-row gap-4 lg:w-96 w-full z-10 lg:hidden'>
-        <CustomLink
-          href={`${routes.productList}/${categories.smartwatch}`}
-          locale={locale}
-          className='w-full'
-        >
-          <Button type='button' variant='bordered'>
-            {translation.seeMore}
-          </Button>
-        </CustomLink>
-        <CustomLink
-          href={`${routes.product}/3`}
-          locale={locale}
-          className='w-full'
-        >
-          <Button type='button'>{translation.buyNow}</Button>
-        </CustomLink>
+          <CustomLink
+            href={`${routes.productList}/${categories.smartwatch}`}
+            locale={locale}
+            className='w-full'
+          >
+            <Button type='button' variant='bordered'>
+              {translation.seeMore}
+            </Button>
+          </CustomLink>
+          <CustomLink href={`${routes.product}/3`} locale={locale} className='w-full'>
+            <Button type='button'>{translation.buyNow}</Button>
+          </CustomLink>
         </div>
       </div>
 
@@ -100,10 +94,10 @@ const Home = async ({ params: { locale } }: { params: { locale: Locale } }) => {
       <div className='flex flex-col gap-6 mb-40 w-full'>
         <span className='font-bold text-xl text-main-purple'>{translation.popular}</span>
         <span className='font-bold text-2xl'>{translation.newProducts}</span>
-        <div className='flex flex-col md:flex-row items-center gap-8 w-full justify-center'>
-          {newItems.map(({ name, price, averageRate, base64Image, id }: any, index: number) => {
-            return (
-              <div className='md:w-full' key={id}>
+        <div className='flex flex-col md:flex-row items-center gap-8 w-full md:justify-around'>
+          {newItems.map(
+            ({ name, price, averageRate, base64Image, id, quantity }: any, index: number) => {
+              return (
                 <ProductCard
                   photo={`data:image/;base64,${base64Image}`}
                   text={name}
@@ -112,10 +106,11 @@ const Home = async ({ params: { locale } }: { params: { locale: Locale } }) => {
                   price={`${price} zł`}
                   translation={translation}
                   locale={locale}
+                  quantity={quantity}
                 />
-              </div>
-            );
-          })}
+              );
+            }
+          )}
         </div>
       </div>
 

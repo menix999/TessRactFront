@@ -116,10 +116,25 @@
     "yourOrders": "Your orders",
     "actuallyYouDontHaveAnyOrders": "You don't have any orders yet",
     "noAvailableProducts": "Currently there are no available products",
+    "noOpionionsAboutThisProduct": "No opinions about this product",
     "isAvailable": "is now available",
     "apply": "Apply",
     "addToCart": "Add to cart",
     "buyAndPay": "Buy and pay",
+    "addDiscount": "Add discount",
+    "nameOfDiscount": "Name of discount",
+    "valueOfDiscount": "Value of discount",
+    "enterValueOfDiscount": "Enter the value of the discount",
+    "enterNameOfDiscount": "Enter the name of the discount",
+    "expirationDate": "Expiration date",
+    "addOpinion": "Add opinion",
+    "leaveReview": "Leave a review",
+    "appliedDiscount": "Applied discount",
+    "deleteDiscount": "Delete discount", 
+    "availableQuantityOfProduct": "Available quantity of product",
+    "submitYourOrder": "Submit your order",
+    "soldOut": "Sold out",
+    "product": "Product",
     "orderThanksSummary": {
         "thanksForOrder": "Thank you for your order",
         "inOrderToTrack": "To track your order status, please check your email",
@@ -136,7 +151,7 @@
         "news": "News",
         "description": "Discover a new dimension of functionality and style with our smartwatch!",
         "recommendedBySportsman": "Recommended by athletes",
-        "talkAndChat": "Rozmawiaj i pisz z innymi",
+        "talkAndChat": "Talk and chat with others",
         "healthControl": "Talk and write with others",
         "healthControlDescription": "The smartwatch allows for heart rate, sleep, calorie control, and more"
     },
@@ -155,7 +170,8 @@
         "productToRate": "Products to rate",
         "manageOrders": "Manage orders",
         "addProduct": "Add product",
-        "logout": "Logout"
+        "logout": "Logout",
+        "addDiscountCode": "Add discount code"
     },
     "emailVerification": {
         "checkYourEmail": "Check your email",
@@ -177,7 +193,8 @@
         "onlyLettersAllowed": "incorrect format, only letters allowed",
         "onlyNumbersAllowed": "incorrect format, only numbers allowed",
         "minCharactersAndSpecialCharacters": "Password must contain at least 8 characters, including one digit",
-        "maxCharacters": "Maximum number of characters is 50"
+        "maxCharacters": "Maximum number of characters is 50",
+         "maxDiscount": "Incorrect format, The maximum discount value is 100"
     },
     "toastifyMessages": {
         "title": {
@@ -192,17 +209,26 @@
             "passwordHasBenChangedSuccessfully": "Password has been changed successfully",
             "settingsOfAccountHasBeenChanged": "The settings of the account have been changed successfully",
             "yourOrderHasBeenPlaced": "Your order has been placed successfully",
-            "yourStatusHasBeenChanged": "The order status has been updated successfully"
+            "yourStatusHasBeenChanged": "The order status has been updated successfully",
+            "discountAddedSuccessfully": "Discount added successfully",
+            "opinionAddedSuccessfully": "Opinion added successfully"
         },
         "descriptionError": {
             "problemAddingProduct": "There was a problem adding the product, please try again later",
+            "problemAddingDiscount": "Wystąpił problem podczas dodawania zniżki spróbuj ponownie później",
             "problemWithServer": "There was a problem with the server, please try again later",
             "incorrectEmailOrPassword": "incorrect email or password",
             "noResponseFromServer": "No response from the server",
             "unexpectedError": "An unexpected error occurred",
             "unexpectedErrorWhileChangingStatus": "An unexpected error occurred while changing the order status",
             "emailNotFound": "The email address you provided was not found",
-            "errorWhileChangingPassword": "An error occurred while changing the password"
+            "errorWhileChangingPassword": "An error occurred while changing the password",
+            "emailWasTaken": "The email address you provided is already taken",
+            "verifyYourEmail": "Your email address has not been verified, please check your mailbox to verify",
+            "errorWhileAddingOpinion": "An error occurred while adding an opinion, please try again later",
+            "discountNotFound": "Discount not found",
+            "discountAlreadyInUse": "Discount already in use, please delete actual discount in order to add new",
+            "exceededAvailableLimitOfProduct": "The order being processed exceeded the limit of available products in stock"
         }
     }
 }

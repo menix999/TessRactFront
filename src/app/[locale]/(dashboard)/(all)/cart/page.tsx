@@ -1,8 +1,5 @@
-import Button from '@/components/Button/Button';
 import { Locale } from '../../../../../../i18n.config';
 import { getDictionary } from '../../../../../../lib/dictionary';
-import smartWatchLogo from '../../../../assets/smartWatch.png';
-import CartDiscount from '@/components/CartDiscount/CartDiscount';
 import CartSummary from '@/components/CartSummary/CartSummary';
 
 const CartPage = async ({ params: { locale } }: { params: { locale: Locale } }) => {

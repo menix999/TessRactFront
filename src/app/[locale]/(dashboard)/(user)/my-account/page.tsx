@@ -1,10 +1,10 @@
 import { cookies } from 'next/headers';
+
 import { Locale } from '../../../../../../i18n.config';
 import { getDictionary } from '../../../../../../lib/dictionary';
 
 const getInfoAboutUser = async (userId: string, userToken: string) => {
   try {
-
     const respone = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Account/${userId}`, {
       method: 'GET',
       cache: 'no-cache',
@@ -12,12 +12,10 @@ const getInfoAboutUser = async (userId: string, userToken: string) => {
         Authorization: `Bearer ${userToken}`,
       },
     });
-    
 
     return respone.json();
-  } catch(error) {
+  } catch (error) {
     console.log('error', error);
-  
   }
 };
 
@@ -49,6 +47,7 @@ const MyAccountPage = async ({ params: { locale } }: { params: { locale: Locale 
   return (
     <div className='flex flex-col justify-center items-center h-[calc(100%-64px)]'>
       <div className='flex flex-col w-full max-w-[700px] gap-8 '>
+        <h1 className='font-medium text-4xl mb-4'>{translation.myAccount}:</h1>
         {firstName && (
           <div className='flex'>
             <span className='mr-2 font-bold'>{translation.name}:</span>

@@ -15,4 +15,13 @@ export interface ICart<T> {
   setNumberOfProducts: Dispatch<SetStateAction<Record<string, number>>>;
   setCartListTotalAmount: Dispatch<SetStateAction<number>>;
   handleQuantityChange: (productId: number, quantity: number) => void;
+  addDiscountToCart: (discount: number) => void;
+  discount: IDiscount | null;
+  deleteDiscountFromCart: () => void;
+}
+
+export interface IDiscount {
+  expirationDate: string;
+  symbol: string;
+  value: number;
 }

@@ -67,7 +67,16 @@ const LoginPanel = ({ translation, locale }: ILoginPanel) => {
           type='error'
           />
         );
-      } else {
+      } else if(error.response.data === "VerifyAccount") {
+        toast.error(
+          <ToastifyText
+          title={translation.toastifyMessages.title.error}
+          description={translation.toastifyMessages.descriptionError.verifyYourEmail}
+          type='error'
+          />
+        );
+      }
+       else {
         toast.error(
           <ToastifyText
           title={translation.toastifyMessages.title.error}

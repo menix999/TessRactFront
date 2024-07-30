@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import { IProductProperties } from '@/constants/globalConstant.types';
-import { IAuthContextProps, ICart } from './CartContext.types';
+import { IAuthContextProps, ICart, IDiscount } from './CartContext.types';
 
 export const CartContext = createContext<ICart<IProductProperties[]>>({
   cart: [],
@@ -14,10 +14,14 @@ export const CartContext = createContext<ICart<IProductProperties[]>>({
   setNumberOfProducts: () => {},
   setCartListTotalAmount: () => {},
   handleQuantityChange: () => {},
+  addDiscountToCart: () => {},
+  discount: null,
+  deleteDiscountFromCart: () => {},
 });
 
 export const CartProvider = ({ children }: IAuthContextProps) => {
   const [cart, setCart] = useState<IProductProperties[]>([]);
+  const [discount, setDiscount] = useState<IDiscount | null>(null);
   const [numberOfProducts, setNumberOfProducts] = useState<Record<string, number>>({});
   const [cartListTotalAmount, setCartListTotalAmount] = useState<number>(0);
 
@@ -25,6 +29,7 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
     const preparedProduct = {
       ...product,
       quantity: 1,
+      availableAmountOfProduct: product.quantity,
     };
 
     const isProductExist = cart.some((product) => product.id === preparedProduct.id);
@@ -50,6 +55,16 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
     localStorage.setItem('cart', JSON.stringify(loadedCart));
   };
 
+  const addDiscountToCart = (discount: IDiscount) => {
+    setDiscount(discount);
+    localStorage.setItem('discount', JSON.stringify(discount));
+  };
+
+  const deleteDiscountFromCart = () => {
+    setDiscount(null);
+    localStorage.removeItem('discount');
+  };
+
   const deleteProductFromTheCart = (id: string) => {
     const newCart = cart.filter((item) => item.id !== id);
     const newNumberOfProducts = { ...numberOfProducts };
@@ -60,6 +75,11 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
 
     localStorage.setItem('numberOfProducts', JSON.stringify(newNumberOfProducts));
     localStorage.setItem('cart', JSON.stringify(newCart));
+
+    if (!newCart.length) {
+      setDiscount(null);
+      localStorage.removeItem('discount');
+    }
   };
 
   const handleQuantityChange = (id: string, quantity: number) => {
@@ -79,14 +99,23 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
 
   useEffect(() => {
     const cart = localStorage.getItem('cart');
+    const discount = localStorage.getItem('discount');
 
-    if (!cart) return;
+    if (discount) {
+      const parsedDiscount = JSON.parse(discount || '');
 
-    const parsedCart = JSON.parse(cart || '');
+      if (parsedDiscount) {
+        setDiscount(parsedDiscount);
+      }
+    }
 
-    if (!parsedCart.length) return;
+    if (cart) {
+      const parsedCart = JSON.parse(cart || '');
 
-    setCart(parsedCart);
+      if (parsedCart.length) {
+        setCart(parsedCart);
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -110,10 +139,13 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
       setNumberOfProducts,
       setCartListTotalAmount,
       handleQuantityChange,
+      addDiscountToCart,
+      discount,
+      deleteDiscountFromCart,
     }),
 
     // eslint-disable-next-line
-    [cart, numberOfProducts, cartListTotalAmount]
+    [cart, numberOfProducts, cartListTotalAmount, discount]
   );
 
   return <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>;

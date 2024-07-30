@@ -4,7 +4,7 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import { IAccountSettingsFormProps, IAccountSettingsForm } from './AccountSettingsForm.types';
-import { phoneNumberRegex, postalCodeRegex } from '@/constants/regex';
+import { onlyLettersRegex, phoneNumberRegex, postalCodeRegex } from '@/constants/regex';
 import { useAuth } from '@/context/AuthContext/AuthContext';
 import { useEffect } from 'react';
 import ToastifyText from '../ToastifyText/ToastifyText';
@@ -160,6 +160,10 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
             value: true,
             message: translation.errorMessage.thisFieldIsRequired,
           },
+          pattern: {
+            value: onlyLettersRegex,
+            message: translation.errorMessage.onlyLettersAllowed,
+          },
         }}
         control={control}
         defaultValue=''
@@ -213,6 +217,10 @@ const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
           required: {
             value: true,
             message: translation.errorMessage.thisFieldIsRequired,
+          },
+          pattern: {
+            value: onlyLettersRegex,
+            message: translation.errorMessage.onlyLettersAllowed,
           },
         }}
         control={control}
