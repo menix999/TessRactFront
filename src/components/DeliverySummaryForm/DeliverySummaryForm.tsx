@@ -1,6 +1,5 @@
 'use client';
 
-import axios from 'axios';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -15,6 +14,7 @@ import { toast } from 'react-toastify';
 import ToastifyText from '../ToastifyText/ToastifyText';
 import { createLanguagePath } from '@/utils/functions';
 import { routes } from '@/constants/constants';
+import apiClient from '@/utils/api';
 
 const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps) => {
   const router = useRouter();
@@ -99,13 +99,13 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
     try {
       const preparedOrderPosition = cart.map((item) => ({
         productId: item.id,
-        productName: item.name,
+        // productName: item.name,
         quantity: item.quantity,
         price: item.price,
       }));
 
-      const response = await axios.post(
-        'http://localhost:5250/api/Order',
+      const response = await apiClient.post(
+        '/api/Order',
         {
           firstName: name,
           surname,
@@ -115,7 +115,7 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
           city,
           apartmentNumber,
           orderPosition: preparedOrderPosition,
-          // discountSymbol: discount?.symbol || '',
+          discountSymbol: discount?.symbol || '',
         },
         {
           headers: {

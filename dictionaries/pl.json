@@ -228,7 +228,8 @@
             "errorWhileAddingOpinion": "Wystąpił błąd podczas dodawania opinii, spróbuj ponownie później",
             "discountNotFound": "Podany kod rabatowy nie został znaleziony",
             "discountAlreadyInUse": "Kod rabatowy jest już używany, w celu zastosowania innego kodu musisz usunąć aktualny",
-            "exceededAvailableLimitOfProduct": "Realizowane zamówienie przekroczyło limit dostepnych produktów na stanie"
+            "exceededAvailableLimitOfProduct": "Realizowane zamówienie przekroczyło limit dostepnych produktów na stanie",
+            "rateAndCommentNeeded": "Aby móc wysatwić opinie należy uzupełnić wszystkie rzeczy z nią związane"
         }
     }
 }

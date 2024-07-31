@@ -228,7 +228,8 @@
             "errorWhileAddingOpinion": "An error occurred while adding an opinion, please try again later",
             "discountNotFound": "Discount not found",
             "discountAlreadyInUse": "Discount already in use, please delete actual discount in order to add new",
-            "exceededAvailableLimitOfProduct": "The order being processed exceeded the limit of available products in stock"
+            "exceededAvailableLimitOfProduct": "The order being processed exceeded the limit of available products in stock",
+            "rateAndCommentNeeded": "To be able to leave an opinion, you must complete all the information related to it"
         }
     }
 }

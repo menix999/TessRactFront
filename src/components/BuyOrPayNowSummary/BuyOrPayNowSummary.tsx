@@ -40,7 +40,7 @@ const BuyOrPayNowSummary = ({
     }
   };
 
-  const priceWithDiscount = discount && total * (discount.value / 100);
+  const priceWithDiscount = discount && total - total * (discount.value / 100);
 
   return (
     <div className='flex flex-col w-full max-w-[700px] xl:w-auto gap-6 xl:mt-12'>

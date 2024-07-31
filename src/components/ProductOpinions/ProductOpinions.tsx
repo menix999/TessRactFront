@@ -5,24 +5,36 @@ import AddOpinionForm from '../AddOpinionForm/AddOpinionForm';
 import Stars from '../Stars/Stars';
 import UserAvatar from '../UserAvatar/UserAvatar';
 import { IOpinionProduct, IProductOpinionsProps } from './ProductOpinions.types';
+import { useAuth } from '@/context/AuthContext/AuthContext';
 
-const ProductOpinions = ({ translation, productId, opinions }: IProductOpinionsProps) => {
+const ProductOpinions = ({
+  translation,
+  productId,
+  opinions,
+  firstName,
+  surname,
+}: IProductOpinionsProps) => {
   const [opinionsData, setOpinionsData] = useState<IOpinionProduct[]>([]);
 
   useEffect(() => {
     setOpinionsData(opinions);
   }, [opinions]);
 
+  const { userToken } = useAuth();
   return (
     <>
-      <AddOpinionForm
-        translation={translation}
-        productId={productId}
-        setOpinionsData={setOpinionsData}
-      />
+      {userToken && (
+        <AddOpinionForm
+          translation={translation}
+          productId={productId}
+          setOpinionsData={setOpinionsData}
+          firstName={firstName}
+          surname={surname}
+        />
+      )}
       <div className='flex flex-col items-start w-full pb-10 gap-4 mb-12'>
         <h2 className='text-2xl font-bold mb-4'>{translation.opinions}</h2>
-        {!!opinions.length ? (
+        {!!opinionsData.length ? (
           opinionsData.map(
             ({
               opinionId,

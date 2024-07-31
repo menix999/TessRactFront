@@ -5,6 +5,8 @@ export interface IAddOpionionProps {
   translation: Awaited<ReturnType<typeof getDictionary>>;
   productId: string;
   setOpinionsData: React.Dispatch<React.SetStateAction<IOpinionProduct[]>>;
+  firstName?: string;
+  surname?: string;
 }
 
 export interface IAddOpinionForm {

@@ -8,8 +8,8 @@ import Button from '../Button/Button';
 import { ICartDiscountForm, ICartDiscountProps } from './CartDiscount.types';
 import { useAuth } from '@/context/AuthContext/AuthContext';
 import ToastifyText from '../ToastifyText/ToastifyText';
-import axios from 'axios';
 import { useCart } from '@/context/CartContext/CartContext';
+import apiClient from '@/utils/api';
 
 const CartDiscount = ({ translation }: ICartDiscountProps) => {
   const {
@@ -39,14 +39,11 @@ const CartDiscount = ({ translation }: ICartDiscountProps) => {
         return;
       }
 
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Discount/${discountCode}`,
-        {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
+      const response = await apiClient.get(`/api/Discount/${discountCode}`, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
 
       if (response) {
         addDiscountToCart(response.data);

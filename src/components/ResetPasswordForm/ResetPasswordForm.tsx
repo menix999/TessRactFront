@@ -14,6 +14,7 @@ import { createLanguagePath } from '@/utils/functions';
 import ToastifyText from '../ToastifyText/ToastifyText';
 import { toast } from 'react-toastify';
 import { oneNumberRegex } from '@/constants/regex';
+import apiClient from '@/utils/api';
 
 const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
@@ -38,17 +39,14 @@ const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => 
       const token = urlParams.get('token');
       const userId = match && match[1];
 
-      const response = await axios.put(
-        `http://localhost:5250/api/Account/${userId}/reset-password`,
-        {
-          token,
-          password,
-          confirmPassword,
-        }
-      );
+      const response = await apiClient.put(`/api/Account/${userId}/reset-password`, {
+        token,
+        password,
+        confirmPassword,
+      });
 
       if (response) {
-        setIsLoading(false)
+        setIsLoading(false);
         toast.success(
           <ToastifyText
             title={translation.toastifyMessages.title.success}
@@ -61,13 +59,13 @@ const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => 
         router.push(createLanguagePath({ href: routes.login, locale }));
       }
     } catch (error) {
-      setIsLoading(false)
+      setIsLoading(false);
 
       toast.error(
         <ToastifyText
-        title={translation.toastifyMessages.title.error}
-        description={translation.toastifyMessages.descriptionError.errorWhileChangingPassword}
-        type='error'
+          title={translation.toastifyMessages.title.error}
+          description={translation.toastifyMessages.descriptionError.errorWhileChangingPassword}
+          type='error'
         />
       );
 
@@ -115,7 +113,7 @@ const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => 
             }
             return true;
           },
-         }}
+        }}
         control={control}
         defaultValue=''
         name='password'
@@ -157,7 +155,9 @@ const ResetPasswordForm = ({ translation, locale }: IResetPasswordFormProps) => 
         defaultValue=''
         name='confirmPassword'
       />
-      <Button type='submit' isLoading={isLoading}>{translation.recoverPassword}</Button>
+      <Button type='submit' isLoading={isLoading}>
+        {translation.recoverPassword}
+      </Button>
     </form>
   );
 };

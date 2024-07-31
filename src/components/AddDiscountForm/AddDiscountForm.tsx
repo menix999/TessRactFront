@@ -8,8 +8,8 @@ import Button from '../Button/Button';
 import ToastifyText from '../ToastifyText/ToastifyText';
 import { IAddDiscountForm, IAddDiscountFormProps } from './AddDiscountForm.types';
 import { promotionCodeRegex } from '@/constants/regex';
-import axios from 'axios';
 import { useAuth } from '@/context/AuthContext/AuthContext';
+import apiClient from '@/utils/api';
 
 const AddDiscountForm = ({ translation }: IAddDiscountFormProps) => {
   const {
@@ -27,14 +27,8 @@ const AddDiscountForm = ({ translation }: IAddDiscountFormProps) => {
     discountExpirationDate,
   }) => {
     try {
-      let formData = new FormData();
-
-      formData.append('symbol', discountSymbol);
-      formData.append('value', discountValue);
-      formData.append('expirationDate', discountExpirationDate.toISOString());
-
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Discount`,
+      const response = await apiClient.post(
+        `/api/Discount`,
         {
           symbol: discountSymbol,
           value: discountValue,

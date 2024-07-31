@@ -1,3 +1,5 @@
+import { cookies } from 'next/headers';
+
 import { Locale } from '../../../../../../../i18n.config';
 import { getDictionary } from '../../../../../../../lib/dictionary';
 import DeliveryIcon from '@/assets/DeliveryIcon';
@@ -14,6 +16,24 @@ const getProduct = async (id: number) => {
   return response.json();
 };
 
+const getInfoAboutUser = async (userId?: string, userToken?: string) => {
+  try {
+    if (!userId || !userToken) return;
+
+    const respone = await fetch(`${process.env.NEXT_PUBLIC_DB_BASEURL}/api/Account/${userId}`, {
+      method: 'GET',
+      cache: 'no-cache',
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
+
+    return respone.json();
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
 const ProductPage = async ({
   params: { locale, id },
 }: {
@@ -22,6 +42,13 @@ const ProductPage = async ({
   const translation = await getDictionary(locale);
 
   const productData = await getProduct(Number(id));
+
+  const cookieStore = cookies();
+
+  const userId = cookieStore.get('userId')?.value;
+  const userToken = cookieStore.get('userToken')?.value;
+
+  const infoAboutUser = await getInfoAboutUser(userId, userToken);
 
   const {
     id: productId,
@@ -126,7 +153,13 @@ const ProductPage = async ({
           <span>{material}</span>
         </div>
       </div>
-      <ProductOpinions translation={translation} productId={productId} opinions={opinions} />
+      <ProductOpinions
+        translation={translation}
+        productId={productId}
+        opinions={opinions}
+        firstName={infoAboutUser?.firstName}
+        surname={infoAboutUser?.surname}
+      />
     </div>
   );
 };
