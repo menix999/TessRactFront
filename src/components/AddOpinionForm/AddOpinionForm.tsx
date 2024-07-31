@@ -10,13 +10,30 @@ import Button from '../Button/Button';
 import ToastifyText from '../ToastifyText/ToastifyText';
 import { useAuth } from '@/context/AuthContext/AuthContext';
 
-const AddOpinionForm = ({ translation, productId, setOpinionsData }: IAddOpionionProps) => {
+const AddOpinionForm = ({
+  translation,
+  productId,
+  setOpinionsData,
+  firstName,
+  surname,
+}: IAddOpionionProps) => {
   const { control, handleSubmit, reset } = useForm<IAddOpinionForm>();
 
   const { userToken } = useAuth();
 
   const onSubmit = async ({ commentContent, rate }: IAddOpinionForm) => {
     try {
+      if (!commentContent || !rate) {
+        toast.error(
+          <ToastifyText
+            title={translation.toastifyMessages.title.error}
+            description={translation.toastifyMessages.descriptionError.rateAndCommentNeeded}
+            type='error'
+          />
+        );
+        return;
+      }
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_DB_BASEURL}/api/product/${productId}/opinion`,
         {
@@ -48,8 +65,8 @@ const AddOpinionForm = ({ translation, productId, setOpinionsData }: IAddOpionio
             rate,
             creationDate: new Date().toISOString(),
             opinionId: prev.length + 1,
-            firstName: 'Ty',
-            surname: '',
+            firstName: firstName || 'Ty',
+            surname: surname || '',
           },
         ]);
 

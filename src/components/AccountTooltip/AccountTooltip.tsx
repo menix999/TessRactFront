@@ -1,16 +1,13 @@
 'use client';
-import Cookies from 'js-cookie';
-
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+
 import Tooltip from '../Tooltip/Tooltip';
-import Link from 'next/link';
 import PersonIcon from '@/assets/PersonIcon';
 import { IAccountTooltipProps } from './AccountTooltip.types';
 import { routes } from '@/constants/constants';
 import OrdersIcon from '@/assets/OrdersIcon';
-import ReturnAndComplaintsIcon from '@/assets/ReturnAndComplaintsIcon';
 import SettingsIcon from '@/assets/SettingsIcon';
-import ProductToRateIcon from '@/assets/ProductToRateIcon';
 import ManageOrdersIcon from '@/assets/ManageOrdersIcon';
 import { useAuth } from '@/context/AuthContext/AuthContext';
 import AddProductIcon from '@/assets/AddProductIcon';
@@ -24,6 +21,8 @@ const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
 
   const loginRef = useRef<HTMLAnchorElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
+
+  const router = useRouter();
 
   const closeTooltip = () => {
     setIsToolTipVisible(false);
@@ -48,6 +47,7 @@ const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
   }, []);
 
   const handleLogout = () => {
+    router.push(routes.main);
     logout();
   };
 

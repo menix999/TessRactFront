@@ -7,10 +7,13 @@ interface CustomLinkProps {
   children: React.ReactNode;
   [key: string]: any;
   customRef?: React.RefObject<HTMLAnchorElement>;
+  isLink?: boolean;
 }
 
-export default function CustomLink({ href, locale, customRef, ...props }: CustomLinkProps) {
+export default function CustomLink({ href, locale, customRef, isLink, ...props }: CustomLinkProps) {
   const isDefaultLang = locale === i18n.defaultLocale;
   const path = isDefaultLang ? href : `/${locale}${href}`;
-  return <Link href={path} ref={customRef} {...props} />;
+
+  if (isLink) return <Link href={path} ref={customRef} {...props} />;
+  return <a href={path} ref={customRef} {...props} />;
 }

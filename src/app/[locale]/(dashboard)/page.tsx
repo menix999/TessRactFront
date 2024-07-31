@@ -13,6 +13,7 @@ import SafetyTransactionIcon from '@/assets/SafetyTransactionIcon';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import CustomLink from '@/components/CustomLink/CustomLink';
 import { categories, routes } from '@/constants/constants';
+import { Fragment } from 'react';
 
 const getNewProducts = async () => {
   const params = new URLSearchParams({
@@ -98,16 +99,18 @@ const Home = async ({ params: { locale } }: { params: { locale: Locale } }) => {
           {newItems.map(
             ({ name, price, averageRate, base64Image, id, quantity }: any, index: number) => {
               return (
-                <ProductCard
-                  photo={`data:image/;base64,${base64Image}`}
-                  text={name}
-                  rate={averageRate}
-                  productId={id}
-                  price={`${price} zł`}
-                  translation={translation}
-                  locale={locale}
-                  quantity={quantity}
-                />
+                <Fragment key={id}>
+                  <ProductCard
+                    photo={`data:image/;base64,${base64Image}`}
+                    text={name}
+                    rate={averageRate}
+                    productId={id}
+                    price={`${price} zł`}
+                    translation={translation}
+                    locale={locale}
+                    quantity={quantity}
+                  />
+                </Fragment>
               );
             }
           )}

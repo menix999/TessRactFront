@@ -4,6 +4,8 @@ export interface IProductOpinionsProps {
   translation: Awaited<ReturnType<typeof getDictionary>>;
   productId: string;
   opinions: IOpinionProduct[];
+  firstName?: string;
+  surname?: string;
 }
 
 export interface IOpinionProduct {
