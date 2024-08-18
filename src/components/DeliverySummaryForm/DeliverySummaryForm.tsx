@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 import Input from '../Input/Input';
 import { IDeliverySummaryForm, IDeliverySummaryFormProps } from './DeliverySummaryForm.types';
-import { emailRegex } from '@/constants/regex';
+import { emailRegex, onlyLettersRegex, phoneNumberRegex, postalCodeRegex } from '@/constants/regex';
 import BuyOrPayNowSummary from '../BuyOrPayNowSummary/BuyOrPayNowSummary';
 import { useAuth } from '@/context/AuthContext/AuthContext';
 import { useCart } from '@/context/CartContext/CartContext';
@@ -28,7 +28,7 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
 
   const { userId, userToken } = useAuth();
 
-  const { cart, cartListTotalAmount, discount } = useCart();
+  const { cart, cartListTotalAmount, discount, handleClearEverything } = useCart();
 
   const getAccountSettingsData = async () => {
     try {
@@ -132,6 +132,7 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
             type='success'
           />
         );
+        handleClearEverything();
         router.push(createLanguagePath({ href: routes.orderSummary, locale }));
       }
     } catch (error) {
@@ -241,6 +242,10 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
               value: true,
               message: translation.errorMessage.thisFieldIsRequired,
             },
+            pattern: {
+              value: onlyLettersRegex,
+              message: translation.errorMessage.onlyLettersAllowed,
+            },
           }}
           control={control}
           defaultValue=''
@@ -266,6 +271,10 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
               value: true,
               message: translation.errorMessage.thisFieldIsRequired,
             },
+            pattern: {
+              value: onlyLettersRegex,
+              message: translation.errorMessage.onlyLettersAllowed,
+            },
           }}
           control={control}
           defaultValue=''
@@ -290,6 +299,10 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
             required: {
               value: true,
               message: translation.errorMessage.thisFieldIsRequired,
+            },
+            pattern: {
+              value: postalCodeRegex,
+              message: translation.errorMessage.invalidFormatOfPostalCode,
             },
           }}
           control={control}
@@ -340,6 +353,12 @@ const DeliverySummaryForm = ({ translation, locale }: IDeliverySummaryFormProps)
             required: {
               value: true,
               message: translation.errorMessage.thisFieldIsRequired,
+            },
+            validate: {
+              isPhoneNumberLengthValid: (value) =>
+                value.length <= 9 || translation.errorMessage.isPhoneNumberLengthValid,
+              isValidPhoneNumber: (value) =>
+                phoneNumberRegex.test(value) || translation.errorMessage.isValidPhoneNumber,
             },
           }}
           control={control}

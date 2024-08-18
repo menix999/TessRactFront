@@ -214,6 +214,8 @@
             "opinionAddedSuccessfully": "Opinia została dodana pomyślnie"
         },
         "descriptionError": {
+            "discountExpired": "Kod rabatowy wygasł",
+            "discountAlreadyExists": "Zniżka o podanej nazwie już istnieje",
             "problemAddingProduct": "Wystąpił problem podczas dodawania produktu spróbuj ponownie później ",
             "problemAddingDiscount": "Wystąpił problem podczas dodawania zniżki spróbuj ponownie później",
             "problemWithServer": "Wystąpił problem z serwerem spróbuj ponownie później",

@@ -11,7 +11,6 @@ import ToastifyText from '../ToastifyText/ToastifyText';
 import { toast } from 'react-toastify';
 
 const AccounetSettingsForm = ({ translation }: IAccountSettingsFormProps) => {
-
   const { userId, userToken } = useAuth();
 
   const {

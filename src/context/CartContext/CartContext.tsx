@@ -17,6 +17,7 @@ export const CartContext = createContext<ICart<IProductProperties[]>>({
   addDiscountToCart: () => {},
   discount: null,
   deleteDiscountFromCart: () => {},
+  handleClearEverything: () => {},
 });
 
 export const CartProvider = ({ children }: IAuthContextProps) => {
@@ -63,6 +64,15 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
   const deleteDiscountFromCart = () => {
     setDiscount(null);
     localStorage.removeItem('discount');
+  };
+
+  const handleClearEverything = () => {
+    setCart([]);
+    setNumberOfProducts({});
+    setCartListTotalAmount(0);
+    setDiscount(null);
+
+    localStorage.clear();
   };
 
   const deleteProductFromTheCart = (id: string) => {
@@ -142,6 +152,7 @@ export const CartProvider = ({ children }: IAuthContextProps) => {
       addDiscountToCart,
       discount,
       deleteDiscountFromCart,
+      handleClearEverything,
     }),
 
     // eslint-disable-next-line

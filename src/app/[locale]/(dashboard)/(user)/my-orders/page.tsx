@@ -30,8 +30,6 @@ const MyOrdersPage = async ({ params: { locale } }: { params: { locale: Locale }
 
   const userToken = cookieStore.get('userToken')?.value;
 
-  console.log('RRRRRRRRRRRRRRRRRRRREFRESH');
-  // TODO: Add proper handling
   if (!userId || !userToken) return;
 
   const userOrders: IUserOrders[] = await getUserOrders(userId, userToken);
@@ -57,7 +55,7 @@ const MyOrdersPage = async ({ params: { locale } }: { params: { locale: Locale }
                       Status: <OrderStatus status={status} translation={translation} />
                     </span>
                   </div>
-                  {positions.map(({ productName, base64Image, price }) => {
+                  {positions.map(({ productName, base64Image, price, quantity }) => {
                     return (
                       <div className='flex mb-6 w-full' key={id}>
                         <div className='mr-6'>
@@ -69,7 +67,7 @@ const MyOrdersPage = async ({ params: { locale } }: { params: { locale: Locale }
                         </div>
                         <div className='flex flex-col grow'>
                           <span className='text-xl'>{productName}</span>
-                          <span className='text-base text-main-gray'>1 szt</span>
+                          <span className='text-base text-main-gray'>{quantity} szt</span>
                         </div>
                         <span className='flex items-center text-2xl font-medium'>{price} zł</span>
                       </div>

@@ -24,13 +24,14 @@ const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps
 
   const onSubmit: SubmitHandler<IRecoverPasswordForm> = async ({ email }) => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const response = await axios.put('http://localhost:5250/api/Account/password', {
         email,
       });
 
+      console.log('response', response);
       if (response) {
-        setIsLoading(false)
+        setIsLoading(false);
         toast.success(
           <ToastifyText
             title={translation.toastifyMessages.title.success}
@@ -41,23 +42,31 @@ const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps
         setIsLinkSent(true);
       }
     } catch (error: any) {
-      setIsLoading(false)
+      setIsLoading(false);
       setIsLinkSent(false);
 
-      if(error.response.data === "EmailNotFound") {
+      if (error.response.data === 'EmailNotFound') {
         toast.error(
           <ToastifyText
-          title={translation.toastifyMessages.title.error}
-          description={translation.toastifyMessages.descriptionError.emailNotFound}
-          type='error'
+            title={translation.toastifyMessages.title.error}
+            description={translation.toastifyMessages.descriptionError.emailNotFound}
+            type='error'
+          />
+        );
+      } else if (error.response.data === 'VerifyAccount') {
+        toast.error(
+          <ToastifyText
+            title={translation.toastifyMessages.title.error}
+            description={translation.toastifyMessages.descriptionError.verifyYourEmail}
+            type='error'
           />
         );
       } else {
         toast.error(
           <ToastifyText
-          title={translation.toastifyMessages.title.error}
-          description={translation.toastifyMessages.descriptionError.problemWithServer}
-          type='error'
+            title={translation.toastifyMessages.title.error}
+            description={translation.toastifyMessages.descriptionError.problemWithServer}
+            type='error'
           />
         );
       }
@@ -107,7 +116,9 @@ const RecoveryPasswordForm = ({ translation, locale }: IRecoverPasswordPageProps
                 </Button>
               </CustomLink>
               <div className='w-full'>
-                <Button type='submit' isLoading={isLoading}>{translation.recoverPassword}</Button>
+                <Button type='submit' isLoading={isLoading}>
+                  {translation.recoverPassword}
+                </Button>
               </div>
             </div>
           </form>

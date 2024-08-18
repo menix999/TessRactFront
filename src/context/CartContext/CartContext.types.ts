@@ -18,6 +18,7 @@ export interface ICart<T> {
   addDiscountToCart: (discount: number) => void;
   discount: IDiscount | null;
   deleteDiscountFromCart: () => void;
+  handleClearEverything: () => void;
 }
 
 export interface IDiscount {

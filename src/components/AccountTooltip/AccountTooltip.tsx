@@ -13,11 +13,14 @@ import { useAuth } from '@/context/AuthContext/AuthContext';
 import AddProductIcon from '@/assets/AddProductIcon';
 import CustomLink from '../CustomLink/CustomLink';
 import DiscountIcon from '@/assets/DiscountIcon';
+import { useCart } from '@/context/CartContext/CartContext';
 
 const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
   const [isToolTipVisible, setIsToolTipVisible] = useState(false);
 
   const { logout, userToken, userRole } = useAuth();
+
+  const { handleClearEverything } = useCart();
 
   const loginRef = useRef<HTMLAnchorElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -47,6 +50,7 @@ const AccountTooltip = ({ translation, locale }: IAccountTooltipProps) => {
   }, []);
 
   const handleLogout = () => {
+    handleClearEverything();
     router.push(routes.main);
     logout();
   };

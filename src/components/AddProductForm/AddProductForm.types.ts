@@ -21,4 +21,5 @@ export interface IAddProductForm {
   color: string;
   material: string;
   mark: string;
+  imageFile: any;
 }

@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState, useMemo } from '
 import Cookies from 'js-cookie';
 
 import { IAuthContextProps, IAuthCreateContext, userType } from './AuthContext.types';
+import { useCart } from '../CartContext/CartContext';
 
 export const AuthContext = createContext<IAuthCreateContext>({
   userToken: null,
@@ -17,6 +18,8 @@ export const AuthProvider = ({ children }: IAuthContextProps) => {
     userRole: null,
     userId: null,
   });
+
+  const { handleClearEverything } = useCart();
 
   useEffect(() => {
     const userToken = Cookies.get('userToken');

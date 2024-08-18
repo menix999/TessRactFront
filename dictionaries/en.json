@@ -214,6 +214,8 @@
             "opinionAddedSuccessfully": "Opinion added successfully"
         },
         "descriptionError": {
+            "discountExpired": "Discount expired",
+            "discountAlreadyExists": "Discount already exists",
             "problemAddingProduct": "There was a problem adding the product, please try again later",
             "problemAddingDiscount": "Wystąpił problem podczas dodawania zniżki spróbuj ponownie później",
             "problemWithServer": "There was a problem with the server, please try again later",

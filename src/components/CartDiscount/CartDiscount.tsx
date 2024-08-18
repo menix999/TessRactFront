@@ -27,6 +27,7 @@ const CartDiscount = ({ translation }: ICartDiscountProps) => {
 
   const onSubmit: SubmitHandler<ICartDiscountForm> = async ({ discountCode }) => {
     try {
+      if (!discountCode) return;
       if (discount) {
         toast.error(
           <ToastifyText
@@ -63,7 +64,15 @@ const CartDiscount = ({ translation }: ICartDiscountProps) => {
 
       const errorCode = error.response.statusText;
 
-      if (errorCode === 'Not Found') {
+      if (error.response.data === 'DiscountExpired') {
+        toast.error(
+          <ToastifyText
+            title={translation.toastifyMessages.title.error}
+            description={translation.toastifyMessages.descriptionError.discountExpired}
+            type='error'
+          />
+        );
+      } else if (errorCode === 'Not Found') {
         toast.error(
           <ToastifyText
             title={translation.toastifyMessages.title.error}

@@ -2,6 +2,7 @@ interface IUserOrderPositions {
   productName: string;
   base64Image: string;
   price: number;
+  quantity: number;
 }
 
 export interface IUserOrders {

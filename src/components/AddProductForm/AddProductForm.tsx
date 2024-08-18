@@ -41,6 +41,7 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
       const quantityValue = !quantity ? 1 : quantity;
 
       let formData = new FormData();
+
       if (selectedImage) {
         formData.append('imageFile', selectedImage);
       }
@@ -81,7 +82,7 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
     }
   };
 
-  const handleDrop = (event: any) => {
+  const handleDrop = (event: any, onChange: any) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
     if (
@@ -89,6 +90,7 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
       (file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png')
     ) {
       setSelectedImage(file);
+      onChange(file);
     } else {
       setSelectedImage(null);
     }
@@ -98,20 +100,23 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
     event.preventDefault();
   };
 
-  const handleImageChange = (event: any) => {
+  const handleImageChange = (event: any, onChange: any) => {
     const file = event.target.files[0];
+    console.log('file', file);
     if (
       file &&
       (file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png')
     ) {
       setSelectedImage(file);
+      onChange(file);
     } else {
       setSelectedImage(null);
     }
   };
 
-  const handleDeletePhoto = () => {
+  const handleDeletePhoto = (onChange: any) => {
     setSelectedImage(null);
+    onChange(null);
   };
 
   return (
@@ -311,45 +316,67 @@ const AddProductForm = ({ translation }: IAddProductFormProps) => {
               placeholder={translation.enterYourDescription}
               value={value}
               onChange={onChange}
+              isError={!!errors.description}
             />
           </div>
         )}
+        rules={{
+          required: {
+            value: true,
+            message: translation.errorMessage.thisFieldIsRequired,
+          },
+        }}
         control={control}
         defaultValue=''
         name='description'
       />
+
       <div className='flex items-center justify-center'>
-        <div
-          className='flex items-center relative flex-col w-full justify-center border-dashed border-2 rounded-xl border-main-gray h-60 relative'
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-        >
-          {selectedImage ? (
-            <>
-              <img src={URL.createObjectURL(selectedImage)} className='max-w-40 max-h-40 ' />
-              <div
-                className='absolute z-30 top-4 right-4 cursor-pointer'
-                onClick={handleDeletePhoto}
-              >
-                <TrashIcon />
-              </div>
-            </>
-          ) : (
-            <>
-              <input
-                type='file'
-                accept='.jpg, .jpeg, .png'
-                onChange={handleImageChange}
-                className='opacity-0 absolute inset-0 w-full h-full cursor-pointer'
-              />
-              <UploadPhotoIcon />
-              <span className='font-bold text-xs sm:text-lg'>
-                {translation.choosePhotoAndDragItHere}
-              </span>
-              <span className='text-[10px] text-xs'>{translation.supportsJpgJpegPngGif}</span>
-            </>
+        <Controller
+          render={({ field: { onChange, value } }) => (
+            <div
+              className={`flex items-center relative flex-col w-full justify-center border-dashed ${
+                !!errors.imageFile ? 'border-main-error-red' : 'border-main-gray'
+              } border-2 rounded-xl  h-60`}
+              onDrop={(event) => handleDrop(event, onChange)}
+              onDragOver={handleDragOver}
+            >
+              {selectedImage ? (
+                <>
+                  <img src={URL.createObjectURL(selectedImage)} className='max-w-40 max-h-40 ' />
+                  <div
+                    className='absolute z-30 top-4 right-4 cursor-pointer'
+                    onClick={() => handleDeletePhoto(onChange)}
+                  >
+                    <TrashIcon />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <input
+                    type='file'
+                    accept='.jpg, .jpeg, .png'
+                    onChange={(event) => handleImageChange(event, onChange)}
+                    className='opacity-0 absolute inset-0 w-full h-full cursor-pointer'
+                  />
+                  <UploadPhotoIcon />
+                  <span className='font-bold text-xs sm:text-lg'>
+                    {translation.choosePhotoAndDragItHere}
+                  </span>
+                  <span className='text-[10px] text-xs'>{translation.supportsJpgJpegPngGif}</span>
+                </>
+              )}
+            </div>
           )}
-        </div>
+          control={control}
+          rules={{
+            required: {
+              value: true,
+              message: translation.errorMessage.thisFieldIsRequired,
+            },
+          }}
+          name='imageFile'
+        />
       </div>
       <Button type='submit'>{translation.add}</Button>
     </form>

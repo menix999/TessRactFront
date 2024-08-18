@@ -8,6 +8,7 @@ import { ICartSummaryProps } from './CartSummary.types';
 import { useCart } from '@/context/CartContext/CartContext';
 import BuyOrPayNowSummary from '../BuyOrPayNowSummary/BuyOrPayNowSummary';
 import ToastifyText from '../ToastifyText/ToastifyText';
+import { oneNumberRegex } from '@/constants/regex';
 
 const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
   const {
@@ -165,6 +166,7 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
                               type='text'
                               maxLength={2}
                               value={quantity}
+                              readOnly
                               onChange={(e) =>
                                 handleChangeNumberOfProducs(
                                   +id,
@@ -172,7 +174,7 @@ const CartSummary = ({ translation, locale }: ICartSummaryProps) => {
                                   availableAmountOfProduct
                                 )
                               }
-                              className='h-6 w-6 text-center p-0 text-sm outline-none border border-solid rounded-lg border-main-gray focus:border-2 focus:border-main-purple'
+                              className='h-6 w-6 text-center p-0 text-sm outline-none border border-solid rounded-lg border-main-gray'
                             />
                           </div>
                           <button

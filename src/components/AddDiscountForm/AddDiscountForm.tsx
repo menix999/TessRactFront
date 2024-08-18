@@ -40,6 +40,7 @@ const AddDiscountForm = ({ translation }: IAddDiscountFormProps) => {
           },
         }
       );
+
       if (response) {
         toast.success(
           <ToastifyText
@@ -51,16 +52,26 @@ const AddDiscountForm = ({ translation }: IAddDiscountFormProps) => {
 
         reset();
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log('AddDiscountForm error', error);
 
-      toast.error(
-        <ToastifyText
-          title={translation.toastifyMessages.title.error}
-          description={translation.toastifyMessages.descriptionError.problemAddingDiscount}
-          type='error'
-        />
-      );
+      if (error.response.data === 'DiscountExists') {
+        toast.error(
+          <ToastifyText
+            title={translation.toastifyMessages.title.error}
+            description={translation.toastifyMessages.descriptionError.discountAlreadyExists}
+            type='error'
+          />
+        );
+      } else {
+        toast.error(
+          <ToastifyText
+            title={translation.toastifyMessages.title.error}
+            description={translation.toastifyMessages.descriptionError.problemAddingDiscount}
+            type='error'
+          />
+        );
+      }
     }
   };
 
