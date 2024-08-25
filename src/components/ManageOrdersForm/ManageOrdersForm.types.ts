@@ -19,6 +19,7 @@ export interface IOrderList {
   orderDate: string;
   status: string;
   totalPrice: number;
+  finalPrice: number;
   orderPositions: IOrderPosition[];
 }
 

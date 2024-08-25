@@ -122,12 +122,7 @@ const DeliverySummaryForm = ({ translation, ordersListData }: IManageOrdersFormP
 
   const ordersData = useMemo(() => {
     return state.orders.map(
-      ({ id, orderDate, firstName, surname, street, apartmentNumber, orderPositions, status }) => {
-        let totalPrice = 0;
-
-        orderPositions.forEach((product) => {
-          totalPrice += product.quantity * product.price;
-        });
+      ({ id, orderDate, firstName, surname, street, apartmentNumber, orderPositions, status, finalPrice }) => {
 
         return {
           orderNumber: <span className='text-base'>{id}</span>,
@@ -144,7 +139,7 @@ const DeliverySummaryForm = ({ translation, ordersListData }: IManageOrdersFormP
               {street} {apartmentNumber}
             </span>
           ),
-          sum: <span className='text-base'>{totalPrice.toFixed(2)} zł</span>,
+          sum: <span className='text-base'>{finalPrice.toFixed(2)} zł</span>,
           status: (
             <div>
               <OrderStatus status={status} translation={translation} />
